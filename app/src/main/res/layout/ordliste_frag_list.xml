@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="com.attosec.galgeleg_v400b.Ordliste_Frag"
+    android:background="@color/colorBackground">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/wordlistView2"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:visibility="visible" >
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/wordList2"
+            android:choiceMode="none"
+            android:layout_alignParentStart="true"
+            android:visibility="visible"
+            />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tilføj ord"
+            android:id="@+id/addWordButton2"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:visibility="visible" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="356dp"
+        android:id="@+id/addwordView2"
+        android:padding="20dp"
+        android:visibility="invisible" >
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ordBox2"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="57dp"
+            android:layout_alignParentStart="true"
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            android:visibility="visible" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tilføj"
+            android:id="@+id/addButton2"
+            android:layout_below="@+id/ordBox2"
+            android:layout_alignEnd="@+id/ordBox2"
+            android:visibility="visible" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:id="@+id/cancelButton2"
+            android:layout_alignBottom="@+id/addButton2"
+            android:layout_alignParentStart="true"
+            android:visibility="visible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Regler: Det kræves at ordet er på over 2 bogstaver, ikke indeholder mellemrum, og ikke indeholder tal!"
+            android:id="@+id/regler2"
+            android:layout_below="@+id/addButton2"
+            android:layout_centerHorizontal="true"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/removeView2"
+        android:paddingTop="150dp"
+        android:visibility="invisible"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Vil du fjerne ordet * fra listen ?"
+            android:id="@+id/removeText2"
+            android:layout_gravity="center_horizontal"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:visibility="visible" >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ja"
+                android:id="@+id/yesButton2"
+                android:visibility="visible" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nej"
+                android:id="@+id/noButton2"
+                android:visibility="visible" />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

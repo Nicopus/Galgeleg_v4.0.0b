@@ -1,0 +1,24 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="com.attosec.galgeleg_v400b.Hjaelp_Frag"
+    android:background="@color/colorBackground">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView"
+        android:layout_gravity="center" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Spillet spilles ved at trykke på spil knappen på første side. Herefter kan antallet af bogstaver tælles med de stjerner der ses under galjen. Man gætter på bogstaver ved at slide til det ønskede bogstav på slideren under stjernerne der repræsenterer ordet. Gætter man på et forkert bogstav for mange gange taber man spillet, da Jens, den uheldige frivillige, bliver hængt. Gætter man dog ordet før Jens og alle hans legmer er blevet hængt har man vundet spillet!\n\nOrdlisten indeholder alle de ord du har mulighed for at skulle gætte, og kan ses under &quot;Ordliste&quot;.  \nDu kan slette ord fra ordlisten ved at trykke på dem, og ligeledes kan du tilføje ord ved at trykke på &quot;Tilføj ord&quot; knappen."
+            android:id="@+id/textView2"
+            android:textColor="#ffffff"
+            android:padding="20dp"
+            android:textSize="17dp" />
+    </ScrollView>
+</FrameLayout>

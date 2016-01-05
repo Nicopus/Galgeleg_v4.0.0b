@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.attosec.galgeleg_v400b" >
+
+        <uses-permission android:name="android.permission.INTERNET" />
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+        <application
+            android:allowBackup="true"
+            android:icon="@drawable/appicon01"
+            android:label="Galgeleg"
+            android:screenOrientation="portrait"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme" >
+            <activity
+                android:name="com.attosec.galgeleg_v400b.Main"
+                android:screenOrientation="portrait" >
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
+
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
+            </activity>
+            <fragment
+                android:name=".OmAppen_Frag"
+                android:label="Om Appen"
+                android:screenOrientation="portrait">
+                </fragment>
+        </application>
+
+    </manifest>
