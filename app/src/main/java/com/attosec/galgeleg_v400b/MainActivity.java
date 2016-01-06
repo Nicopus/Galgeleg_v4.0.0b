@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.include, fragment)  // tom container i layout
                     .commit();
+            //fragment.getActivity().setTitle("Galgeleg");
             //toolbar.setTitle("Galgeleg");
             //getActionBar().setTitle("Galgeleg");
             //finish();
