@@ -7,7 +7,7 @@
     android:paddingTop="10dp"
     android:theme="@style/Theme.AppCompat.Dialog"
     android:orientation="vertical"
-    android:background="@color/colorBackground">
+    android:background="@color/colorPrimaryDark">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -84,7 +84,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Start Spil"
-                android:id="@+id/btnStartGame"
                 android:backgroundTint="@color/colorPrimary"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="20dp"
@@ -94,7 +93,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ordliste"
-                android:id="@+id/btnWordList"
                 android:layout_column="12"
                 android:backgroundTint="@color/colorPrimary"
                 android:width="100dp" />
@@ -132,7 +130,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Om Appen"
-                android:id="@+id/btnAbout"
                 android:backgroundTint="@color/colorPrimary"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="20dp"
@@ -142,7 +139,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hjælp"
-                android:id="@+id/btnHelp"
                 android:backgroundTint="@color/colorPrimary"
                 android:width="100dp" />
         </LinearLayout>

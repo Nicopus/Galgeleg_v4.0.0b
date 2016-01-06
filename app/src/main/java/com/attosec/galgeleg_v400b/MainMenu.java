@@ -16,7 +16,7 @@ public class MainMenu extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         getActivity().setTitle("Galgeleg");
         View mainView = inflater.inflate(R.layout.main_menu_frag, container, false);
-
+/*
         startSpil = (Button) mainView.findViewById(R.id.btnStartGame);
         startSpil.setText("Start Spil");
         startSpil.setOnClickListener(this);
@@ -34,7 +34,7 @@ public class MainMenu extends Fragment implements View.OnClickListener {
         hjaelp.setText("Hjælp");
         hjaelp.setOnClickListener(this);
 
-
+*/
         return mainView;
     }
 
@@ -42,28 +42,28 @@ public class MainMenu extends Fragment implements View.OnClickListener {
         if (v == hjaelp) {
 
             getFragmentManager().beginTransaction()
-                    .replace(R.id.mainFrag, new Hjaelp_Frag())
+                    .replace(R.id.include, new Hjaelp_Frag())
                     .addToBackStack(null)
                     .commit();
 
         } else if (v == omAppen) {
 
             getFragmentManager().beginTransaction()
-                    .replace(R.id.mainFrag, new OmAppen_Frag())
+                    .replace(R.id.include, new OmAppen_Frag())
                     .addToBackStack(null)
                     .commit();
 
         } else if (v == startSpil) {
 
             getFragmentManager().beginTransaction()
-                    .replace(R.id.mainFrag, new Spil_Frag())
+                    .replace(R.id.include, new Spil_Frag())
                     .addToBackStack(null)
                     .commit();
 
 
         } else if (v == ordListe) {
             getFragmentManager().beginTransaction()
-                    .replace(R.id.mainFrag, new Ordliste_Frag())
+                    .replace(R.id.include, new Ordliste_Frag())
                     .addToBackStack(null)
                     .commit();
         }

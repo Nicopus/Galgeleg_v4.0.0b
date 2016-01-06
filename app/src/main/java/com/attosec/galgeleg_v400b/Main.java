@@ -1,4 +1,6 @@
+
 package com.attosec.galgeleg_v400b;
+
 
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
@@ -6,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Window;
-
+/*
 public class Main extends AppCompatActivity {
 
 
@@ -59,7 +61,7 @@ public class Main extends AppCompatActivity {
         }
 
         protected void onPostExecute(Void result){
-/*            findViewById(R.id.loadingText).setVisibility(View.INVISIBLE);
+/*          findViewById(R.id.loadingText).setVisibility(View.INVISIBLE);
             findViewById(R.id.playButton).setVisibility(View.VISIBLE);
             findViewById(R.id.helpButton).setVisibility(View.VISIBLE);
             findViewById(R.id.aboutButton).setVisibility(View.VISIBLE);
@@ -68,8 +70,11 @@ public class Main extends AppCompatActivity {
             findViewById(R.id.helpImg).setVisibility(View.VISIBLE);
             findViewById(R.id.aboutImg).setVisibility(View.VISIBLE);
             findViewById(R.id.wordImg).setVisibility(View.VISIBLE);
-            prog.setVisibility(View.INVISIBLE);*/
-
+            prog.setVisibility(View.INVISIBLE);
+            */
+/*
         }
     }
 }
+
+*/
