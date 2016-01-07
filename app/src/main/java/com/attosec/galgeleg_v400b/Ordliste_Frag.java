@@ -50,10 +50,10 @@ public class Ordliste_Frag extends Fragment implements View.OnClickListener {
 
 
 
-        if(Spil_Frag.game == null){
-            Spil_Frag.game = new HangmanLogic();
+        if(MainActivity.game == null){
+            MainActivity.game = new HangmanLogic();
         }
-        ordliste2 = Spil_Frag.game.getAllWords();
+        ordliste2 = MainActivity.game.getAllWords();
         Collections.sort(ordliste2);
         wordList2 = (ListView) rod.findViewById(R.id.wordList2);
         arrayAdapter2 = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, ordliste2);
@@ -128,8 +128,8 @@ public class Ordliste_Frag extends Fragment implements View.OnClickListener {
                     && ordBox2.getText().toString().toLowerCase().length()>2
                     && !ordBox2.getText().toString().toLowerCase().matches(".*\\d+.*")
                     && !ordBox2.getText().toString().contains(" ")
-                    && !Spil_Frag.game.getAllWords().contains(ordBox2.getText().toString().toLowerCase())){
-                Spil_Frag.game.addWord(ordBox2.getText().toString().toLowerCase());
+                    && !MainActivity.game.getAllWords().contains(ordBox2.getText().toString().toLowerCase())){
+                MainActivity.game.addWord(ordBox2.getText().toString().toLowerCase());
                 errorToast("Ordet \"" + ordBox2.getText().toString().toLowerCase() + "\" blev tilføjet til ordlisten");
             }
             else{
@@ -144,14 +144,14 @@ public class Ordliste_Frag extends Fragment implements View.OnClickListener {
             Collections.sort(ordliste2);
             wordList2.setAdapter(arrayAdapter2);
         }
-        if(v==yesButton2 && Spil_Frag.game.getAllWords().size()>9){
-            Spil_Frag.game.removeWord(String.valueOf(o2));
+        if(v==yesButton2 && MainActivity.game.getAllWords().size()>9){
+            MainActivity.game.removeWord(String.valueOf(o2));
             wordlistView2.setVisibility(View.VISIBLE);
             removeView2.setVisibility(View.INVISIBLE);
             wordList2.setAdapter(arrayAdapter2);
             errorToast("Ordet \"" + o2 + "\" blev fjernet fra listen");
         }
-        if(v==yesButton2 && Spil_Frag.game.getAllWords().size()<=9){
+        if(v==yesButton2 && MainActivity.game.getAllWords().size()<=9){
             wordlistView2.setVisibility(View.VISIBLE);
             removeView2.setVisibility(View.INVISIBLE);
             wordList2.setAdapter(arrayAdapter2);

@@ -38,7 +38,7 @@ public class MainMenu extends Fragment implements View.OnClickListener {
         return mainView;
     }
 
-    public void onClick(View v) {
+    public void onClick(View v) {/*
         if (v == hjaelp) {
 
             getFragmentManager().beginTransaction()
@@ -66,7 +66,7 @@ public class MainMenu extends Fragment implements View.OnClickListener {
                     .replace(R.id.include, new Ordliste_Frag())
                     .addToBackStack(null)
                     .commit();
-        }
+        }*/
 
 
     }

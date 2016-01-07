@@ -1,5 +1,6 @@
 package com.attosec.galgeleg_v400b;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,7 +18,8 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
 
     private NumberPicker charPicker;
     private String[] alphabet = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "æ", "ø", "å"};
-    public static HangmanLogic game;
+    //public static HangmanLogic game;
+
     private Button guessButton;
     private Button playagain;
     private TextView wordText;
@@ -27,15 +29,17 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
     private TextView gættilbage;
     private TextView normTekst;
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         getActivity().setTitle("Galgeleg");
         View rod = inflater.inflate(R.layout.spil_frag, container, false);
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        if(game == null){
-            game = new HangmanLogic();
-        }
+        //if(game == null){game = new HangmanLogic();}
+
+
         charPicker = (NumberPicker) rod.findViewById(R.id.charPicker);
         playagain = (Button) rod.findViewById(R.id.btnPlayAgain);
         galgeImg = (ImageView) rod.findViewById(R.id.imageView);
@@ -51,7 +55,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
         playagain.setOnClickListener(this);
         DrAsync g = new DrAsync();
         g.execute();
-        game.nulstil();
+        MainActivity.game.nulstil();
 
         return rod;
     }
@@ -72,7 +76,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
     }
 
     public void restartSpil(){
-        wordText.setText(game.getSynligtOrd());
+        wordText.setText(MainActivity.game.getSynligtOrd());
         gættilbage.setText("7");
         galgeImg.setImageResource(R.drawable.galge);
         wrongImg = new Integer[]{
@@ -85,37 +89,37 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if (v == guessButton) {
-            if (!game.erSpilletSlut()) {
-                game.gætBogstav(alphabet[charPicker.getValue()]);
-                wordText.setText(game.getSynligtOrd());
-                gættilbage.setText(String.valueOf(7 - game.getAntalForkerteBogstaver()));
+            if (!MainActivity.game.erSpilletSlut()) {
+                MainActivity.game.gætBogstav(alphabet[charPicker.getValue()]);
+                wordText.setText(MainActivity.game.getSynligtOrd());
+                gættilbage.setText(String.valueOf(7 - MainActivity.game.getAntalForkerteBogstaver()));
                 if(!String.valueOf(guessedWords.getText()).contains(" " + alphabet[charPicker.getValue()] + " ")){
                     guessedWords.append(alphabet[charPicker.getValue()] + " ");
                 }
-                if(!game.erSidsteBogstavKorrekt()) {
-                    if (!game.erSpilletSlut()) {
-                        galgeImg.setImageResource(wrongImg[game.getAntalForkerteBogstaver() - 1]);
+                if(!MainActivity.game.erSidsteBogstavKorrekt()) {
+                    if (!MainActivity.game.erSpilletSlut()) {
+                        galgeImg.setImageResource(wrongImg[MainActivity.game.getAntalForkerteBogstaver() - 1]);
                     } else {
                         //Kan gøres til en metode for at spare kode men nu lavede jeg det i uden lige at tænke på det så fuck det (Y)
-                        if (game.erSpilletVundet()) {
+                        if (MainActivity.game.erSpilletVundet()) {
                             galgeImg.setImageResource(R.drawable.vundet);
-                            wordText.setText("Du har vundet! Ordet var: " + game.getOrdet());
+                            wordText.setText("Du har vundet! Ordet var: " + MainActivity.game.getOrdet());
                             setVisibleView();
                         } else {
                             galgeImg.setImageResource(R.drawable.tabt);
-                            wordText.setText("Du har tabt! Ordet var: " + game.getOrdet());
+                            wordText.setText("Du har tabt! Ordet var: " + MainActivity.game.getOrdet());
                             setVisibleView();
                         }
                     }
                 }
-                else if(game.erSpilletSlut())
-                    if (game.erSpilletVundet()) {
+                else if(MainActivity.game.erSpilletSlut())
+                    if (MainActivity.game.erSpilletVundet()) {
                         galgeImg.setImageResource(R.drawable.vundet);
-                        wordText.setText("Du har vundet! Ordet var: " + game.getOrdet());
+                        wordText.setText("Du har vundet! Ordet var: " + MainActivity.game.getOrdet());
                         setVisibleView();
                     } else {
                         galgeImg.setImageResource(R.drawable.tabt);
-                        wordText.setText("Du har tabt! Ordet var: " + game.getOrdet());
+                        wordText.setText("Du har tabt! Ordet var: " + MainActivity.game.getOrdet());
                         setVisibleView();
                     }
             }
@@ -128,8 +132,8 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
             gættilbage.setVisibility(View.VISIBLE);
             normTekst.setVisibility(View.VISIBLE);
             galgeImg.setImageResource(R.drawable.galge);
-            game.nulstil();
-            wordText.setText(game.getSynligtOrd());
+            MainActivity.game.nulstil();
+            wordText.setText(MainActivity.game.getSynligtOrd());
             gættilbage.setText("7");
             guessedWords.setText("Brugte bogstaver: ");
             //getActivity().finish();
@@ -142,12 +146,13 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
 
         @Override
         protected Void doInBackground(Void... params) {
-            if (game.getAllWords().size() == 8) {
+            if (MainActivity.game.getAllWords().size() == 8) {
                 try {
-                    game.hentOrdFraDr();
+                    MainActivity.game.hentOrdFraDr();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
             }
             return null;
         }

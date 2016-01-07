@@ -1,6 +1,7 @@
 package com.attosec.galgeleg_v400b;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -39,20 +40,22 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private TextView gravityText;
     private ListView dilemmaList;
-
+    public static HangmanLogic game;
     private ProgressBar prog;
-    private String[] dilemmaTitles;
-    private String[] dilemmaGravities;
     private RelativeLayout loadingView;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        if(game == null) {
+            game = new HangmanLogic();
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (savedInstanceState == null) {
+        if (savedInstanceState == null && game.getAllWords().size() > 8) {
             Fragment fragment = new MainMenu();
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.include, fragment)  // tom container i layout
@@ -79,6 +82,10 @@ public class MainActivity extends AppCompatActivity
         //loading bar
         prog = (ProgressBar) findViewById(R.id.progressBar2);
         loadList();
+
+        DrAsync g = new DrAsync();
+        g.execute();
+        game.nulstil();
 
     }
 
@@ -196,21 +203,48 @@ public class MainActivity extends AppCompatActivity
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(1==1){
+                if(game.getAllWords().size() > 20){
                     errorToast("Loading complete!");
                     loadingView.setVisibility(View.GONE);
                     findViewById(R.id.dilemmaList).setVisibility(View.VISIBLE);
                     //findViewById(R.id.fab).setVisibility(View.VISIBLE);
                     onResume();
                 }
-                if(1!=1){
+                if(game.getAllWords().size() == 8){
                     errorToast("Connection error. Check internet connection. If your internet connection is on, our servers might be down.");
-                    loadingView.setVisibility(View.GONE);
-                    findViewById(R.id.dilemmaList).setVisibility(View.VISIBLE);
+                    //loadingView.setVisibility(View.GONE);
+                    //findViewById(R.id.dilemmaList).setVisibility(View.VISIBLE);
                     //findViewById(R.id.fab).setVisibility(View.VISIBLE);
                 }
             }
         }, 4000); //Find smartere metode til at tjekke når isloading er færdig og isconnected er færdig?
+    }
+
+
+    private class DrAsync extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            if (game.getAllWords().size() == 8) {
+                try {
+                    game.hentOrdFraDr();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+       @Override
+       protected void onPostExecute(Void result){
+           if (game.getAllWords().size() >= 20) {
+               Fragment fragment = new MainMenu();
+               getSupportFragmentManager().beginTransaction()
+                       .replace(R.id.include, fragment)  // tom container i layout
+                       .commit();
+           }
+       }
+
     }
 }
 
