@@ -2,20 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/nav_home" android:icon="@mipmap/ic_active_dilemmas"
+        <item android:id="@+id/nav_home" android:icon="@drawable/appicon"
             android:title="Hjem" />
-        <item android:id="@+id/nav_play" android:icon="@mipmap/ic_my_dilemmas"
+        <item android:id="@+id/nav_play" android:icon="@drawable/icon_play"
             android:title="Spil" />
         <item android:id="@+id/nav_wordlist" android:icon="@mipmap/ic_my_answers"
             android:title="Ordliste" />
-        <item android:id="@+id/nav_about" android:icon="@mipmap/ic_settings"
+        <item android:id="@+id/nav_highscore" android:icon="@mipmap/ic_active_dilemmas"
+            android:title="Highscore" />
+        <item android:id="@+id/nav_about" android:icon="@drawable/icon_info"
             android:title="Om" />
+        <item android:id="@+id/nav_help" android:icon="@drawable/icon_help"
+            android:title="Hjælp" />
     </group>
 
     <item android:title="Bruger indstillinger">
         <menu>
-            <item android:id="@+id/nav_login" android:icon="@mipmap/ic_login"
-                android:title="Log ind/Log ud" />
+            <item android:id="@+id/nav_profile" android:icon="@mipmap/ic_login"
+                android:title="Min profil" />
             <item android:id="@+id/nav_register" android:icon="@mipmap/ic_register"
                 android:title="Registrer" />
             <item android:id="@+id/nav_editUser" android:icon="@mipmap/ic_edit_user"

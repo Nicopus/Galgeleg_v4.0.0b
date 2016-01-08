@@ -3,6 +3,7 @@ package com.attosec.galgeleg_v400b;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -86,7 +87,8 @@ public class Ordliste_Frag extends Fragment implements View.OnClickListener {
 
             }
         });
-
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        toolbar.setTitle("Ordliste");
 
         return rod;
     }

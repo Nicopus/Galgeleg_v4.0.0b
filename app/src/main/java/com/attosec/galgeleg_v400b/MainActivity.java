@@ -65,12 +65,13 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Galgeleg");
         loadingView = (RelativeLayout) findViewById(R.id.loadingView);
+        loadingView.setVisibility(View.GONE);
 
 
         dilemmaList = (ListView) findViewById(R.id.dilemmaList);
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //DrawerLayout mainFrag = (DrawerLayout) findViewById(R.id.main_drawer);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -94,17 +95,16 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //Fragment mainFragView = getSupportFragmentManager().findFragmentById(R.id.mainFragView);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+ //       }else if (mainFragView.isVisible()){finish();
         } else {
-            Fragment fragment = new MainMenu();
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.include, fragment)  // tom container i layout
-                    .commit();
+  //          Fragment fragment = new MainMenu(); getSupportFragmentManager().beginTransaction() .replace(R.id.include, fragment) .commit();
             //fragment.getActivity().setTitle("Galgeleg");
             //toolbar.setTitle("Galgeleg");
             //getActionBar().setTitle("Galgeleg");
-            //finish();
+            finish();
         }
     }
 
@@ -163,6 +163,13 @@ public class MainActivity extends AppCompatActivity
                     .commit();
             //getSupportActionBar().setTitle("Ordliste");
             //Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_highscore) {
+            Fragment fragment = new Ordliste_Frag();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.include, fragment)  // tom container i layout
+                    .commit();
+            //getSupportActionBar().setTitle("Om Appen");
+            //Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_about) {
             Fragment fragment = new OmAppen_Frag();
             getSupportFragmentManager().beginTransaction()
@@ -170,7 +177,14 @@ public class MainActivity extends AppCompatActivity
                     .commit();
             //getSupportActionBar().setTitle("Om Appen");
             //Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_login) {
+        } else if (id == R.id.nav_help) {
+            Fragment fragment = new Hjaelp_Frag();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.include, fragment)  // tom container i layout
+                    .commit();
+            //getSupportActionBar().setTitle("Om Appen");
+            //Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_profile) {
             Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
             //startActivity(new Intent(MainActivity.this, LoginActivity.class));
         } else if (id == R.id.nav_register) {

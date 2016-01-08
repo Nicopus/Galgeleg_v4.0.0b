@@ -161,7 +161,7 @@ public class Main extends AppCompatActivity
                     .commit();
             //getSupportActionBar().setTitle("Om Appen");
             //Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_login) {
+        } else if (id == R.id.nav_profile) {
             Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
             //startActivity(new Intent(MainActivity.this, LoginActivity.class));
         } else if (id == R.id.nav_register) {

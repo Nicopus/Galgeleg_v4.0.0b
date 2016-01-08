@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,7 +36,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        getActivity().setTitle("Galgeleg");
+        getActivity().setTitle("Galgelegooooo");
         View rod = inflater.inflate(R.layout.spil_frag, container, false);
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //if(game == null){game = new HangmanLogic();}
@@ -56,6 +58,8 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
         DrAsync g = new DrAsync();
         g.execute();
         MainActivity.game.nulstil();
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        toolbar.setTitle("Spil Galgeleg");
 
         return rod;
     }
