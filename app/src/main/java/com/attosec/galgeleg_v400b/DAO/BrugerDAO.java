@@ -1,9 +1,10 @@
-package com.attosec.galgeleg_v400b;
+package com.attosec.galgeleg_v400b.DAO;
 
 /**
  * Created by nicolaihansen on 08/01/16.
  */
 
+import com.attosec.galgeleg_v400b.DTO.BrugerDTO;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;

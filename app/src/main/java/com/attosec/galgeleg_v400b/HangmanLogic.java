@@ -1,5 +1,10 @@
 package com.attosec.galgeleg_v400b;
 
+import android.widget.ArrayAdapter;
+
+import com.attosec.galgeleg_v400b.DAO.BrugerDAO;
+import com.attosec.galgeleg_v400b.DAO.OrdlisteDAO;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,7 +15,8 @@ import java.util.HashSet;
 import java.util.Random;
 
 public class HangmanLogic {
-    private ArrayList<String> muligeOrd = new ArrayList<String>();
+    private ArrayList<String> muligeOrd = new ArrayList<>();
+    private ArrayList<String> muligeHints = new ArrayList<>();
     private String ordet;
     private ArrayList<String> brugteBogstaver = new ArrayList<String>();
     private String synligtOrd;
@@ -19,7 +25,8 @@ public class HangmanLogic {
     private boolean spilletErVundet;
     private boolean spilletErTabt;
     private int score = 0;
-
+    OrdlisteDAO ordlisteDAO = new OrdlisteDAO();
+    BrugerDAO brugerDAO = new BrugerDAO();
 
     public ArrayList<String> getBrugteBogstaver() {
         return brugteBogstaver;
@@ -58,14 +65,6 @@ public class HangmanLogic {
     }
 
     public HangmanLogic() {
-        muligeOrd.add("bil");
-        muligeOrd.add("computer");
-        muligeOrd.add("programmering");
-        muligeOrd.add("motorvej");
-        muligeOrd.add("busrute");
-        muligeOrd.add("gangsti");
-        muligeOrd.add("skovsnegl");
-        muligeOrd.add("solsort");
         nulstil();
     }
 
@@ -76,6 +75,7 @@ public class HangmanLogic {
         spilletErTabt = false;
         ordet = muligeOrd.get(new Random().nextInt(muligeOrd.size()));
         opdaterSynligtOrd();
+        score = 0;
     }
 
 
@@ -97,8 +97,8 @@ public class HangmanLogic {
         return muligeOrd;
     }
 
-    public void addWord(String word){
-        muligeOrd.add(word);
+    public void addWord(String word, String hint){
+        ordlisteDAO.tilføjOrd(word, hint);
     }
 
     public void removeWord(String word){
@@ -122,7 +122,7 @@ public class HangmanLogic {
             sidsteBogstavVarKorrekt = false;
             System.out.println("Bogstavet var IKKE korrekt: " + bogstav);
             antalForkerteBogstaver = antalForkerteBogstaver + 1;
-            //score -=10;
+            score -=10;
             if (antalForkerteBogstaver > 6) {
                 spilletErTabt = true;
             }
@@ -167,5 +167,22 @@ public class HangmanLogic {
 
         System.out.println("muligeOrd = " + muligeOrd);
         nulstil();
+    }
+
+    public void opdaterOrdliste() {
+        int antalOrd = ordlisteDAO.getOrdliste().size();
+        for (int i = 0; i <= antalOrd; i++) {
+            muligeOrd.add(ordlisteDAO.getOrdliste().get(i).getOrd());
+            muligeHints.add(ordlisteDAO.getOrdliste().get(i).getHint());
+        }
+    }
+
+    public boolean erHighscoreSlået(String nickname) {
+        if (brugerDAO.getHighscore(nickname).getHighScore() < score) {
+            brugerDAO.updateHighscore(nickname, score);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
