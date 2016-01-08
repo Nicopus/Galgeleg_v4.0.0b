@@ -33,7 +33,7 @@ Christian Jappe - S144866
 Magnus Nielsen - S141899
 Nicolai Hansen - S133974
 */
-
+/*
 
 public class Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -213,3 +213,4 @@ public class Main extends AppCompatActivity
 }
 
 
+*/

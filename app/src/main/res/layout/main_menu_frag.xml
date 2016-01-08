@@ -56,8 +56,9 @@
             android:padding="15dp"
             android:gravity="center_horizontal"
             android:typeface="monospace"
-            android:layout_above="@+id/textView4"
-            android:layout_centerHorizontal="true" />
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -72,107 +73,118 @@
             android:typeface="monospace"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:id="@+id/linearLayout"
+            android:layout_alignParentTop="false"
+            android:layout_toRightOf="@+id/textView4"
+            android:layout_toEndOf="@+id/textView4"
+            android:layout_alignParentBottom="true">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/imageView4"
+                    android:src="@drawable/icon_play"
+                    android:layout_marginRight="90dp" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/imageView3"
+                    android:src="@mipmap/ic_active_dilemmas"
+                    android:tint="#ffffff" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Start Spil"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:width="105dp"
+                    android:id="@+id/btnStartGame" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Highscore"
+                    android:layout_column="12"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:width="105dp"
+                    android:id="@+id/btnHighscore" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/imageView5"
+                    android:src="@drawable/icon_info"
+                    android:layout_marginRight="90dp" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/imageView6"
+                    android:src="@drawable/icon_help" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:visibility="gone">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Om Appen"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:width="100dp" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hjælp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:width="100dp" />
+            </LinearLayout>
+        </LinearLayout>
 
     </RelativeLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone">
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:id="@+id/imageView4"
-                android:src="@drawable/icon_play"
-                android:layout_marginRight="90dp" />
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:id="@+id/imageView3"
-                android:src="@drawable/abc_ic_search_api_mtrl_alpha" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Start Spil"
-                android:backgroundTint="@color/colorPrimary"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="20dp"
-                android:width="100dp" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ordliste"
-                android:layout_column="12"
-                android:backgroundTint="@color/colorPrimary"
-                android:width="100dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:id="@+id/imageView5"
-                android:src="@drawable/icon_info"
-                android:layout_marginRight="90dp" />
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:id="@+id/imageView6"
-                android:src="@drawable/icon_help" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Om Appen"
-                android:backgroundTint="@color/colorPrimary"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="20dp"
-                android:width="100dp" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hjælp"
-                android:backgroundTint="@color/colorPrimary"
-                android:width="100dp" />
-        </LinearLayout>
-    </LinearLayout>
 
 </TableLayout>

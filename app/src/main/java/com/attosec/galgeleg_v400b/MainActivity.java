@@ -149,6 +149,7 @@ public class MainActivity extends AppCompatActivity
             Fragment fragment = new MainMenu();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.include, fragment)  // tom container i layout
+                    .addToBackStack(null)
                     .commit();
 
             //getSupportActionBar().setTitle("Galgeleg");
@@ -156,6 +157,7 @@ public class MainActivity extends AppCompatActivity
             Fragment fragment = new Spil_Frag();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.include, fragment)  // tom container i layout
+                    .addToBackStack(null)
                     .commit();
             //getSupportActionBar().setTitle("Spil");
             //Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
@@ -163,6 +165,7 @@ public class MainActivity extends AppCompatActivity
             Fragment fragment = new Ordliste_Frag();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.include, fragment)  // tom container i layout
+                    .addToBackStack(null)
                     .commit();
             //getSupportActionBar().setTitle("Ordliste");
             //Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
@@ -170,6 +173,7 @@ public class MainActivity extends AppCompatActivity
             Fragment fragment = new Ordliste_Frag();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.include, fragment)  // tom container i layout
+                    .addToBackStack(null)
                     .commit();
             //getSupportActionBar().setTitle("Om Appen");
             //Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
@@ -177,6 +181,7 @@ public class MainActivity extends AppCompatActivity
             Fragment fragment = new OmAppen_Frag();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.include, fragment)  // tom container i layout
+                    .addToBackStack(null)
                     .commit();
             //getSupportActionBar().setTitle("Om Appen");
             //Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
@@ -184,6 +189,7 @@ public class MainActivity extends AppCompatActivity
             Fragment fragment = new Hjaelp_Frag();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.include, fragment)  // tom container i layout
+                    .addToBackStack(null)
                     .commit();
             //getSupportActionBar().setTitle("Om Appen");
             //Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
