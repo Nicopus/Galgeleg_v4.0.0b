@@ -21,6 +21,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
+
 //import com.firebase.client.Firebase;
 
 
@@ -53,6 +55,7 @@ public class MainActivity extends AppCompatActivity
             game = new HangmanLogic();
         }
         super.onCreate(savedInstanceState);
+        Firebase.setAndroidContext(this);
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null && game.getAllWords().size() > 8) {

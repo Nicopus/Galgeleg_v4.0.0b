@@ -30,7 +30,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
     private Integer[] wrongImg;
     private TextView gættilbage;
     private TextView normTekst;
-
+    private BrugerDAO brugerDAO;
 
 
     @Override
@@ -41,7 +41,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //if(game == null){game = new HangmanLogic();}
 
-
+        brugerDAO = new BrugerDAO();
         charPicker = (NumberPicker) rod.findViewById(R.id.charPicker);
         playagain = (Button) rod.findViewById(R.id.btnPlayAgain);
         galgeImg = (ImageView) rod.findViewById(R.id.imageView);
@@ -121,6 +121,9 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
                         galgeImg.setImageResource(R.drawable.vundet);
                         wordText.setText("Du har vundet! Ordet var: " + MainActivity.game.getOrdet());
                         setVisibleView();
+                        if(brugerDAO.getHighscore("nicolai").getHighScore() < MainActivity.game.getScore()) {
+                            brugerDAO.updateHighscore("nicolai", MainActivity.game.getScore());
+                        }
                     } else {
                         galgeImg.setImageResource(R.drawable.tabt);
                         wordText.setText("Du har tabt! Ordet var: " + MainActivity.game.getOrdet());

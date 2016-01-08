@@ -18,6 +18,7 @@ public class HangmanLogic {
     private boolean sidsteBogstavVarKorrekt;
     private boolean spilletErVundet;
     private boolean spilletErTabt;
+    private int score = 0;
 
 
     public ArrayList<String> getBrugteBogstaver() {
@@ -52,6 +53,9 @@ public class HangmanLogic {
         return spilletErTabt || spilletErVundet;
     }
 
+    public int getScore() {
+        return score;
+    }
 
     public HangmanLogic() {
         muligeOrd.add("bil");
@@ -112,11 +116,13 @@ public class HangmanLogic {
         if (ordet.contains(bogstav)) {
             sidsteBogstavVarKorrekt = true;
             System.out.println("Bogstavet var korrekt: " + bogstav);
+            score += 20;
         } else {
             // Vi gættede på et bogstav der ikke var i ordet.
             sidsteBogstavVarKorrekt = false;
             System.out.println("Bogstavet var IKKE korrekt: " + bogstav);
             antalForkerteBogstaver = antalForkerteBogstaver + 1;
+            //score -=10;
             if (antalForkerteBogstaver > 6) {
                 spilletErTabt = true;
             }
