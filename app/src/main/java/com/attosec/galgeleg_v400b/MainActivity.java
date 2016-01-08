@@ -1,6 +1,9 @@
 package com.attosec.galgeleg_v400b;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -20,6 +24,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import com.firebase.client.Firebase;
 
@@ -46,7 +51,9 @@ public class MainActivity extends AppCompatActivity
     private ProgressBar prog;
     private RelativeLayout loadingView;
 
-
+    private SensorManager mSensorManager;
+    private Sensor mAccelerometer;
+    private ShakeDetector mShakeDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,9 +98,63 @@ public class MainActivity extends AppCompatActivity
         g.execute();
         game.nulstil();
 
+        // ShakeDetector initialization
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mAccelerometer = mSensorManager
+                .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mShakeDetector = new ShakeDetector();
+        mShakeDetector.setOnShakeListener(new ShakeDetector.OnShakeListener() {
+
+            @Override
+            public void onShake(int count) {
+				/*
+				 * The following method, "handleShakeEvent(count):" is a stub //
+				 * method you would use to setup whatever you want done once the
+				 * device has been shook.
+				 */
+                handleShakeEvent(count);
+            }
+        });
+
     }
 
 
+
+    private void handleShakeEvent(int count) {
+        Spil_Frag mySpilFrag = (Spil_Frag)getSupportFragmentManager().findFragmentByTag("SPIL_FRAG");
+
+
+
+        if(mySpilFrag != null && mySpilFrag.isVisible()){
+            Toast.makeText(this, "Shaking", Toast.LENGTH_SHORT).show();
+
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("Andet ord?")
+                    .setMessage("Du vil miste 30 point ved at få nyt ord")
+                    .setPositiveButton("Nyt ord", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //game.nulstil();
+                            //Spil_Frag.wordText.setText(MainActivity.game.getSynligtOrd());
+                            Spil_Frag.spilRefresh();
+                        }
+                    })
+                    .setNegativeButton("Annuller", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+        }
+
+    }
+
+    @Override
+    public void onPause() {
+        // Add the following line to unregister the Sensor Manager onPause
+        mSensorManager.unregisterListener(mShakeDetector);
+        super.onPause();
+    }
 
     @Override
     public void onBackPressed() {
@@ -102,11 +163,14 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
  //       }else if (mainFragView.isVisible()){finish();
-        } else {
+        } else if (getSupportFragmentManager().getBackStackEntryCount()>0){
   //          Fragment fragment = new MainMenu(); getSupportFragmentManager().beginTransaction() .replace(R.id.include, fragment) .commit();
             //fragment.getActivity().setTitle("Galgeleg");
             //toolbar.setTitle("Galgeleg");
             //getActionBar().setTitle("Galgeleg");
+            //finish();
+            getSupportFragmentManager().popBackStack();
+        } else{
             finish();
         }
     }
@@ -121,7 +185,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onResume(){
         super.onResume();
-
+        // Add the following line to register the Session Manager Listener onResume
+        mSensorManager.registerListener(mShakeDetector, mAccelerometer, SensorManager.SENSOR_DELAY_UI);
     }
 
     @Override
@@ -147,22 +212,25 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             Fragment fragment = new MainMenu();
-            getSupportFragmentManager().beginTransaction()
+            getSupportFragmentManager().popBackStack();
+            /*getSupportFragmentManager().beginTransaction()
                     .replace(R.id.include, fragment)  // tom container i layout
                     .addToBackStack(null)
                     .commit();
-
+*/
             //getSupportActionBar().setTitle("Galgeleg");
         } else if (id == R.id.nav_play) {
             Fragment fragment = new Spil_Frag();
+            getSupportFragmentManager().popBackStack();
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.include, fragment)  // tom container i layout
+                    .replace(R.id.include, fragment, "SPIL_FRAG")  // tom container i layout
                     .addToBackStack(null)
                     .commit();
             //getSupportActionBar().setTitle("Spil");
             //Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_wordlist) {
             Fragment fragment = new Ordliste_Frag();
+            getSupportFragmentManager().popBackStack();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.include, fragment)  // tom container i layout
                     .addToBackStack(null)
@@ -171,6 +239,7 @@ public class MainActivity extends AppCompatActivity
             //Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_highscore) {
             Fragment fragment = new Ordliste_Frag();
+            getSupportFragmentManager().popBackStack();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.include, fragment)  // tom container i layout
                     .addToBackStack(null)
@@ -179,6 +248,7 @@ public class MainActivity extends AppCompatActivity
             //Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_about) {
             Fragment fragment = new OmAppen_Frag();
+            getSupportFragmentManager().popBackStack();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.include, fragment)  // tom container i layout
                     .addToBackStack(null)
@@ -187,6 +257,7 @@ public class MainActivity extends AppCompatActivity
             //Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_help) {
             Fragment fragment = new Hjaelp_Frag();
+            getSupportFragmentManager().popBackStack();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.include, fragment)  // tom container i layout
                     .addToBackStack(null)

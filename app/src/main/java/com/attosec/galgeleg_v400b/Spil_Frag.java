@@ -22,14 +22,14 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
     private String[] alphabet = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "æ", "ø", "å"};
     //public static HangmanLogic game;
 
-    private Button guessButton;
+    public static Button guessButton;
     private Button playagain;
-    private TextView wordText;
-    private TextView guessedWords;
-    private ImageView galgeImg;
-    private Integer[] wrongImg;
-    private TextView gættilbage;
-    private TextView normTekst;
+    public static TextView wordText;
+    public static TextView guessedWords;
+    public static ImageView galgeImg;
+    public static Integer[] wrongImg;
+    public static TextView gættilbage;
+    public static TextView normTekst;
     private BrugerDAO brugerDAO;
 
 
@@ -63,6 +63,8 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
 
         return rod;
     }
+
+
     public boolean onOptionsItemSelected(MenuItem item) {
         //finish();
         //android.os.Process.killProcess(android.os.Process.myPid());
@@ -80,6 +82,8 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
     }
 
     public void restartSpil(){
+        MainActivity.game.nulstil();
+        guessedWords.setText("Brugte bogstaver: ");
         wordText.setText(MainActivity.game.getSynligtOrd());
         gættilbage.setText("7");
         galgeImg.setImageResource(R.drawable.galge);
@@ -138,15 +142,23 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
             guessedWords.setVisibility(View.VISIBLE);
             gættilbage.setVisibility(View.VISIBLE);
             normTekst.setVisibility(View.VISIBLE);
-            galgeImg.setImageResource(R.drawable.galge);
-            MainActivity.game.nulstil();
-            wordText.setText(MainActivity.game.getSynligtOrd());
-            gættilbage.setText("7");
-            guessedWords.setText("Brugte bogstaver: ");
+
+            restartSpil();
+
+            //spilRefresh();
+
             //getActivity().finish();
             //android.os.Process.killProcess(android.os.Process.myPid());
 
         }
+    }
+
+    public static void spilRefresh(){
+        MainActivity.game.nulstil();
+        wordText.setText(MainActivity.game.getSynligtOrd());
+        gættilbage.setText("7");
+        guessedWords.setText("Brugte bogstaver: ");
+        galgeImg.setImageResource(R.drawable.galge);
     }
 
     private class DrAsync extends AsyncTask<Void, Void, Void> {

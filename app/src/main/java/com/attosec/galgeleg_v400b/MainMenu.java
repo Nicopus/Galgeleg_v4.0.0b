@@ -46,7 +46,7 @@ public class MainMenu extends Fragment implements View.OnClickListener {
     if (v == startSpil) {
 
             getFragmentManager().beginTransaction()
-                    .replace(R.id.include, new Spil_Frag())
+                    .replace(R.id.include, new Spil_Frag(), "SPIL_FRAG")
                     .addToBackStack(null)
                     .commit();
 
