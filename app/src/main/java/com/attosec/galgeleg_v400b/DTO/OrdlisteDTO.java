@@ -5,18 +5,13 @@ package com.attosec.galgeleg_v400b.DTO;
  */
 public class OrdlisteDTO {
     private String ord;
-    private String hint;
 
-    public OrdlisteDTO (String ord, String hint) {
+    public OrdlisteDTO (String ord) {
         this.ord = ord;
-        this.hint = hint;
     }
 
     public String getOrd() {
         return ord;
     }
 
-    public String getHint() {
-        return hint;
-    }
 }

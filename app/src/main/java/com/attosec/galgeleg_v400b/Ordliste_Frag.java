@@ -66,7 +66,6 @@ public class Ordliste_Frag extends Fragment implements View.OnClickListener {
         yesButton2 = (Button) rod.findViewById(R.id.yesButton2);
         noButton2 = (Button) rod.findViewById(R.id.noButton2);
         ordBox2 = (EditText) rod.findViewById(R.id.ordBox2);
-        ordBox3 = (EditText) rod.findViewById(R.id.ordBox3);
         regler2 = (TextView) rod.findViewById(R.id.regler2);
         removeView2 = (LinearLayout) rod.findViewById(R.id.removeView2);
         wordlistView2 = (RelativeLayout) rod.findViewById(R.id.wordlistView2);
@@ -133,14 +132,9 @@ public class Ordliste_Frag extends Fragment implements View.OnClickListener {
                     && !ordBox2.getText().toString().toLowerCase().matches(".*\\d+.*")
                     && !ordBox2.getText().toString().contains(" ")
                     && !MainActivity.game.getAllWords().contains(ordBox2.getText().toString().toLowerCase());
-            boolean ordbox3Check = !ordBox2.getText().toString().toLowerCase().isEmpty()
-                    && ordBox2.getText().toString().toLowerCase().length() == 1
-                    && !ordBox2.getText().toString().toLowerCase().matches(".*\\d+.*")
-                    && !ordBox2.getText().toString().contains(" ")
-                    && !MainActivity.game.getAllWords().contains(ordBox2.getText().toString().toLowerCase());
 
-            if(ordbox2Check && ordbox3Check){
-                MainActivity.game.addWord(ordBox2.getText().toString().toLowerCase(), ordBox3.getText().toString().toLowerCase());
+            if(ordbox2Check){
+                MainActivity.game.addWord(ordBox2.getText().toString().toLowerCase());
                 errorToast("Ordet \"" + ordBox2.getText().toString().toLowerCase() + "\" blev tilføjet til ordlisten");
             }
             else{

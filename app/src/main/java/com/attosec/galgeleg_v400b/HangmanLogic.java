@@ -1,22 +1,15 @@
 package com.attosec.galgeleg_v400b;
 
-import android.widget.ArrayAdapter;
+import android.util.Log;
 
 import com.attosec.galgeleg_v400b.DAO.BrugerDAO;
 import com.attosec.galgeleg_v400b.DAO.OrdlisteDAO;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Random;
 
 public class HangmanLogic {
     private ArrayList<String> muligeOrd = new ArrayList<>();
-    private ArrayList<String> muligeHints = new ArrayList<>();
     private String ordet;
     private ArrayList<String> brugteBogstaver = new ArrayList<String>();
     private String synligtOrd;
@@ -65,6 +58,14 @@ public class HangmanLogic {
     }
 
     public HangmanLogic() {
+        muligeOrd.add("bil");
+        muligeOrd.add("computer");
+        muligeOrd.add("programmering");
+        muligeOrd.add("motorvej");
+        muligeOrd.add("busrute");
+        muligeOrd.add("gangsti");
+        muligeOrd.add("skovsnegl");
+        muligeOrd.add("solsort");
         nulstil();
     }
 
@@ -76,6 +77,7 @@ public class HangmanLogic {
         ordet = muligeOrd.get(new Random().nextInt(muligeOrd.size()));
         opdaterSynligtOrd();
         score = 0;
+        Log.v("afdfsrf", ordet);
     }
 
 
@@ -97,8 +99,8 @@ public class HangmanLogic {
         return muligeOrd;
     }
 
-    public void addWord(String word, String hint){
-        ordlisteDAO.tilføjOrd(word, hint);
+    public void addWord(String word){
+        ordlisteDAO.tilføjOrd(word);
     }
 
     public void removeWord(String word){
@@ -141,48 +143,22 @@ public class HangmanLogic {
         System.out.println("---------- ");
     }
 
-
-    public static String hentUrl(String url) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(new URL(url).openStream()));
-        StringBuilder sb = new StringBuilder();
-        String linje = br.readLine();
-        while (linje != null) {
-            sb.append(linje + "\n");
-            linje = br.readLine();
+    public void opdaterOrdliste() {
+        int antalOrd = ordlisteDAO.getOrdliste().size();
+        //muligeOrd.clear();
+        for (int i = 0; i < antalOrd; i++) {
+            muligeOrd.add(ordlisteDAO.getOrdliste().get(i).getOrd());
         }
-        return sb.toString();
-    }
-
-    public void hentOrdFraDr() throws Exception {
-        String data = hentUrl("http://dr.dk");
-        System.out.println("data = " + data);
-
-        data = data.substring(data.indexOf("<body")).
-                replaceAll("<.+?>", " ").toLowerCase().replaceAll("[^a-zæøå]", " ").
-                replaceAll(" [a-zæøå] "," "). // fjern 1-bogstavsord
-                replaceAll(" [a-zæøå][a-zæøå] "," "); // fjern 2-bogstavsord
-        System.out.println("data = " + data);
-        muligeOrd.clear();
-        muligeOrd.addAll(new HashSet<String>(Arrays.asList(data.split(" "))));
-
         System.out.println("muligeOrd = " + muligeOrd);
         nulstil();
     }
 
-    public void opdaterOrdliste() {
-        int antalOrd = ordlisteDAO.getOrdliste().size();
-        for (int i = 0; i <= antalOrd; i++) {
-            muligeOrd.add(ordlisteDAO.getOrdliste().get(i).getOrd());
-            muligeHints.add(ordlisteDAO.getOrdliste().get(i).getHint());
-        }
-    }
-
-    public boolean erHighscoreSlået(String nickname) {
+    public int updateHigscore(final String nickname) {
         if (brugerDAO.getHighscore(nickname).getHighScore() < score) {
             brugerDAO.updateHighscore(nickname, score);
-            return true;
+            return score;
         } else {
-            return false;
+            return -1;
         }
     }
 }

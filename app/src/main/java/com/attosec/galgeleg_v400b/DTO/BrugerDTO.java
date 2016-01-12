@@ -17,10 +17,6 @@ public class BrugerDTO {
         return highScore;
     }
 
-    public void setHighscore(int point) {
-        this.highScore = point;
-    }
-
     public String getNickname() {
         return nickname;
     }

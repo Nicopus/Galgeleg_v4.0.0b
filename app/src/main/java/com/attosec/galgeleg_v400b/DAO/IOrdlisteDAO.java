@@ -2,6 +2,7 @@ package com.attosec.galgeleg_v400b.DAO;
 
 import com.attosec.galgeleg_v400b.DTO.OrdlisteDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,6 +10,6 @@ import java.util.List;
  */
 public interface IOrdlisteDAO {
 
-    void tilføjOrd (String ord, String hint);
-    List<OrdlisteDTO> getOrdliste();
+    void tilføjOrd (String ord);
+    ArrayList<OrdlisteDTO> getOrdliste();
 }

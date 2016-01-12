@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -125,8 +126,8 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
                         galgeImg.setImageResource(R.drawable.vundet);
                         wordText.setText("Du har vundet! Ordet var: " + MainActivity.game.getOrdet());
                         setVisibleView();
-                        if(brugerDAO.getHighscore("nicolai").getHighScore() < MainActivity.game.getScore()) {
-                            brugerDAO.updateHighscore("nicolai", MainActivity.game.getScore());
+                        if (MainActivity.game.updateHigscore("nicolai") != -1) {
+                            Log.v("xadjaj", "det virker");
                         }
                     } else {
                         galgeImg.setImageResource(R.drawable.tabt);
@@ -167,7 +168,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
         protected Void doInBackground(Void... params) {
             if (MainActivity.game.getAllWords().size() == 8) {
                 try {
-                    MainActivity.game.hentOrdFraDr();
+                    MainActivity.game.opdaterOrdliste();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

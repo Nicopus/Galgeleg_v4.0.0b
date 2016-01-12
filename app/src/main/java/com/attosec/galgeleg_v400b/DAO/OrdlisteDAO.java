@@ -1,11 +1,14 @@
 package com.attosec.galgeleg_v400b.DAO;
 
+import android.util.Log;
+
 import com.attosec.galgeleg_v400b.DTO.OrdlisteDTO;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,24 +18,24 @@ import java.util.List;
 public class OrdlisteDAO implements IOrdlisteDAO {
 
     private Firebase firebaseRef = new Firebase("https://galgeleg.firebaseio.com/wordlist");
-    private List<OrdlisteDTO> ordlisteDTO = new ArrayList<>();
+    private ArrayList<OrdlisteDTO> ordlisteDTO = new ArrayList<>();
 
     @Override
-    public void tilføjOrd(String ord, String hint) {
+    public void tilføjOrd(String ord) {
         Firebase ref = firebaseRef.child(String.valueOf(ord));
         ref.child("word").setValue(ord);
-        ref.child("hint").setValue(hint);
+
     }
 
     @Override
-    public List<OrdlisteDTO> getOrdliste() {
+    public ArrayList<OrdlisteDTO> getOrdliste() {
+
         firebaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot d : snapshot.getChildren()) {
-                    String ord = (String) d.child("word").getValue();
-                    String hint = (String) d.child("hint").getValue();
-                    ordlisteDTO.add(new OrdlisteDTO(ord, hint));
+                    String ord = (String)d.child("word").getValue();
+                    ordlisteDTO.add(new OrdlisteDTO(ord));
                 }
             }
 
@@ -41,6 +44,7 @@ public class OrdlisteDAO implements IOrdlisteDAO {
 
             }
         });
+
         return ordlisteDTO;
     }
 }

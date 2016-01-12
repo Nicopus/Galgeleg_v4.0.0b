@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity
     public static HangmanLogic game;
     private ProgressBar prog;
     private RelativeLayout loadingView;
-
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
     private ShakeDetector mShakeDetector;
@@ -58,12 +57,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        if(game == null) {
-            game = new HangmanLogic();
-        }
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this);
         setContentView(R.layout.activity_main);
+
+        if(game == null) {
+            game = new HangmanLogic();
+        }
 
         if (savedInstanceState == null && game.getAllWords().size() > 8) {
             Fragment fragment = new MainMenu();
@@ -319,9 +319,9 @@ public class MainActivity extends AppCompatActivity
 
         @Override
         protected Void doInBackground(Void... params) {
-            if (game.getAllWords().size() == 8) {
+            if (game.getAllWords().size() <= 8) {
                 try {
-                    game.hentOrdFraDr();
+                    game.opdaterOrdliste();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
