@@ -69,7 +69,7 @@ public class MainMenu extends Fragment implements View.OnClickListener {
 
         } else if (v == highscore) {
             getFragmentManager().beginTransaction()
-                    .replace(R.id.include, new Ordliste_Frag())
+                    .replace(R.id.include, new Scoreboard_Frag())
                     .addToBackStack(null)
                     .commit();
         }

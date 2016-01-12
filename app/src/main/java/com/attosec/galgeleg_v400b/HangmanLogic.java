@@ -161,4 +161,21 @@ public class HangmanLogic {
             return -1;
         }
     }
+
+    public ArrayList<String> getTop30Nicknames() {
+        ArrayList<String> nicknames = new ArrayList<>();
+        for (int i=0; i<brugerDAO.getTop30scores().size(); i++) {
+            nicknames.add(brugerDAO.getTop30scores().get(i).getNickname());
+        }
+        return nicknames;
+    }
+
+
+    public ArrayList<String> getTop30Highscores() {
+        ArrayList<String> highscores = new ArrayList<>();
+        for (int i=0; i<brugerDAO.getTop30scores().size(); i++) {
+            highscores.add(String.valueOf(brugerDAO.getTop30scores().get(i).getHighScore()));
+        }
+        return highscores;
+    }
 }

@@ -44,10 +44,7 @@ Nicolai Hansen - S133974
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private TextView gravityText;
-    private ListView dilemmaList;
     public static HangmanLogic game;
-    private ProgressBar prog;
     private RelativeLayout loadingView;
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
@@ -60,13 +57,10 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this);
         setContentView(R.layout.activity_main);
-        //brugerDAO = new BrugerDAO();
 
         if(game == null) {
             game = new HangmanLogic();
         }
-
-
 
         if (savedInstanceState == null && game.getAllWords().size() > 8) {
             Fragment fragment = new MainMenu();
@@ -81,9 +75,6 @@ public class MainActivity extends AppCompatActivity
         loadingView = (RelativeLayout) findViewById(R.id.loadingView);
         loadingView.setVisibility(View.VISIBLE);
 
-
-        dilemmaList = (ListView) findViewById(R.id.dilemmaList);
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         //DrawerLayout mainFrag = (DrawerLayout) findViewById(R.id.main_drawer);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -97,13 +88,7 @@ public class MainActivity extends AppCompatActivity
         DrAsync firebaseOrdliste = new DrAsync();
         firebaseOrdliste.execute();
         game.nulstil();
-
-
-        //loading bar
-        prog = (ProgressBar) findViewById(R.id.progressBar2);
         loadList();
-
-
 
         // ShakeDetector initialization
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -124,8 +109,6 @@ public class MainActivity extends AppCompatActivity
         });
 
     }
-
-
 
     private void handleShakeEvent(int count) {
         Spil_Frag mySpilFrag = (Spil_Frag)getSupportFragmentManager().findFragmentByTag("SPIL_FRAG");
@@ -245,7 +228,7 @@ public class MainActivity extends AppCompatActivity
             //getSupportActionBar().setTitle("Ordliste");
             //Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_highscore) {
-            Fragment fragment = new Ordliste_Frag();
+            Fragment fragment = new Scoreboard_Frag();
             getSupportFragmentManager().popBackStack();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.include, fragment)  // tom container i layout
@@ -311,7 +294,6 @@ public class MainActivity extends AppCompatActivity
                 if(game.getAllWords().size() > 8){
                     errorToast("Loading complete!");
                     loadingView.setVisibility(View.GONE);
-                    findViewById(R.id.dilemmaList).setVisibility(View.VISIBLE);
                     //findViewById(R.id.fab).setVisibility(View.VISIBLE);
                     onResume();
                 }

@@ -9,17 +9,6 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior" tools:showIn="@layout/app_bar_main"
     tools:context=".MainActivity">
 
-    <ListView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/dilemmaList"
-        android:layout_alignParentStart="true"
-        android:drawSelectorOnTop="false"
-        android:fastScrollAlwaysVisible="false"
-        android:divider="#5C6BC0"
-        android:dividerHeight="1dp"
-        android:visibility="gone" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

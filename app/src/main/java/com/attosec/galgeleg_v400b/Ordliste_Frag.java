@@ -57,7 +57,7 @@ public class Ordliste_Frag extends Fragment implements View.OnClickListener {
         ordliste2 = MainActivity.game.getAllWords();
         Collections.sort(ordliste2);
         wordList2 = (ListView) rod.findViewById(R.id.wordList2);
-        arrayAdapter2 = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, ordliste2);
+        arrayAdapter2 = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, ordliste2);
         wordList2.setAdapter(arrayAdapter2);
         addWordButton2 = (Button) rod.findViewById(R.id.addWordButton2);
         addButton2 = (Button) rod.findViewById(R.id.addButton2);
