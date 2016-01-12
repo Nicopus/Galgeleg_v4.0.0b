@@ -19,6 +19,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -33,8 +35,6 @@ public class Ordliste_Frag extends Fragment implements View.OnClickListener {
     private Button yesButton2;
     private Button noButton2;
     private EditText ordBox2;
-    private EditText ordBox3;
-    private TextView regler2;
     private TextView removeText2;
     private LinearLayout removeView2;
     private RelativeLayout wordlistView2;
@@ -50,11 +50,10 @@ public class Ordliste_Frag extends Fragment implements View.OnClickListener {
         View rod = inflater.inflate(R.layout.ordliste_frag_list, container, false);
         inputManager2 = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
-
-
         if(MainActivity.game == null){
             MainActivity.game = new HangmanLogic();
         }
+
         ordliste2 = MainActivity.game.getAllWords();
         Collections.sort(ordliste2);
         wordList2 = (ListView) rod.findViewById(R.id.wordList2);
@@ -65,12 +64,11 @@ public class Ordliste_Frag extends Fragment implements View.OnClickListener {
         cancelButton2 = (Button) rod.findViewById(R.id.cancelButton2);
         yesButton2 = (Button) rod.findViewById(R.id.yesButton2);
         noButton2 = (Button) rod.findViewById(R.id.noButton2);
-        ordBox2 = (EditText) rod.findViewById(R.id.ordBox2);
-        regler2 = (TextView) rod.findViewById(R.id.regler2);
         removeView2 = (LinearLayout) rod.findViewById(R.id.removeView2);
         wordlistView2 = (RelativeLayout) rod.findViewById(R.id.wordlistView2);
         addwordView2 = (RelativeLayout) rod.findViewById(R.id.addwordView2);
         removeText2 = (TextView) rod.findViewById(R.id.removeText2);
+        ordBox2 = (EditText) rod.findViewById(R.id.ordBox2);
         ordBox2.setHint("Skriv ord");
         addWordButton2.setOnClickListener(this);
         addButton2.setOnClickListener(this);
@@ -107,7 +105,6 @@ public class Ordliste_Frag extends Fragment implements View.OnClickListener {
         return true;
     }
 
-
     @Override
     public void onClick(View v) {
         if(v==addWordButton2){
@@ -116,6 +113,7 @@ public class Ordliste_Frag extends Fragment implements View.OnClickListener {
             ordBox2.requestFocus();
             inputManager2.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_IMPLICIT_ONLY);
         }
+
         if(v==cancelButton2){
             wordlistView2.setVisibility(View.VISIBLE);
             addwordView2.setVisibility(View.INVISIBLE);
@@ -126,6 +124,7 @@ public class Ordliste_Frag extends Fragment implements View.OnClickListener {
             wordList2.setAdapter(arrayAdapter2);
             errorToast("Annulleret");
         }
+
         if(v==addButton2){
             boolean ordbox2Check = !ordBox2.getText().toString().toLowerCase().isEmpty()
                     && ordBox2.getText().toString().toLowerCase().length()>2
@@ -149,9 +148,8 @@ public class Ordliste_Frag extends Fragment implements View.OnClickListener {
             
             Collections.sort(ordliste2);
             wordList2.setAdapter(arrayAdapter2);
-
-
         }
+
         if(v==yesButton2 && MainActivity.game.getAllWords().size()>9){
             MainActivity.game.removeWord(String.valueOf(o2));
             wordlistView2.setVisibility(View.VISIBLE);
@@ -159,12 +157,14 @@ public class Ordliste_Frag extends Fragment implements View.OnClickListener {
             wordList2.setAdapter(arrayAdapter2);
             errorToast("Ordet \"" + o2 + "\" blev fjernet fra listen");
         }
+
         if(v==yesButton2 && MainActivity.game.getAllWords().size()<=9){
             wordlistView2.setVisibility(View.VISIBLE);
             removeView2.setVisibility(View.INVISIBLE);
             wordList2.setAdapter(arrayAdapter2);
             errorToast("Der skal være mindst 9 ord i ordlisten");
         }
+
         if(v==noButton2){
             wordlistView2.setVisibility(View.VISIBLE);
             removeView2.setVisibility(View.INVISIBLE);

@@ -309,7 +309,7 @@ public class MainActivity extends AppCompatActivity
             public void run() {
 
                 if(game.getAllWords().size() > 8){
-                    errorToast("Loading complete!!");
+                    errorToast("Loading complete!");
                     loadingView.setVisibility(View.GONE);
                     findViewById(R.id.dilemmaList).setVisibility(View.VISIBLE);
                     //findViewById(R.id.fab).setVisibility(View.VISIBLE);
