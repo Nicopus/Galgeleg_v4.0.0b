@@ -77,7 +77,7 @@ public class HangmanLogic {
         ordet = muligeOrd.get(new Random().nextInt(muligeOrd.size()));
         opdaterSynligtOrd();
         score = 0;
-        Log.v("afdfsrf", ordet);
+        Log.v("Ordet er", ordet);
     }
 
 

@@ -27,8 +27,7 @@ import android.widget.Toast;
 
 
 import com.firebase.client.Firebase;
-
-//import com.firebase.client.Firebase;
+import com.attosec.galgeleg_v400b.DAO.BrugerDAO;
 
 
 
@@ -53,6 +52,7 @@ public class MainActivity extends AppCompatActivity
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
     private ShakeDetector mShakeDetector;
+    //public static BrugerDAO brugerDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,22 +60,26 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this);
         setContentView(R.layout.activity_main);
+        //brugerDAO = new BrugerDAO();
 
         if(game == null) {
             game = new HangmanLogic();
         }
+
+
 
         if (savedInstanceState == null && game.getAllWords().size() > 8) {
             Fragment fragment = new MainMenu();
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.include, fragment)  // tom container i layout
                     .commit();
+            loadingView.setVisibility(View.GONE);
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Galgeleg");
         loadingView = (RelativeLayout) findViewById(R.id.loadingView);
-        loadingView.setVisibility(View.GONE);
+        loadingView.setVisibility(View.VISIBLE);
 
 
         dilemmaList = (ListView) findViewById(R.id.dilemmaList);
@@ -90,13 +94,16 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        DrAsync firebaseOrdliste = new DrAsync();
+        firebaseOrdliste.execute();
+        game.nulstil();
+
+
         //loading bar
         prog = (ProgressBar) findViewById(R.id.progressBar2);
         loadList();
 
-        DrAsync g = new DrAsync();
-        g.execute();
-        game.nulstil();
+
 
         // ShakeDetector initialization
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -291,13 +298,17 @@ public class MainActivity extends AppCompatActivity
         Toast.makeText(this, "Klik på " + position, Toast.LENGTH_SHORT).show();
     }
 
+
+    //Fejl i opdate af ordliste.. Men fixed (dårligt)her
+
     public void loadList(){
         //Loading bar
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(game.getAllWords().size() > 20){
+
+                if(game.getAllWords().size() > 8){
                     errorToast("Loading complete!");
                     loadingView.setVisibility(View.GONE);
                     findViewById(R.id.dilemmaList).setVisibility(View.VISIBLE);
@@ -305,11 +316,26 @@ public class MainActivity extends AppCompatActivity
                     onResume();
                 }
                 if(game.getAllWords().size() == 8){
-                    errorToast("Connection error. Check internet connection. If your internet connection is on, our servers might be down.");
+                    //errorToast("Connection error. Check internet connection. If your internet connection is on, our servers might be down.");
+                    game.opdaterOrdliste();
                     //loadingView.setVisibility(View.GONE);
                     //findViewById(R.id.dilemmaList).setVisibility(View.VISIBLE);
                     //findViewById(R.id.fab).setVisibility(View.VISIBLE);
+
+                    if (game.getAllWords().size() > 8) {
+                        Fragment fragment = new MainMenu();
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.include, fragment)  // tom container i layout
+                                .commit();
+                        loadingView.setVisibility(View.GONE);
+                        errorToast("Loading complete!");
+                    }else{
+                        errorToast("Connection error. Check internet connection. If your internet connection is on, our servers might be down.");
+                    }
+
                 }
+
+
             }
         }, 4000); //Find smartere metode til at tjekke når isloading er færdig og isconnected er færdig?
     }
@@ -319,7 +345,7 @@ public class MainActivity extends AppCompatActivity
 
         @Override
         protected Void doInBackground(Void... params) {
-            if (game.getAllWords().size() <= 8) {
+            if (game.getAllWords().size() == 8) {
                 try {
                     game.opdaterOrdliste();
                 } catch (Exception e) {
@@ -331,12 +357,13 @@ public class MainActivity extends AppCompatActivity
 
        @Override
        protected void onPostExecute(Void result){
-           if (game.getAllWords().size() >= 20) {
+           if (game.getAllWords().size() > 8) {
                Fragment fragment = new MainMenu();
                getSupportFragmentManager().beginTransaction()
                        .replace(R.id.include, fragment)  // tom container i layout
                        .commit();
            }
+           //Spil_Frag.spilRefresh();
        }
 
     }

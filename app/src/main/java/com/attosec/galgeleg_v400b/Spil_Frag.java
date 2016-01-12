@@ -31,7 +31,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
     public static Integer[] wrongImg;
     public static TextView gættilbage;
     public static TextView normTekst;
-    private BrugerDAO brugerDAO;
+    //private BrugerDAO brugerDAO;
 
 
     @Override
@@ -42,7 +42,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //if(game == null){game = new HangmanLogic();}
 
-        brugerDAO = new BrugerDAO();
+        //brugerDAO = new BrugerDAO();
         charPicker = (NumberPicker) rod.findViewById(R.id.charPicker);
         playagain = (Button) rod.findViewById(R.id.btnPlayAgain);
         galgeImg = (ImageView) rod.findViewById(R.id.imageView);
@@ -56,8 +56,9 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
         charPicker.setDisplayedValues(alphabet);
         wordText.setText("Loading...");
         playagain.setOnClickListener(this);
-        DrAsync g = new DrAsync();
-        g.execute();
+
+        DrAsync firebaseOrdliste = new DrAsync();
+        firebaseOrdliste.execute();
         MainActivity.game.nulstil();
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("Spil Galgeleg");
@@ -172,7 +173,6 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             }
             return null;
         }
