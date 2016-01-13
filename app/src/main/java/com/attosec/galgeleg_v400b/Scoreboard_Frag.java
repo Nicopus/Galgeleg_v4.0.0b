@@ -32,6 +32,9 @@ public class Scoreboard_Frag extends ListFragment {
             MainActivity.game = new HangmanLogic();
         }
 
+        DrAsync firebaseOrdliste = new DrAsync();
+        firebaseOrdliste.execute();
+
         rowItems = new ArrayList<>();
         nicknameList = MainActivity.game.getTop30Nicknames();
         highscoreList = MainActivity.game.getTop30Highscores();
@@ -47,6 +50,31 @@ public class Scoreboard_Frag extends ListFragment {
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("Scoreboard");
 
+        MainActivity.game.getTop30Highscores();
+        MainActivity.game.getTop30Nicknames();
+
         return rod;
+    }
+    private class DrAsync extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            if (highscoreList.size() < 10) {
+                try {
+                    MainActivity.game.getTop30Highscores();
+                    MainActivity.game.getTop30Nicknames();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result){
+            MainActivity.game.getTop30Highscores();
+            MainActivity.game.getTop30Nicknames();
+        }
+
     }
 }

@@ -35,7 +35,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        getActivity().setTitle("Galgeleg");
+        //getActivity().setTitle("Galgeleg");
         View rod = inflater.inflate(R.layout.spil_frag, container, false);
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //if(game == null){game = new HangmanLogic();}
