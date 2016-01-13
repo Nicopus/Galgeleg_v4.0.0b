@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +35,7 @@ public class Scoreboard_Frag extends ListFragment {
         rowItems = new ArrayList<>();
         nicknameList = MainActivity.game.getTop30Nicknames();
         highscoreList = MainActivity.game.getTop30Highscores();
-        Log.v("scorboar frag test", String.valueOf(nicknameList.size()));
+        Log.v("scoreboard frag test", String.valueOf(nicknameList.size()));
 
         for (int i = 0; i < nicknameList.size(); i++) {
             rowItems.add(new RowItem(nicknameList.get(i), highscoreList.get(i), i+1));
@@ -42,6 +43,9 @@ public class Scoreboard_Frag extends ListFragment {
 
         adapter = new CustomAdapter(getContext(), rowItems);
         setListAdapter(adapter);
+
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        toolbar.setTitle("Scoreboard");
 
         return rod;
     }
