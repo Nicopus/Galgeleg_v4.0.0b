@@ -26,7 +26,7 @@ public class BrugerDAO implements IBrugerDAO {
         queryRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                highscore = (String)dataSnapshot.child(nickname).getValue();
+                highscore = String.valueOf(dataSnapshot.child(nickname).getValue());
             }
 
             @Override
@@ -46,7 +46,6 @@ public class BrugerDAO implements IBrugerDAO {
 
     @Override
     public ArrayList<BrugerDTO> getTop30scores() {
-        //ArrayList<BrugerDTO> top30scores = new ArrayList<>();
         Query queryRef = firebaseRef.orderByValue().limitToFirst(30);
         queryRef.addChildEventListener(new ChildEventListener() {
 

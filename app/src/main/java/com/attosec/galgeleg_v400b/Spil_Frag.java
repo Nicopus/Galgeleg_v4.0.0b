@@ -1,8 +1,10 @@
 package com.attosec.galgeleg_v400b;
 
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,14 +16,10 @@ import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
-import com.attosec.galgeleg_v400b.DAO.BrugerDAO;
-
-
 public class Spil_Frag extends Fragment implements View.OnClickListener{
 
     private NumberPicker charPicker;
     private String[] alphabet = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "æ", "ø", "å"};
-    //public static HangmanLogic game;
 
     public static Button guessButton;
     private Button playagain;
@@ -31,7 +29,6 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
     public static Integer[] wrongImg;
     public static TextView gættilbage;
     public static TextView normTekst;
-    //private BrugerDAO brugerDAO;
 
 
     @Override
@@ -115,6 +112,8 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
                             galgeImg.setImageResource(R.drawable.vundet);
                             wordText.setText("Du har vundet! Ordet var: " + MainActivity.game.getOrdet());
                             setVisibleView();
+
+
                         } else {
                             galgeImg.setImageResource(R.drawable.tabt);
                             wordText.setText("Du har tabt! Ordet var: " + MainActivity.game.getOrdet());
@@ -128,7 +127,9 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
                         wordText.setText("Du har vundet! Ordet var: " + MainActivity.game.getOrdet());
                         setVisibleView();
                         if (MainActivity.game.updateHigscore("nicolai") != -1) {
-                            Log.v("xadjaj", "det virker");
+                            FragmentManager fm = getFragmentManager();
+                            Custom_Dialog_Frag dialogFragment = new Custom_Dialog_Frag();
+                            dialogFragment.show(fm, "Highscore slået");
                         }
                     } else {
                         galgeImg.setImageResource(R.drawable.tabt);
@@ -181,5 +182,4 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
         protected void onPostExecute(Void result){restartSpil();}
 
     }
-
 }

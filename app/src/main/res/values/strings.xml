@@ -34,9 +34,8 @@
     <string name="specificButton">Færdig</string>
 
     <string name="nav_header_text">Galgeleg Applikations Menu</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="galgeleg_title">Galgeleg</string>
+    <string name="dialog_description">For at kunne gemme din highscore skal du indtaste et nickname. Dit nickname vil blive gemt og du vil ikke blive spurgt om dette fremover.</string>
 
 </resources>
