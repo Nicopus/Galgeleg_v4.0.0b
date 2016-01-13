@@ -9,14 +9,38 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/highscore"
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:text="22:"
+            android:id="@+id/rankText"
+            android:paddingLeft="10dp"
+            android:textSize="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp" />
+
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Second"
+            android:text="New Text"
+            android:id="@+id/nicknameText"
+            android:layout_weight="2"
+            android:paddingLeft="10dp"
+            android:textSize="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/highscoreText"
             android:layout_weight="1"
             android:gravity="right"
             android:paddingRight="10dp"
-            android:textSize="20dp">
+            android:textSize="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
         </TextView>
+
     </LinearLayout>
 </RelativeLayout>

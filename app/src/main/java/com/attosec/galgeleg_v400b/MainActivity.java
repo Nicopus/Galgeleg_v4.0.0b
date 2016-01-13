@@ -316,6 +316,9 @@ public class MainActivity extends AppCompatActivity
                     }
 
                 }
+                if(game.getTop30Highscores().size() == 0) {
+                    game.opdaterTop30();
+                }
 
 
             }
@@ -327,6 +330,13 @@ public class MainActivity extends AppCompatActivity
 
         @Override
         protected Void doInBackground(Void... params) {
+            if (game.getTop30Highscores().isEmpty()) {
+                try {
+                    game.opdaterTop30();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
             if (game.getAllWords().size() == 8) {
                 try {
                     game.opdaterOrdliste();

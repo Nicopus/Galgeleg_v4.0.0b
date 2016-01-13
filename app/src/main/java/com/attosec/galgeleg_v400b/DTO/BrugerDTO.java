@@ -5,15 +5,15 @@ package com.attosec.galgeleg_v400b.DTO;
  */
 public class BrugerDTO {
 
-    private int highScore;
+    private String highScore;
     private String nickname;
 
-    public BrugerDTO(int highScore, String nickname) {
+    public BrugerDTO(String highScore, String nickname) {
         this.highScore = highScore;
         this.nickname = nickname;
     }
 
-    public int getHighScore() {
+    public String getHighScore() {
         return highScore;
     }
 

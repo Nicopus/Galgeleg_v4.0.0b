@@ -18,8 +18,10 @@ public class HangmanLogic {
     private boolean spilletErVundet;
     private boolean spilletErTabt;
     private int score = 0;
-    OrdlisteDAO ordlisteDAO = new OrdlisteDAO();
-    BrugerDAO brugerDAO = new BrugerDAO();
+    private OrdlisteDAO ordlisteDAO = new OrdlisteDAO();
+    private BrugerDAO brugerDAO = new BrugerDAO();
+    private ArrayList<String> top30highscores = new ArrayList<>();
+    private ArrayList<String> top30nicknames = new ArrayList<>();
 
     public ArrayList<String> getBrugteBogstaver() {
         return brugteBogstaver;
@@ -154,7 +156,7 @@ public class HangmanLogic {
     }
 
     public int updateHigscore(final String nickname) {
-        if (brugerDAO.getHighscore(nickname).getHighScore() < score) {
+        if (Integer.valueOf(brugerDAO.getHighscore(nickname).getHighScore()) < score) {
             brugerDAO.updateHighscore(nickname, score);
             return score;
         } else {
@@ -162,20 +164,21 @@ public class HangmanLogic {
         }
     }
 
-    public ArrayList<String> getTop30Nicknames() {
-        ArrayList<String> nicknames = new ArrayList<>();
-        for (int i=0; i<brugerDAO.getTop30scores().size(); i++) {
-            nicknames.add(brugerDAO.getTop30scores().get(i).getNickname());
+    public void opdaterTop30() {
+        int size = brugerDAO.getTop30scores().size()-1;
+        for (int i=size; i>=0; i--) {
+            top30nicknames.add(brugerDAO.getTop30scores().get(i).getNickname());
+            top30highscores.add(brugerDAO.getTop30scores().get(i).getHighScore());
         }
-        return nicknames;
+    }
+
+    public ArrayList<String> getTop30Nicknames() {
+        return top30nicknames;
+
     }
 
 
     public ArrayList<String> getTop30Highscores() {
-        ArrayList<String> highscores = new ArrayList<>();
-        for (int i=0; i<brugerDAO.getTop30scores().size(); i++) {
-            highscores.add(String.valueOf(brugerDAO.getTop30scores().get(i).getHighScore()));
-        }
-        return highscores;
+        return top30highscores;
     }
 }
