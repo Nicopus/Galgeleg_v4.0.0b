@@ -312,6 +312,7 @@ public class MainActivity extends AppCompatActivity
                 }
                 if(game.getTop30Highscores().size() == 0) {
                     game.opdaterTop30();
+
                 }
 
 
