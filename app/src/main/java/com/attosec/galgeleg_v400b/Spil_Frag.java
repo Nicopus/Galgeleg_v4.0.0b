@@ -109,7 +109,6 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
                     if (!MainActivity.game.erSpilletSlut()) {
                         galgeImg.setImageResource(wrongImg[MainActivity.game.getAntalForkerteBogstaver() - 1]);
                     } else {
-                        //Kan gøres til en metode for at spare kode men nu lavede jeg det i uden lige at tænke på det så fuck det (Y)
                         if (MainActivity.game.erSpilletVundet()) {
                             galgeImg.setImageResource(R.drawable.vundet);
                             wordText.setText("Du har vundet! Ordet var: " + MainActivity.game.getOrdet());
@@ -128,11 +127,16 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
                         galgeImg.setImageResource(R.drawable.vundet);
                         wordText.setText("Du har vundet! Ordet var: " + MainActivity.game.getOrdet());
                         setVisibleView();
-                        if (MainActivity.game.updateHigscore("nicolai") != -1) {
+                        String nickname = MainActivity.game.readFromFile(getContext());
+                        if (nickname == "") {
                             FragmentManager fm = getFragmentManager();
                             dialogFragment = new Custom_Dialog_Frag();
                             dialogFragment.show(fm, "Highscore slået");
+                        } else {
+                            MainActivity.game.updateHigscore(String.valueOf(nickname));
                         }
+
+
                     } else {
                         galgeImg.setImageResource(R.drawable.tabt);
                         wordText.setText("Du har tabt! Ordet var: " + MainActivity.game.getOrdet());

@@ -1,10 +1,17 @@
 package com.attosec.galgeleg_v400b;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.attosec.galgeleg_v400b.DAO.BrugerDAO;
 import com.attosec.galgeleg_v400b.DAO.OrdlisteDAO;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -156,12 +163,19 @@ public class HangmanLogic {
     }
 
     public int updateHigscore(final String nickname) {
-        if (Integer.valueOf(brugerDAO.getHighscore(nickname).getHighScore()) < score) {
+        int tempHighscore = Integer.valueOf(brugerDAO.getHighscore(nickname).getHighScore());
+        Log.v("highscore = ", String.valueOf(tempHighscore));
+        if (tempHighscore < score) {
+
             brugerDAO.updateHighscore(nickname, score);
             return score;
         } else {
             return -1;
         }
+    }
+
+    public void indsætNyHighscore(String nickname) {
+        brugerDAO.updateHighscore(nickname, score);
     }
 
     public void opdaterTop30() {
@@ -180,5 +194,41 @@ public class HangmanLogic {
 
     public ArrayList<String> getTop30Highscores() {
         return top30highscores;
+    }
+
+    public String readFromFile(Context context) {
+        String nickname = "";
+        try {
+            InputStream inputStream = context.openFileInput("config.txt");
+
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                    stringBuilder.append(receiveString);
+                }
+
+                inputStream.close();
+                nickname = stringBuilder.toString();
+            }
+        } catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+
+        return nickname;
+    }
+    public void writeToFile(Context context, String nickname) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("config.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write(nickname);
+            outputStreamWriter.close();
+        } catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
     }
 }

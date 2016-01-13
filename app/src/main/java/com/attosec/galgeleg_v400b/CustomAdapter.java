@@ -23,7 +23,6 @@ public class CustomAdapter extends BaseAdapter {
     CustomAdapter(Context context, List<RowItem> rowItem) {
         this.context = context;
         this.rowItem = rowItem;
-
     }
 
     @Override

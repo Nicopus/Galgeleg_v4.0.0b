@@ -40,6 +40,7 @@ public class BrugerDAO implements IBrugerDAO {
 
     @Override
     public void updateHighscore(String nickname, int point) {
+        Log.v("afaaf", "test af burgerDao updateHighscore");
         firebaseRef.child(nickname).setValue(point);
 
     }
