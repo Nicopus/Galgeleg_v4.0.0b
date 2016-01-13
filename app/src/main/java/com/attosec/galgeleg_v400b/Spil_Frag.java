@@ -29,6 +29,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
     public static Integer[] wrongImg;
     public static TextView gættilbage;
     public static TextView normTekst;
+    private Custom_Dialog_Frag dialogFragment;
 
 
     @Override
@@ -53,6 +54,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
         charPicker.setDisplayedValues(alphabet);
         wordText.setText("Loading...");
         playagain.setOnClickListener(this);
+
 
         DrAsync firebaseOrdliste = new DrAsync();
         firebaseOrdliste.execute();
@@ -128,7 +130,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
                         setVisibleView();
                         if (MainActivity.game.updateHigscore("nicolai") != -1) {
                             FragmentManager fm = getFragmentManager();
-                            Custom_Dialog_Frag dialogFragment = new Custom_Dialog_Frag();
+                            dialogFragment = new Custom_Dialog_Frag();
                             dialogFragment.show(fm, "Highscore slået");
                         }
                     } else {
@@ -154,6 +156,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
             //android.os.Process.killProcess(android.os.Process.myPid());
 
         }
+
     }
 
     public static void spilRefresh(){
