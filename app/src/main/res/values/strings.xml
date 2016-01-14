@@ -32,6 +32,7 @@
     <string name="changePW">Skift kode</string>
     <string name="specificUN">Brugernavn</string>
     <string name="specificButton">Færdig</string>
+    <string name="addword_rules">Regler: Det kræves at ordet er på over 2 bogstaver, ikke indeholder mellemrum, og ikke indeholder tal!</string>
 
     <string name="nav_header_text">Galgeleg Applikations Menu</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>

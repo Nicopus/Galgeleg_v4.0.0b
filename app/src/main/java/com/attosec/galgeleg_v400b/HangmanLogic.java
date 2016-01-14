@@ -2,10 +2,8 @@ package com.attosec.galgeleg_v400b;
 
 import android.content.Context;
 import android.util.Log;
-
 import com.attosec.galgeleg_v400b.DAO.BrugerDAO;
 import com.attosec.galgeleg_v400b.DAO.OrdlisteDAO;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -17,18 +15,19 @@ import java.util.Random;
 
 public class HangmanLogic {
     private ArrayList<String> muligeOrd = new ArrayList<>();
+    private ArrayList<String> brugteBogstaver = new ArrayList<>();
     private String ordet;
-    private ArrayList<String> brugteBogstaver = new ArrayList<String>();
     private String synligtOrd;
     private int antalForkerteBogstaver;
     private boolean sidsteBogstavVarKorrekt;
     private boolean spilletErVundet;
     private boolean spilletErTabt;
     private int score = 0;
-    private OrdlisteDAO ordlisteDAO = new OrdlisteDAO();
-    private BrugerDAO brugerDAO = new BrugerDAO();
     private ArrayList<String> top30highscores = new ArrayList<>();
     private ArrayList<String> top30nicknames = new ArrayList<>();
+    private boolean ignorerRegistrering = false;
+    private OrdlisteDAO ordlisteDAO = new OrdlisteDAO();
+    private BrugerDAO brugerDAO = new BrugerDAO();
 
     public ArrayList<String> getBrugteBogstaver() {
         return brugteBogstaver;
@@ -104,16 +103,16 @@ public class HangmanLogic {
         }
     }
 
-    public ArrayList getAllWords(){
+    public ArrayList getMuligeOrd(){
         return muligeOrd;
     }
 
-    public void addWord(String word){
+    public void tilføjOrd(String word){
         ordlisteDAO.tilføjOrd(word);
     }
 
-    public void removeWord(String word){
-        muligeOrd.remove(word);
+    public void fjernOrd(int position) {
+        muligeOrd.remove(position);
     }
 
     public void gætBogstav(String bogstav) {
@@ -141,20 +140,8 @@ public class HangmanLogic {
         opdaterSynligtOrd();
     }
 
-    public void logStatus() {
-        System.out.println("---------- ");
-        System.out.println("- ordet (skult) = " + ordet);
-        System.out.println("- synligtOrd = " + synligtOrd);
-        System.out.println("- forkerteBogstaver = " + antalForkerteBogstaver);
-        System.out.println("- brugeBogstaver = " + brugteBogstaver);
-        if (spilletErTabt) System.out.println("- SPILLET ER TABT");
-        if (spilletErVundet) System.out.println("- SPILLET ER VUNDET");
-        System.out.println("---------- ");
-    }
-
     public void opdaterOrdliste() {
         int antalOrd = ordlisteDAO.getOrdliste().size();
-        //muligeOrd.clear();
         for (int i = 0; i < antalOrd; i++) {
             muligeOrd.add(ordlisteDAO.getOrdliste().get(i).getOrd());
         }
@@ -162,11 +149,12 @@ public class HangmanLogic {
         nulstil();
     }
 
-    public int updateHigscore(final String nickname) {
+    //Kaldes når spil er vundet: opdatere firebase hvis highscore slået og returnere ny highscore,
+    //ellers returneres -1 hvilket betyder at highscoren ikke blev slået
+    public int opdaterHigscore(final String nickname) {
         int tempHighscore = Integer.valueOf(brugerDAO.getHighscore(nickname).getHighScore());
         Log.v("highscore = ", String.valueOf(tempHighscore));
         if (tempHighscore < score) {
-
             brugerDAO.updateHighscore(nickname, score);
             return score;
         } else {
@@ -174,28 +162,36 @@ public class HangmanLogic {
         }
     }
 
+    //Kaldes når første gang brugeren indtaster nickname: indsætter ny bruger i firbase med den opnåede score
     public void indsætNyHighscore(String nickname) {
         brugerDAO.updateHighscore(nickname, score);
     }
 
-    public void opdaterTop30() {
-        int size = brugerDAO.getTop30scores().size()-1;
+    public void opdaterScoreboard() {
+        int size = brugerDAO.getScoreboard().size()-1;
         for (int i=size; i>=0; i--) {
-            top30nicknames.add(brugerDAO.getTop30scores().get(i).getNickname());
-            top30highscores.add(brugerDAO.getTop30scores().get(i).getHighScore());
+            top30nicknames.add(brugerDAO.getScoreboard().get(i).getNickname());
+            top30highscores.add(brugerDAO.getScoreboard().get(i).getHighScore());
         }
     }
 
     public ArrayList<String> getTop30Nicknames() {
         return top30nicknames;
-
     }
-
 
     public ArrayList<String> getTop30Highscores() {
         return top30highscores;
     }
 
+    public void setIgnorerRegistrering(boolean ignorer) {
+        ignorerRegistrering = ignorer;
+    }
+
+    public boolean getIgnorerRegistrering() {
+        return ignorerRegistrering;
+    }
+
+    //Læser nickname i en fil i appen
     public String readFromFile(Context context) {
         String nickname = "";
         try {
@@ -215,20 +211,22 @@ public class HangmanLogic {
                 nickname = stringBuilder.toString();
             }
         } catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
+            e.printStackTrace();
         } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
+            e.printStackTrace();
         }
 
         return nickname;
     }
+
+    //Tilføjer nickname til en fil i appen
     public void writeToFile(Context context, String nickname) {
         try {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("config.txt", Context.MODE_PRIVATE));
             outputStreamWriter.write(nickname);
             outputStreamWriter.close();
         } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
+            e.printStackTrace();
         }
     }
 }

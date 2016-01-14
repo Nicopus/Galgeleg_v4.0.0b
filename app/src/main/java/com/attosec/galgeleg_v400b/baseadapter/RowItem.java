@@ -1,4 +1,4 @@
-package com.attosec.galgeleg_v400b;
+package com.attosec.galgeleg_v400b.baseadapter;
 
 /**
  * Created by nicolaihansen on 12/01/16.
@@ -13,7 +13,6 @@ public class RowItem {
         this.nickname = nickname;
         this.highscore = highscore;
         this.rank = rank;
-
     }
 
     public String getNickname() {

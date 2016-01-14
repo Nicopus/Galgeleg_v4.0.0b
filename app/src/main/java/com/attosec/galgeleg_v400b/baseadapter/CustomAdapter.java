@@ -1,5 +1,4 @@
-package com.attosec.galgeleg_v400b;
-
+package com.attosec.galgeleg_v400b.baseadapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,8 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.view.LayoutInflater;
 import android.widget.TextView;
-
-import java.util.ArrayList;
+import com.attosec.galgeleg_v400b.R;
 import java.util.List;
 
 /**
@@ -17,35 +15,31 @@ import java.util.List;
  */
 public class CustomAdapter extends BaseAdapter {
 
-    Context context;
-    List<RowItem> rowItem;
+    private Context context;
+    private List<RowItem> rowItem;
 
-    CustomAdapter(Context context, List<RowItem> rowItem) {
+    public CustomAdapter(Context context, List<RowItem> rowItem) {
         this.context = context;
         this.rowItem = rowItem;
     }
 
     @Override
     public int getCount() {
-
         return rowItem.size();
     }
 
     @Override
     public Object getItem(int position) {
-
         return rowItem.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-
         return rowItem.indexOf(getItem(position));
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) context
                     .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
@@ -61,8 +55,6 @@ public class CustomAdapter extends BaseAdapter {
         highscoreTxt.setText(row_pos.getHighscore());
         rankTxt.setText(row_pos.getRank() + ":");
 
-
         return convertView;
-
     }
 }

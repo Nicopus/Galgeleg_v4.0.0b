@@ -76,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Regler: Det kræves at ordet er på over 2 bogstaver, ikke indeholder mellemrum, og ikke indeholder tal!"
+            android:text="@string/addword_rules"
             android:id="@+id/regler2"
             android:layout_below="@+id/addButton2"
             android:layout_centerHorizontal="true"

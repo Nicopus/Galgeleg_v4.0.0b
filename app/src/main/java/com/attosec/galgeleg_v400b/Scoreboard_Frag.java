@@ -1,6 +1,5 @@
 package com.attosec.galgeleg_v400b;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -9,36 +8,35 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
+import com.attosec.galgeleg_v400b.baseadapter.CustomAdapter;
+import com.attosec.galgeleg_v400b.baseadapter.RowItem;
 import java.util.ArrayList;
 
 
 public class Scoreboard_Frag extends ListFragment {
 
-    private InputMethodManager inputManager2;
     private ArrayList<String> nicknameList;
     private ArrayList<String> highscoreList;
     private CustomAdapter adapter;
     private ArrayList<RowItem> rowItems;
+    private DrAsync firebaseOrdliste;
 
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState){
         getActivity().setTitle("Scoreboard");
         View rod = inflater.inflate(R.layout.scoreboard_frag, container, false);
-        inputManager2 = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
         if(MainActivity.game == null){
             MainActivity.game = new HangmanLogic();
         }
 
-        DrAsync firebaseOrdliste = new DrAsync();
+        firebaseOrdliste = new DrAsync();
         firebaseOrdliste.execute();
 
         rowItems = new ArrayList<>();
         nicknameList = MainActivity.game.getTop30Nicknames();
         highscoreList = MainActivity.game.getTop30Highscores();
-        Log.v("scoreboard frag test", String.valueOf(nicknameList.size()));
 
         for (int i = 0; i < nicknameList.size(); i++) {
             rowItems.add(new RowItem(nicknameList.get(i), highscoreList.get(i), i+1));
@@ -50,8 +48,7 @@ public class Scoreboard_Frag extends ListFragment {
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("Scoreboard");
 
-        MainActivity.game.getTop30Highscores();
-        MainActivity.game.getTop30Nicknames();
+        MainActivity.game.opdaterScoreboard();
 
         return rod;
     }
@@ -61,8 +58,7 @@ public class Scoreboard_Frag extends ListFragment {
         protected Void doInBackground(Void... params) {
             if (highscoreList.size() < 10) {
                 try {
-                    MainActivity.game.getTop30Highscores();
-                    MainActivity.game.getTop30Nicknames();
+                    MainActivity.game.opdaterScoreboard();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

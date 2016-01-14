@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity
             game = new HangmanLogic();
         }
 
-        if (savedInstanceState == null && game.getAllWords().size() > 8) {
+        if (savedInstanceState == null && game.getMuligeOrd().size() > 8) {
             Fragment fragment = new MainMenu();
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.include, fragment)  // tom container i layout
@@ -285,20 +285,20 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void run() {
 
-                if(game.getAllWords().size() > 8){
+                if(game.getMuligeOrd().size() > 8){
                     errorToast("Loading complete!");
                     loadingView.setVisibility(View.GONE);
                     //findViewById(R.id.fab).setVisibility(View.VISIBLE);
                     onResume();
                 }
-                if(game.getAllWords().size() == 8){
+                if(game.getMuligeOrd().size() == 8){
                     //errorToast("Connection error. Check internet connection. If your internet connection is on, our servers might be down.");
                     game.opdaterOrdliste();
                     //loadingView.setVisibility(View.GONE);
                     //findViewById(R.id.dilemmaList).setVisibility(View.VISIBLE);
                     //findViewById(R.id.fab).setVisibility(View.VISIBLE);
 
-                    if (game.getAllWords().size() > 8) {
+                    if (game.getMuligeOrd().size() > 8) {
                         Fragment fragment = new MainMenu();
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.include, fragment)  // tom container i layout
@@ -311,7 +311,7 @@ public class MainActivity extends AppCompatActivity
 
                 }
                 if(game.getTop30Highscores().size() == 0) {
-                    game.opdaterTop30();
+                    game.opdaterScoreboard();
 
                 }
 
@@ -327,12 +327,12 @@ public class MainActivity extends AppCompatActivity
         protected Void doInBackground(Void... params) {
             if (game.getTop30Highscores().isEmpty()) {
                 try {
-                    game.opdaterTop30();
+                    game.opdaterScoreboard();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-            if (game.getAllWords().size() == 8) {
+            if (game.getMuligeOrd().size() == 8) {
                 try {
                     game.opdaterOrdliste();
                 } catch (Exception e) {
@@ -344,7 +344,7 @@ public class MainActivity extends AppCompatActivity
 
        @Override
        protected void onPostExecute(Void result){
-           if (game.getAllWords().size() > 8) {
+           if (game.getMuligeOrd().size() > 8) {
                Fragment fragment = new MainMenu();
                getSupportFragmentManager().beginTransaction()
                        .replace(R.id.include, fragment)  // tom container i layout

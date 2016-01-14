@@ -7,5 +7,6 @@ public interface IBrugerDAO {
 
     BrugerDTO getHighscore(String nickname);
     void updateHighscore(String nickname, int point);
-    ArrayList<BrugerDTO> getTop30scores();
+    ArrayList<BrugerDTO> getScoreboard();
+
 }
