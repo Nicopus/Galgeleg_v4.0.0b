@@ -9,5 +9,5 @@ import java.util.ArrayList;
 public interface IOrdlisteDAO {
 
     void tilføjOrd (String ord);
-    ArrayList<OrdlisteDTO> getOrdliste();
+    ArrayList<String> getOrdliste();
 }

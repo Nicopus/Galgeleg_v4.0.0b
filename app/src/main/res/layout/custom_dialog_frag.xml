@@ -13,12 +13,14 @@
         android:id="@+id/descriptionTxt" />
 
     <EditText
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Nickname"
         android:inputType="textPersonName"
-        android:text="Nickname"
         android:ems="10"
-        android:id="@+id/nicknameEditText" />
+        android:id="@+id/nicknameEditText"
+        android:imeOptions="actionUnspecified" />
 
     <LinearLayout
         android:orientation="horizontal"

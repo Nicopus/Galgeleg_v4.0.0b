@@ -271,13 +271,8 @@ public class MainActivity extends AppCompatActivity
         toast.show();
     }
 
-    public void onItemClick(AdapterView<?> l, View v, int position, long id) {
-        Toast.makeText(this, "Klik på " + position, Toast.LENGTH_SHORT).show();
-    }
-
 
     //Fejl i opdate af ordliste.. Men fixed (dårligt)her
-
     public void loadList(){
         //Loading bar
         final Handler handler = new Handler();
@@ -285,7 +280,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void run() {
 
-                if(game.getMuligeOrd().size() > 8){
+                if(game.getMuligeOrd().size() >= 8){
                     errorToast("Loading complete!");
                     loadingView.setVisibility(View.GONE);
                     //findViewById(R.id.fab).setVisibility(View.VISIBLE);
@@ -298,7 +293,7 @@ public class MainActivity extends AppCompatActivity
                     //findViewById(R.id.dilemmaList).setVisibility(View.VISIBLE);
                     //findViewById(R.id.fab).setVisibility(View.VISIBLE);
 
-                    if (game.getMuligeOrd().size() > 8) {
+                    if (game.getMuligeOrd().size() >= 8) {
                         Fragment fragment = new MainMenu();
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.include, fragment)  // tom container i layout
@@ -311,7 +306,7 @@ public class MainActivity extends AppCompatActivity
 
                 }
                 if(game.getTop30Highscores().size() == 0) {
-                    game.opdaterScoreboard();
+                   game.opdaterScoreboard();
 
                 }
 
@@ -344,7 +339,7 @@ public class MainActivity extends AppCompatActivity
 
        @Override
        protected void onPostExecute(Void result){
-           if (game.getMuligeOrd().size() > 8) {
+           if (game.getMuligeOrd().size() >= 8) {
                Fragment fragment = new MainMenu();
                getSupportFragmentManager().beginTransaction()
                        .replace(R.id.include, fragment)  // tom container i layout

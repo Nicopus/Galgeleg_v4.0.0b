@@ -4,6 +4,10 @@ import android.content.Context;
 import android.util.Log;
 import com.attosec.galgeleg_v400b.DAO.BrugerDAO;
 import com.attosec.galgeleg_v400b.DAO.OrdlisteDAO;
+import com.attosec.galgeleg_v400b.DAO.ScoreboardDAO;
+import com.attosec.galgeleg_v400b.DTO.BrugerDTO;
+
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -23,11 +27,13 @@ public class HangmanLogic {
     private boolean spilletErVundet;
     private boolean spilletErTabt;
     private int score = 0;
+    private ArrayList<BrugerDTO> highscores = new ArrayList<BrugerDTO>();
     private ArrayList<String> top30highscores = new ArrayList<>();
     private ArrayList<String> top30nicknames = new ArrayList<>();
     private boolean ignorerRegistrering = false;
     private OrdlisteDAO ordlisteDAO = new OrdlisteDAO();
     private BrugerDAO brugerDAO = new BrugerDAO();
+    private ScoreboardDAO scoreboardDAO = new ScoreboardDAO();
 
     public ArrayList<String> getBrugteBogstaver() {
         return brugteBogstaver;
@@ -141,11 +147,19 @@ public class HangmanLogic {
     }
 
     public void opdaterOrdliste() {
+        muligeOrd.clear();
+        muligeOrd = ordlisteDAO.getOrdliste();
+        muligeOrd.add("bil");
+        muligeOrd.add("computer");
+        muligeOrd.add("programmering");
+        muligeOrd.add("motorvej");
+        muligeOrd.add("busrute");
+        muligeOrd.add("gangsti");
+        muligeOrd.add("skovsnegl");
+        muligeOrd.add("solsort");
         int antalOrd = ordlisteDAO.getOrdliste().size();
-        for (int i = 0; i < antalOrd; i++) {
-            muligeOrd.add(ordlisteDAO.getOrdliste().get(i).getOrd());
-        }
-        System.out.println("muligeOrd = " + muligeOrd);
+        Log.v("muligeord size", String.valueOf(antalOrd));
+
         nulstil();
     }
 
@@ -168,11 +182,15 @@ public class HangmanLogic {
     }
 
     public void opdaterScoreboard() {
-        int size = brugerDAO.getScoreboard().size()-1;
-        for (int i=size; i>=0; i--) {
-            top30nicknames.add(brugerDAO.getScoreboard().get(i).getNickname());
-            top30highscores.add(brugerDAO.getScoreboard().get(i).getHighScore());
+        top30highscores.clear();
+        top30nicknames.clear();
+        int size = scoreboardDAO.getTop30Nicknames().size();
+
+        for (int i = size-1 ; i >= 0; i--) {
+            top30highscores.add(scoreboardDAO.getTop30Highscores().get(i));
+            top30nicknames.add(scoreboardDAO.getTop30Nicknames().get(i));
         }
+
     }
 
     public ArrayList<String> getTop30Nicknames() {

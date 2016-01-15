@@ -1,5 +1,7 @@
 package com.attosec.galgeleg_v400b.DAO;
 
+import android.util.Log;
+
 import com.attosec.galgeleg_v400b.DTO.BrugerDTO;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -22,6 +24,7 @@ public class BrugerDAO implements IBrugerDAO {
     @Override
     public BrugerDTO getHighscore(final String nickname) {
         Query queryRef = firebaseRef.orderByKey().equalTo(nickname);
+        scoreboardList.clear();
         queryRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -39,6 +42,7 @@ public class BrugerDAO implements IBrugerDAO {
 
     @Override
     public void updateHighscore(String nickname, int point) {
+        scoreboardList.clear();
         firebaseRef.child(nickname).setValue(point);
     }
 
@@ -51,6 +55,7 @@ public class BrugerDAO implements IBrugerDAO {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 nickname = dataSnapshot.getKey();
                 highscore = String.valueOf(dataSnapshot.getValue());
+                //Log.v("scoreboar_frag", nickname + " : " + highscore);
                 scoreboardList.add(new BrugerDTO(highscore, nickname));
             }
 

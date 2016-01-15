@@ -30,9 +30,12 @@ public class Scoreboard_Frag extends ListFragment {
         if(MainActivity.game == null){
             MainActivity.game = new HangmanLogic();
         }
+        Log.v("oncreateView", "kig her");
 
         firebaseOrdliste = new DrAsync();
         firebaseOrdliste.execute();
+
+        MainActivity.game.opdaterScoreboard();
 
         rowItems = new ArrayList<>();
         nicknameList = MainActivity.game.getTop30Nicknames();
@@ -41,14 +44,14 @@ public class Scoreboard_Frag extends ListFragment {
         for (int i = 0; i < nicknameList.size(); i++) {
             rowItems.add(new RowItem(nicknameList.get(i), highscoreList.get(i), i+1));
         }
-
+        MainActivity.game.opdaterScoreboard();
         adapter = new CustomAdapter(getContext(), rowItems);
         setListAdapter(adapter);
 
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("Scoreboard");
 
-        MainActivity.game.opdaterScoreboard();
+
 
         return rod;
     }
