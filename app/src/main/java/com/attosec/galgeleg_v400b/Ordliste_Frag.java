@@ -142,9 +142,10 @@ public class Ordliste_Frag extends Fragment implements View.OnClickListener {
             inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             ordBox.clearFocus();
             ordBox.setText("");
-
             Collections.sort(ordliste);
-            wordList.setAdapter(arrayAdapter);
+            arrayAdapter.notifyDataSetChanged();
+
+            //wordList.setAdapter(arrayAdapter);
         }
 
         if(v==yesButton && MainActivity.game.getMuligeOrd().size()>9){
