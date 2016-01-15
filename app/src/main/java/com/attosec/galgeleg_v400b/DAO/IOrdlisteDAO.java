@@ -10,4 +10,5 @@ public interface IOrdlisteDAO {
 
     void tilføjOrd (String ord);
     ArrayList<String> getOrdliste();
+    void fjernOrd (String ord);
 }

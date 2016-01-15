@@ -51,7 +51,9 @@ public class OrdlisteDAO implements IOrdlisteDAO {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-
+                String ord = dataSnapshot.getKey();
+                int index = ordliste.indexOf(ord);
+                ordliste.remove(index);
             }
 
             @Override
@@ -77,5 +79,12 @@ public class OrdlisteDAO implements IOrdlisteDAO {
     public ArrayList<String> getOrdliste() {
         return ordliste;
     }
+
+    @Override
+    public void fjernOrd(String ord) {
+        firebaseRef.child(ord).removeValue();
+    }
+
 }
+
 
