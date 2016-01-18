@@ -63,11 +63,29 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Score: "
+                    android:textSize="15dp"
+                    android:id="@+id/scoreTitle" />
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="160"
+                    android:id="@+id/scoreNumber"
+                    android:textSize="15dp"
+                    android:paddingRight="20dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Gæt tilbage: "
                     android:id="@+id/guessBackTitle"
                     android:layout_alignBaseline="@+id/backGame"
                     android:layout_alignBottom="@+id/backGame"
-                    android:textSize="15dp" />
+                    android:textSize="15dp"
+                    android:paddingLeft="20dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"

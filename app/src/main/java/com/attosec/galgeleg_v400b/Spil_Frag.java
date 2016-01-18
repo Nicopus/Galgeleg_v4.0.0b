@@ -27,6 +27,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
 
     public static Button guessButton;
     private Button playagain;
+    public static TextView scoreText;
     public static TextView wordText;
     public static TextView guessedWords;
     public static ImageView galgeImg;
@@ -112,6 +113,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
         //brugerDAO = new BrugerDAO();
         charPicker = (NumberPicker) rod.findViewById(R.id.charPicker);
         playagain = (Button) rod.findViewById(R.id.btnPlayAgain);
+        scoreText = (TextView) rod.findViewById(R.id.scoreNumber);
         galgeImg = (ImageView) rod.findViewById(R.id.imageView);
         wordText = (TextView) rod.findViewById(R.id.wordText);
         guessedWords = (TextView) rod.findViewById(R.id.guessedWords);
@@ -162,6 +164,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
         guessedWords.setText("Brugte bogstaver: ");
         wordText.setText(MainActivity.game.getSynligtOrd());
         gættilbage.setText("7");
+        scoreText.setText("0");
         galgeImg.setImageResource(R.drawable.galge);
         wrongImg = new Integer[]{
                 R.drawable.forkert1, R.drawable.forkert2, R.drawable.forkert3, R.drawable.forkert4, R.drawable.forkert5, R.drawable.forkert6
@@ -172,7 +175,8 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        if (v == guessButton) {}
+        if (v == guessButton) {
+        }
         else if(v == btnA){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[0]); btnLetterClick(); spilCheck();} btnA.setBackgroundColor(0);}
         else if(v == btnB){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[1]); btnLetterClick(); spilCheck();} btnB.setBackgroundColor(0);}
         else if(v == btnC){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[2]); btnLetterClick(); spilCheck();} btnC.setBackgroundColor(0);}
@@ -231,6 +235,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
     public void btnLetterClick(){
         wordText.setText(MainActivity.game.getSynligtOrd());
         gættilbage.setText(String.valueOf(7 - MainActivity.game.getAntalForkerteBogstaver()));
+        scoreText.setText(String.valueOf(MainActivity.game.getScore()));
     }
 
 
@@ -293,6 +298,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
         MainActivity.game.nulstil();
         wordText.setText(MainActivity.game.getSynligtOrd());
         gættilbage.setText("7");
+        scoreText.setText("0");
         galgeImg.setImageResource(R.drawable.galge);
         wrongImg = new Integer[]{
                 R.drawable.forkert1, R.drawable.forkert2, R.drawable.forkert3, R.drawable.forkert4, R.drawable.forkert5, R.drawable.forkert6
