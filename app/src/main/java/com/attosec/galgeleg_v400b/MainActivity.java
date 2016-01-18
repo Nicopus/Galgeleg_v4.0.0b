@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity
         Firebase.setAndroidContext(this);
         setContentView(R.layout.activity_main);
 
-        isLetterBox = false;
+        isLetterBox = true;
 
         if(game == null) {
             game = new HangmanLogic();
