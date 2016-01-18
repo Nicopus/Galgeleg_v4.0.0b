@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
     private ShakeDetector mShakeDetector;
+    public static boolean isLetterBox;
     //public static BrugerDAO brugerDAO;
 
     @Override
@@ -51,6 +52,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this);
         setContentView(R.layout.activity_main);
+
+        isLetterBox = false;
 
         if(game == null) {
             game = new HangmanLogic();

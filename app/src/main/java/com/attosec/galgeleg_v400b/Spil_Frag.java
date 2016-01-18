@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
@@ -30,7 +31,10 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
     public static TextView gættilbage;
     public static TextView normTekst;
     private Custom_Dialog_Frag dialogFragment;
-
+    public static Button btnA, btnB, btnC, btnD, btnE, btnF, btnG, btnH, btnI, btnJ, btnK, btnL, btnM, btnN, btnO, btnP, btnQ, btnR, btnS, btnT, btnU, btnV, btnW, btnX, btnY, btnZ, btnÆ, btnØ, btnÅ;
+    private LinearLayout letterBoxView;
+    private LinearLayout charPickerView;
+    private LinearLayout playAgainView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,6 +43,70 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
         View rod = inflater.inflate(R.layout.spil_frag, container, false);
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //if(game == null){game = new HangmanLogic();}
+
+        letterBoxView = (LinearLayout) rod.findViewById(R.id.letterBoxLayout);
+        charPickerView = (LinearLayout) rod.findViewById(R.id.charPickerLayout);
+        playAgainView = (LinearLayout) rod.findViewById(R.id.playAgainLayout);
+
+        btnA = (Button) rod.findViewById(R.id.btnLetterA);
+        btnB = (Button) rod.findViewById(R.id.btnLetterB);
+        btnC = (Button) rod.findViewById(R.id.btnLetterC);
+        btnD = (Button) rod.findViewById(R.id.btnLetterD);
+        btnE = (Button) rod.findViewById(R.id.btnLetterE);
+        btnF = (Button) rod.findViewById(R.id.btnLetterF);
+        btnG = (Button) rod.findViewById(R.id.btnLetterG);
+        btnH = (Button) rod.findViewById(R.id.btnLetterH);
+        btnI = (Button) rod.findViewById(R.id.btnLetterI);
+        btnJ = (Button) rod.findViewById(R.id.btnLetterJ);
+        btnK = (Button) rod.findViewById(R.id.btnLetterK);
+        btnL = (Button) rod.findViewById(R.id.btnLetterL);
+        btnM = (Button) rod.findViewById(R.id.btnLetterM);
+        btnN = (Button) rod.findViewById(R.id.btnLetterN);
+        btnO = (Button) rod.findViewById(R.id.btnLetterO);
+        btnP = (Button) rod.findViewById(R.id.btnLetterP);
+        btnQ = (Button) rod.findViewById(R.id.btnLetterQ);
+        btnR = (Button) rod.findViewById(R.id.btnLetterR);
+        btnS = (Button) rod.findViewById(R.id.btnLetterS);
+        btnT = (Button) rod.findViewById(R.id.btnLetterT);
+        btnU = (Button) rod.findViewById(R.id.btnLetterU);
+        btnV = (Button) rod.findViewById(R.id.btnLetterV);
+        btnW = (Button) rod.findViewById(R.id.btnLetterW);
+        btnX = (Button) rod.findViewById(R.id.btnLetterX);
+        btnY = (Button) rod.findViewById(R.id.btnLetterY);
+        btnZ = (Button) rod.findViewById(R.id.btnLetterZ);
+        btnÆ = (Button) rod.findViewById(R.id.btnLetterÆ);
+        btnØ = (Button) rod.findViewById(R.id.btnLetterØ);
+        btnÅ = (Button) rod.findViewById(R.id.btnLetterÅ);
+
+        btnA.setOnClickListener(this);
+        btnB.setOnClickListener(this);
+        btnC.setOnClickListener(this);
+        btnD.setOnClickListener(this);
+        btnE.setOnClickListener(this);
+        btnF.setOnClickListener(this);
+        btnG.setOnClickListener(this);
+        btnH.setOnClickListener(this);
+        btnI.setOnClickListener(this);
+        btnJ.setOnClickListener(this);
+        btnK.setOnClickListener(this);
+        btnL.setOnClickListener(this);
+        btnM.setOnClickListener(this);
+        btnN.setOnClickListener(this);
+        btnO.setOnClickListener(this);
+        btnP.setOnClickListener(this);
+        btnQ.setOnClickListener(this);
+        btnR.setOnClickListener(this);
+        btnS.setOnClickListener(this);
+        btnT.setOnClickListener(this);
+        btnU.setOnClickListener(this);
+        btnV.setOnClickListener(this);
+        btnW.setOnClickListener(this);
+        btnX.setOnClickListener(this);
+        btnY.setOnClickListener(this);
+        btnZ.setOnClickListener(this);
+        btnÆ.setOnClickListener(this);
+        btnØ.setOnClickListener(this);
+        btnÅ.setOnClickListener(this);
 
         //brugerDAO = new BrugerDAO();
         charPicker = (NumberPicker) rod.findViewById(R.id.charPicker);
@@ -74,12 +142,17 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
     }
 
     public void setVisibleView(){
-        playagain.setVisibility(View.VISIBLE);
-        charPicker.setVisibility(View.INVISIBLE);
-        guessButton.setVisibility(View.INVISIBLE);
-        guessedWords.setVisibility(View.INVISIBLE);
+        //playagain.setVisibility(View.VISIBLE);
+        playAgainView.setVisibility(View.VISIBLE);
+
+        //charPicker.setVisibility(View.INVISIBLE);
+        //guessButton.setVisibility(View.INVISIBLE);
+        //guessedWords.setVisibility(View.INVISIBLE);
         gættilbage.setVisibility(View.INVISIBLE);
         normTekst.setVisibility(View.INVISIBLE);
+
+        charPickerView.setVisibility(View.GONE);
+        letterBoxView.setVisibility(View.GONE);
     }
 
     public void restartSpil(){
@@ -127,14 +200,14 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
                         galgeImg.setImageResource(R.drawable.vundet);
                         wordText.setText("Du har vundet! Ordet var: " + MainActivity.game.getOrdet());
                         setVisibleView();
-                        String nickname = MainActivity.game.readFromFile(getContext());
-                        if (nickname == "") {
+                        //String nickname = MainActivity.game.readFromFile(getContext());
+                        /*if (nickname == "") {
                             FragmentManager fm = getFragmentManager();
                             dialogFragment = new Custom_Dialog_Frag();
                             dialogFragment.show(fm, "Highscore slået");
                         } else {
                             MainActivity.game.opdaterHigscore(String.valueOf(nickname));
-                        }
+                        }*/
 
 
                     } else {
@@ -145,10 +218,14 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
             }
         }
         else if(v == playagain){
-            playagain.setVisibility(View.GONE);
-            charPicker.setVisibility(View.VISIBLE);
-            guessButton.setVisibility(View.VISIBLE);
-            guessedWords.setVisibility(View.VISIBLE);
+            playAgainView.setVisibility(View.GONE);
+            //playagain.setVisibility(View.GONE);
+
+            charPickerView.setVisibility(View.VISIBLE);
+            //charPicker.setVisibility(View.VISIBLE);
+            //guessButton.setVisibility(View.VISIBLE);
+            //guessedWords.setVisibility(View.VISIBLE);
+
             gættilbage.setVisibility(View.VISIBLE);
             normTekst.setVisibility(View.VISIBLE);
 
@@ -162,6 +239,9 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
         }
 
     }
+
+
+
 
     public static void spilRefresh(){
         MainActivity.game.nulstil();
