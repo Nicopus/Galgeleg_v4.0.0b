@@ -27,12 +27,10 @@ public class HangmanLogic {
     private boolean spilletErVundet;
     private boolean spilletErTabt;
     private int score = 0;
-    private ArrayList<BrugerDTO> highscores = new ArrayList<BrugerDTO>();
     private ArrayList<String> top30highscores = new ArrayList<>();
     private ArrayList<String> top30nicknames = new ArrayList<>();
     private boolean ignorerRegistrering = false;
     private OrdlisteDAO ordlisteDAO = new OrdlisteDAO();
-    private BrugerDAO brugerDAO = new BrugerDAO();
     private ScoreboardDAO scoreboardDAO = new ScoreboardDAO();
 
     public ArrayList<String> getBrugteBogstaver() {
@@ -165,8 +163,9 @@ public class HangmanLogic {
 
     //Kaldes når spil er vundet: opdatere firebase hvis highscore slået og returnere ny highscore,
     //ellers returneres -1 hvilket betyder at highscoren ikke blev slået
-    public int opdaterHigscore(final String nickname) {
-        int tempHighscore = Integer.valueOf(brugerDAO.getHighscore(nickname).getHighScore());
+    public int opdaterHighscore(String nickname) {
+        BrugerDAO brugerDAO = new BrugerDAO(nickname);
+        int tempHighscore = Integer.valueOf(brugerDAO.getHighscore());
         Log.v("highscore = ", String.valueOf(tempHighscore));
         if (tempHighscore < score) {
             brugerDAO.updateHighscore(nickname, score);
@@ -176,8 +175,19 @@ public class HangmanLogic {
         }
     }
 
+    public int getHighscore(String nickname) {
+        BrugerDAO brugerDAO = new BrugerDAO(nickname);
+        return Integer.valueOf(brugerDAO.getHighscore());
+    }
+
+    public String getNickname(String nickname) {
+        BrugerDAO brugerDAO = new BrugerDAO(nickname);
+        return brugerDAO.getNickname();
+    }
+
     //Kaldes når første gang brugeren indtaster nickname: indsætter ny bruger i firbase med den opnåede score
     public void indsætNyHighscore(String nickname) {
+        BrugerDAO brugerDAO = new BrugerDAO(nickname);
         brugerDAO.updateHighscore(nickname, score);
     }
 

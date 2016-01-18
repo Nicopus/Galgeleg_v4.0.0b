@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public interface IBrugerDAO {
 
-    BrugerDTO getHighscore(String nickname);
+    String getHighscore();
+    String getNickname();
     void updateHighscore(String nickname, int point);
-    ArrayList<BrugerDTO> getScoreboard();
 
 }

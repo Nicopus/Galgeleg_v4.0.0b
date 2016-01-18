@@ -38,7 +38,6 @@ public class ScoreboardDAO {
 
                     int previousIndex = nicknameList.indexOf(previousChildName);
                     int nextIndex = previousIndex + 1;
-                    Log.v("index", String.valueOf(nextIndex));
                     if (nextIndex == nicknameList.size()) {
                         nicknameList.add(nickname);
                         highscoreList.add(highscore);

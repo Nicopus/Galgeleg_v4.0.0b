@@ -71,8 +71,7 @@ public class OrdlisteDAO implements IOrdlisteDAO {
 
     @Override
     public void tilføjOrd(String ord) {
-        Firebase ref = firebaseRef.child(String.valueOf(ord));
-        ref.child("word").setValue(ord);
+        firebaseRef.child(ord).setValue(ord);
     }
 
     @Override
