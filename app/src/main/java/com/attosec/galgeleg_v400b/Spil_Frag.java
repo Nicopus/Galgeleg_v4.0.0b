@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,7 +33,8 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
     public static Integer[] wrongImg;
     public static TextView gættilbage;
     public static TextView normTekst;
-    private Custom_Dialog_Frag dialogFragment;
+    private Nyt_Nickname_Dialog_Frag dialogFragment;
+    private Ny_Highscore_Dialog_Frag nyhighscoreFragment;
     public static  boolean spilIgang = true;
 
     @Override
@@ -265,8 +265,14 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
 
                 if (nickname == "") {
                     FragmentManager fm = getFragmentManager();
-                    dialogFragment = new Custom_Dialog_Frag();
+                    dialogFragment = new Nyt_Nickname_Dialog_Frag();
                     dialogFragment.show(fm, "Highscore slået");
+                } else {
+                    if (!(MainActivity.game.opdaterHighscore(nickname) == -1)) {
+                        FragmentManager fm = getFragmentManager();
+                        nyhighscoreFragment = new Ny_Highscore_Dialog_Frag();
+                        nyhighscoreFragment.show(fm, "Highscore slået");
+                    }
                 }
             } else {
                 spilIgang = false;

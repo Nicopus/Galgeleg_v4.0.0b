@@ -3,6 +3,9 @@ package com.attosec.galgeleg_v400b;
 import android.content.Context;
 import android.util.Log;
 import com.attosec.galgeleg_v400b.DAO.BrugerDAO;
+import com.attosec.galgeleg_v400b.DAO.IBrugerDAO;
+import com.attosec.galgeleg_v400b.DAO.IOrdlisteDAO;
+import com.attosec.galgeleg_v400b.DAO.IScoreboardDAO;
 import com.attosec.galgeleg_v400b.DAO.OrdlisteDAO;
 import com.attosec.galgeleg_v400b.DAO.ScoreboardDAO;
 
@@ -31,9 +34,9 @@ public class HangmanLogic {
     private ArrayList<String> alleNicknames = new ArrayList<>();
     private ArrayList<String> alleHighscores = new ArrayList<>();
     private boolean ignorerRegistrering = false;
-    private OrdlisteDAO ordlisteDAO = new OrdlisteDAO();
-    private ScoreboardDAO scoreboardDAO = new ScoreboardDAO();
-    private BrugerDAO brugerDAO = new BrugerDAO();
+    private IOrdlisteDAO ordlisteDAO = new OrdlisteDAO();
+    private IScoreboardDAO scoreboardDAO = new ScoreboardDAO();
+    private IBrugerDAO brugerDAO = new BrugerDAO();
 
     public ArrayList<String> getBrugteBogstaver() {
         return brugteBogstaver;

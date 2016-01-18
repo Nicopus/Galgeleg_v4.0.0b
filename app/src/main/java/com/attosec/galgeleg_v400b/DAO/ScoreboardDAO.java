@@ -1,6 +1,5 @@
 package com.attosec.galgeleg_v400b.DAO;
 
-import android.util.Log;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Created by nicolaihansen on 15/01/16.
  */
-public class ScoreboardDAO {
+public class ScoreboardDAO implements IScoreboardDAO {
 
     private ArrayList<String> nicknameList = new ArrayList<>();
     private ArrayList<String> highscoreList = new ArrayList<>();
@@ -74,11 +73,14 @@ public class ScoreboardDAO {
         });
 
     }
-
+    @Override
     public ArrayList<String> getTop30Nicknames() {
         return nicknameList;
     }
+
+    @Override
     public ArrayList<String> getTop30Highscores() {
         return highscoreList;
     }
+
 }

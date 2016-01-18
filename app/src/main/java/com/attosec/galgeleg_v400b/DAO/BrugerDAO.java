@@ -1,7 +1,5 @@
 package com.attosec.galgeleg_v400b.DAO;
 
-import android.util.Log;
-
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -50,7 +48,11 @@ public class BrugerDAO implements IBrugerDAO {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
+                String nickname = dataSnapshot.getKey();
+                String highscore = String.valueOf(dataSnapshot.getValue());
+                int index = nicknameList.indexOf(nickname);
+                nicknameList.set(index, nickname);
+                highscoreList.set(index, highscore);
             }
 
             @Override

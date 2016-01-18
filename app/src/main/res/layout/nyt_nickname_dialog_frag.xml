@@ -26,6 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
+        android:maxLength="20"
         android:id="@+id/errorText"
         android:textColor="#cc0000"
         android:visibility="gone" />

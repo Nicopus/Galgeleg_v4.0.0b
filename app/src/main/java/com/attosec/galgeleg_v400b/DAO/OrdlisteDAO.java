@@ -1,14 +1,11 @@
 package com.attosec.galgeleg_v400b.DAO;
 
 import android.util.Log;
-
-import com.attosec.galgeleg_v400b.DTO.OrdlisteDTO;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
-import com.firebase.client.ValueEventListener;
 import java.util.ArrayList;
 
 /**
