@@ -35,7 +35,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
     public static TextView gættilbage;
     public static TextView normTekst;
     private Custom_Dialog_Frag dialogFragment;
-
+    public static  boolean spilIgang = true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -130,6 +130,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
         MainActivity.game.nulstil();
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("Spil Galgeleg");
+        spilIgang = true;
 
         return rod;
     }
@@ -232,11 +233,14 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
         gættilbage.setText(String.valueOf(7 - MainActivity.game.getAntalForkerteBogstaver()));
     }
 
+
     public void spilCheck(){
         if(!MainActivity.game.erSidsteBogstavKorrekt()) {
             if (!MainActivity.game.erSpilletSlut()) {
                 galgeImg.setImageResource(wrongImg[MainActivity.game.getAntalForkerteBogstaver() - 1]);
+                spilIgang = true;
             } else {
+                spilIgang = false;
                 //Kan gøres til en metode for at spare kode men nu lavede jeg det i uden lige at tænke på det så fuck det (Y)
                 if (MainActivity.game.erSpilletVundet()) {
                     galgeImg.setImageResource(R.drawable.vundet);
@@ -252,6 +256,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
         }
         else if(MainActivity.game.erSpilletSlut())
             if (MainActivity.game.erSpilletVundet()) {
+                spilIgang = false;
                 galgeImg.setImageResource(R.drawable.vundet);
                 wordText.setText("Du har vundet! Ordet var: " + MainActivity.game.getOrdet());
                 setVisibleView();
@@ -263,6 +268,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
                     dialogFragment.show(fm, "Highscore slået");
                 }
             } else {
+                spilIgang = false;
                 galgeImg.setImageResource(R.drawable.tabt);
                 wordText.setText("Du har tabt! Ordet var: " + MainActivity.game.getOrdet());
                 setVisibleView();
@@ -276,6 +282,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
 
 
     public static void spilRefresh(){
+        spilIgang = true;
         MainActivity.game.nulstil();
         wordText.setText(MainActivity.game.getSynligtOrd());
         gættilbage.setText("7");

@@ -107,14 +107,17 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    private boolean isShaking = false;
+
     private void handleShakeEvent(int count) {
         Spil_Frag mySpilFrag = (Spil_Frag)getSupportFragmentManager().findFragmentByTag("SPIL_FRAG");
 
 
 
-        if(mySpilFrag != null && mySpilFrag.isVisible()){
-            Toast.makeText(this, "Shaking", Toast.LENGTH_SHORT).show();
+        if(mySpilFrag != null && mySpilFrag.isVisible() && isShaking == false && Spil_Frag.spilIgang){
 
+            //Toast.makeText(this, "Shaking", Toast.LENGTH_SHORT).show();
+            isShaking = true;
             new AlertDialog.Builder(MainActivity.this)
                     .setTitle("Andet ord?")
                     .setMessage("Du vil miste 30 point ved at få nyt ord")
@@ -123,11 +126,13 @@ public class MainActivity extends AppCompatActivity
                             //game.nulstil();
                             //Spil_Frag.wordText.setText(MainActivity.game.getSynligtOrd());
                             Spil_Frag.spilRefresh();
+                            isShaking = false;
                         }
                     })
                     .setNegativeButton("Annuller", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             // do nothing
+                            isShaking = false;
                         }
                     })
                     .setIcon(android.R.drawable.ic_dialog_alert)
@@ -283,13 +288,13 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void run() {
 
-                if(game.getMuligeOrd().size() >= 8){
+                if (game.getMuligeOrd().size() >= 8){
                     errorToast("Loading complete!");
                     loadingView.setVisibility(View.GONE);
                     //findViewById(R.id.fab).setVisibility(View.VISIBLE);
                     onResume();
                 }
-                if(game.getMuligeOrd().size() == 8){
+                if (game.getMuligeOrd().size() == 8){
                     //errorToast("Connection error. Check internet connection. If your internet connection is on, our servers might be down.");
                     game.opdaterOrdliste();
                     //loadingView.setVisibility(View.GONE);
