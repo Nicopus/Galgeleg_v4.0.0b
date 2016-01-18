@@ -5,7 +5,6 @@ import android.util.Log;
 import com.attosec.galgeleg_v400b.DAO.BrugerDAO;
 import com.attosec.galgeleg_v400b.DAO.OrdlisteDAO;
 import com.attosec.galgeleg_v400b.DAO.ScoreboardDAO;
-import com.attosec.galgeleg_v400b.DTO.BrugerDTO;
 
 
 import java.io.BufferedReader;
@@ -29,9 +28,12 @@ public class HangmanLogic {
     private int score = 0;
     private ArrayList<String> top30highscores = new ArrayList<>();
     private ArrayList<String> top30nicknames = new ArrayList<>();
+    private ArrayList<String> alleNicknames = new ArrayList<>();
+    private ArrayList<String> alleHighscores = new ArrayList<>();
     private boolean ignorerRegistrering = false;
     private OrdlisteDAO ordlisteDAO = new OrdlisteDAO();
     private ScoreboardDAO scoreboardDAO = new ScoreboardDAO();
+    private BrugerDAO brugerDAO = new BrugerDAO();
 
     public ArrayList<String> getBrugteBogstaver() {
         return brugteBogstaver;
@@ -164,9 +166,7 @@ public class HangmanLogic {
     //Kaldes når spil er vundet: opdatere firebase hvis highscore slået og returnere ny highscore,
     //ellers returneres -1 hvilket betyder at highscoren ikke blev slået
     public int opdaterHighscore(String nickname) {
-        BrugerDAO brugerDAO = new BrugerDAO(nickname);
-        int tempHighscore = Integer.valueOf(brugerDAO.getHighscore());
-        Log.v("highscore = ", String.valueOf(tempHighscore));
+        int tempHighscore = getHighscore(nickname);
         if (tempHighscore < score) {
             brugerDAO.updateHighscore(nickname, score);
             return score;
@@ -176,19 +176,31 @@ public class HangmanLogic {
     }
 
     public int getHighscore(String nickname) {
-        BrugerDAO brugerDAO = new BrugerDAO(nickname);
-        return Integer.valueOf(brugerDAO.getHighscore());
+        int index = alleNicknames.indexOf(nickname);
+        return Integer.valueOf(alleHighscores.get(index));
     }
 
-    public String getNickname(String nickname) {
-        BrugerDAO brugerDAO = new BrugerDAO(nickname);
-        return brugerDAO.getNickname();
+    public boolean checkNicknames(String name) {
+        if (alleNicknames.contains(name)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     //Kaldes når første gang brugeren indtaster nickname: indsætter ny bruger i firbase med den opnåede score
     public void indsætNyHighscore(String nickname) {
-        BrugerDAO brugerDAO = new BrugerDAO(nickname);
         brugerDAO.updateHighscore(nickname, score);
+    }
+
+    public void opdaterAlleBrugere() {
+        alleNicknames.clear();
+        alleHighscores.clear();
+        int size = brugerDAO.getAlleHighscore().size();
+        for (int i = 0; i < size; i++) {
+            alleNicknames.add(brugerDAO.getAlleNicknames().get(i));
+            alleHighscores.add(brugerDAO.getAlleHighscore().get(i));
+        }
     }
 
     public void opdaterScoreboard() {

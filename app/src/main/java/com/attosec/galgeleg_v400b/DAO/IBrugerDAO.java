@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public interface IBrugerDAO {
 
-    String getHighscore();
-    String getNickname();
-    void updateHighscore(String nickname, int point);
+    ArrayList<String> getAlleHighscore();
+    ArrayList<String> getAlleNicknames();
+    void updateHighscore(String nickname, int score);
 
 }

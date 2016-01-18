@@ -38,7 +38,8 @@ public class Custom_Dialog_Frag extends DialogFragment implements View.OnClickLi
         //Hvis brugeren trykker OK gemmes nickname i en fil i appen og en nye bruger indsætte i firebase
         if (v == dialogOkBtn) {
             String tempNickname = dialogNicknameTxt.getText().toString();
-            if (String.valueOf(MainActivity.game.getNickname(tempNickname)) == "") {
+
+            if (!MainActivity.game.checkNicknames(tempNickname)) {
                 MainActivity.game.writeToFile(getContext(), dialogNicknameTxt.getText().toString());
                 MainActivity.game.indsætNyHighscore(dialogNicknameTxt.getText().toString());
                 dismiss();
@@ -47,7 +48,7 @@ public class Custom_Dialog_Frag extends DialogFragment implements View.OnClickLi
                 dialogErrorTxt.setVisibility(View.VISIBLE);
 
             }
-            //Log.v("firebase test", String.valueOf(MainActivity.game.getNickname(dialogNicknameTxt.getText().toString())));
+
 
 
         } else {

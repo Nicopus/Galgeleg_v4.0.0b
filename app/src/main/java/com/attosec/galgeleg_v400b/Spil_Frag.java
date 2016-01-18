@@ -260,6 +260,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
                 galgeImg.setImageResource(R.drawable.vundet);
                 wordText.setText("Du har vundet! Ordet var: " + MainActivity.game.getOrdet());
                 setVisibleView();
+                MainActivity.game.opdaterAlleBrugere();
                 String nickname = MainActivity.game.readFromFile(getContext());
 
                 if (nickname == "") {
