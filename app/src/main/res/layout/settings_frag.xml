@@ -26,7 +26,7 @@
                 android:layout_weight="0.5"
                 android:id="@+id/line1"
                 android:weightSum="1.0"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="20dp">
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -50,7 +50,8 @@
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="Tillad push notifications"
                         android:id="@+id/textView8"
-                        android:textSize="16dp" />
+                        android:textSize="16dp"
+                        android:textColor="#65ffffff" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -78,7 +79,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="0.5"
                 android:id="@+id/line2"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="20dp">
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -102,7 +103,8 @@
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="Sender en push notification når knappen er trykket"
                         android:id="@+id/textView4"
-                        android:textSize="16dp" />
+                        android:textSize="16dp"
+                        android:textColor="#65ffffff" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -120,6 +122,59 @@
                         android:text="OK"
                         android:id="@+id/button"
                         android:background="@color/colorStart" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:id="@+id/line3"
+                android:layout_marginBottom="20dp" >
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/linearLayout4"
+                    android:layout_weight="0.8"
+                    android:gravity="center_vertical|left" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Lydeffekter"
+                        android:id="@+id/textView10"
+                        android:textSize="22dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Slå lyde og lydeffekter til/fra"
+                        android:id="@+id/textView11"
+                        android:textSize="16dp"
+                        android:textColor="#65ffffff" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/linearLayout5"
+                    android:layout_weight="0.2"
+                    android:gravity="right|top" >
+
+                    <Switch
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/switch2"
+                        android:checked="true"
+                        android:clickable="true"
+                        android:thumbTint="@color/colorStart"
+                        android:trackTint="#000000" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
