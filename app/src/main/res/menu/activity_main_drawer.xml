@@ -14,6 +14,8 @@
             android:title="Om" />
         <item android:id="@+id/nav_help" android:icon="@drawable/icon_help"
             android:title="Hjælp" />
+        <item android:id="@+id/nav_settings" android:icon="@drawable/icon_help"
+            android:title="Instillinger" />
     </group>
 
     <item android:title="Bruger indstillinger">

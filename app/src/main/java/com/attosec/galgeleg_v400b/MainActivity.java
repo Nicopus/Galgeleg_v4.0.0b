@@ -262,8 +262,14 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_register) {
             Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
             //startActivity(new Intent(MainActivity.this, RegisterActivity.class));
-        } else if (id == R.id.nav_editUser) {
-            Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_settings) {
+            Fragment fragment = new Settings_Frag();
+            getSupportFragmentManager().popBackStack();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.include, fragment)  // tom container i layout
+                    .addToBackStack(null)
+                    .commit();
+            //Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
