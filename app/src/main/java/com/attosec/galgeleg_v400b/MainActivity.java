@@ -61,6 +61,10 @@ public class MainActivity extends AppCompatActivity
     public static boolean isLetterBox;
 
     public static MediaPlayer mySound;
+    public static MediaPlayer soundDeath;
+    public static MediaPlayer soundAlive;
+    public static MediaPlayer soundOuch;
+    public static MediaPlayer soundYes;
     public static boolean bgMusicIsPlaying;
 
     private Animation animation;
@@ -89,6 +93,10 @@ public class MainActivity extends AppCompatActivity
 
         //bgMusicIsPlaying = true;
         mySound = MediaPlayer.create(this, R.raw.background);
+        soundDeath = MediaPlayer.create(this, R.raw.death);
+        soundAlive = MediaPlayer.create(this, R.raw.relief);
+        soundOuch = MediaPlayer.create(this, R.raw.ouch);
+        soundYes = MediaPlayer.create(this, R.raw.yes);
 
         mySound.start();
         Settings_Frag.musicIsPlaying = true;
@@ -278,17 +286,15 @@ public class MainActivity extends AppCompatActivity
 
         @Override
         public void onAnimationEnd(com.nineoldandroids.animation.Animator animation) {
-
             errorToast("Loading complete!");
-
             final MainActivity mainSplashActivity = mainSplashActivityWeakReference.get();
             if (mainSplashActivity != null) {
                 Fragment fragment = new MainMenu();
+                getSupportFragmentManager().popBackStack();
                 getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.holder_top_fast, R.anim.holder_bottom_back_fast)
+                        .setCustomAnimations(R.anim.logo_animation, R.anim.logo_animation_back)
                         .replace(R.id.include, fragment)  // tom container i layout
                         .commit();
-
             }
         }
 

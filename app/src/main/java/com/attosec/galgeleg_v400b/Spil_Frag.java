@@ -157,6 +157,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
         normTekst.setVisibility(View.INVISIBLE);
 
         letterBoxView.setVisibility(View.GONE);
+
     }
 
     public void restartSpil(){
@@ -244,51 +245,60 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
             if (!MainActivity.game.erSpilletSlut()) {
                 galgeImg.setImageResource(wrongImg[MainActivity.game.getAntalForkerteBogstaver() - 1]);
                 spilIgang = true;
+                MainActivity.soundOuch.start();
             } else {
                 spilIgang = false;
                 //Kan gøres til en metode for at spare kode men nu lavede jeg det i uden lige at tænke på det så fuck det (Y)
                 if (MainActivity.game.erSpilletVundet()) {
                     galgeImg.setImageResource(R.drawable.vundet);
                     wordText.setText("Du har vundet! Ordet var: " + MainActivity.game.getOrdet());
+                    MainActivity.soundAlive.start();
                     setVisibleView();
 
                 } else {
                     galgeImg.setImageResource(R.drawable.tabt);
                     wordText.setText("Du har tabt! Ordet var: " + MainActivity.game.getOrdet());
+                    MainActivity.soundDeath.start();
                     setVisibleView();
                 }
             }
         }
-        else if(MainActivity.game.erSpilletSlut())
-            if (MainActivity.game.erSpilletVundet()) {
-                spilIgang = false;
-                galgeImg.setImageResource(R.drawable.vundet);
-                wordText.setText("Du har vundet! Ordet var: " + MainActivity.game.getOrdet());
-                setVisibleView();
-                MainActivity.game.opdaterAlleBrugere();
-                String nickname = MainActivity.game.readFromFile(getContext());
+        else {
+            MainActivity.soundYes.start();
+            if(MainActivity.game.erSpilletSlut())
+                if (MainActivity.game.erSpilletVundet()) {
+                    spilIgang = false;
+                    galgeImg.setImageResource(R.drawable.vundet);
+                    wordText.setText("Du har vundet! Ordet var: " + MainActivity.game.getOrdet());
+                    MainActivity.soundAlive.start();
+                    setVisibleView();
+                    MainActivity.game.opdaterAlleBrugere();
+                    String nickname = MainActivity.game.readFromFile(getContext());
 
-                if (nickname == "") {
-                    FragmentManager fm = getFragmentManager();
-                    dialogFragment = new Nyt_Nickname_Dialog_Frag();
-                    dialogFragment.show(fm, "Highscore slået");
-                } else {
-                    if (!(MainActivity.game.opdaterHighscore(nickname) == -1)) {
+                    if (nickname == "") {
                         FragmentManager fm = getFragmentManager();
-                        nyhighscoreFragment = new Ny_Highscore_Dialog_Frag();
-                        nyhighscoreFragment.show(fm, "Highscore slået");
+                        dialogFragment = new Nyt_Nickname_Dialog_Frag();
+                        dialogFragment.show(fm, "Highscore slået");
+                    } else {
+                        if (!(MainActivity.game.opdaterHighscore(nickname) == -1)) {
+                            FragmentManager fm = getFragmentManager();
+                            nyhighscoreFragment = new Ny_Highscore_Dialog_Frag();
+                            nyhighscoreFragment.show(fm, "Highscore slået");
+                        }
                     }
+                } else {
+                    spilIgang = false;
+                    galgeImg.setImageResource(R.drawable.tabt);
+                    wordText.setText("Du har tabt! Ordet var: " + MainActivity.game.getOrdet());
+                    MainActivity.soundDeath.start();
+                    setVisibleView();
                 }
-            } else {
-                spilIgang = false;
-                galgeImg.setImageResource(R.drawable.tabt);
-                wordText.setText("Du har tabt! Ordet var: " + MainActivity.game.getOrdet());
-                setVisibleView();
-            }
                 /*
                 if(!String.valueOf(guessedWords.getText()).contains(" " + alphabet[charPicker.getValue()] + " ")){
                     guessedWords.append(alphabet[charPicker.getValue()] + " ");
                 }*/
+        }
+
 
     }
 
