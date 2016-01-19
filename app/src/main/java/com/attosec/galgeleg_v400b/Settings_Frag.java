@@ -13,7 +13,7 @@ public class Settings_Frag extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-        toolbar.setTitle("Instillinger");
+        toolbar.setTitle("Indstillinger");
         return inflater.inflate(R.layout.settings_frag, container, false);
     }
 }
