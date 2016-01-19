@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,8 +20,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CompoundButton;
+
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.Toast;
+import android.widget.ToggleButton;
+
 import com.firebase.client.Firebase;
 
 
@@ -46,12 +53,31 @@ public class MainActivity extends AppCompatActivity
     public static boolean isLetterBox;
     //public static BrugerDAO brugerDAO;
 
+    public static MediaPlayer mySound;
+    public static boolean bgMusicIsPlaying;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this);
         setContentView(R.layout.activity_main);
+
+        //bgMusicIsPlaying = true;
+
+
+
+        mySound = MediaPlayer.create(this, R.raw.background);
+
+        mySound.start();
+        Settings_Frag.musicIsPlaying = true;
+
+        /*if(bgMusicIsPlaying){
+            mySound.start();
+        }else{
+            mySound.release();
+        }*/
+
 
         isLetterBox = true;
 
@@ -64,13 +90,14 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.include, fragment)  // tom container i layout
                     .commit();
-            loadingView.setVisibility(View.GONE);
+            //loadingView.setVisibility(View.GONE);
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Galgeleg");
         loadingView = (RelativeLayout) findViewById(R.id.loadingView);
         loadingView.setVisibility(View.VISIBLE);
+        loadingView.setVisibility(View.GONE);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         //DrawerLayout mainFrag = (DrawerLayout) findViewById(R.id.main_drawer);
@@ -106,6 +133,7 @@ public class MainActivity extends AppCompatActivity
         });
 
     }
+
 
     private boolean isShaking = false;
 
@@ -164,6 +192,7 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager().popBackStack();
         } else{
             finish();
+            mySound.release();
         }
     }
 
