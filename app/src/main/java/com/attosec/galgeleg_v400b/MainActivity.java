@@ -1,13 +1,16 @@
 package com.attosec.galgeleg_v400b;
 
+import android.animation.Animator;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -16,19 +19,24 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.CompoundButton;
-
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
-import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
+
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 
 import com.firebase.client.Firebase;
+
+import java.lang.ref.WeakReference;
+import java.util.HashMap;
 
 
 
@@ -51,10 +59,15 @@ public class MainActivity extends AppCompatActivity
     private Sensor mAccelerometer;
     private ShakeDetector mShakeDetector;
     public static boolean isLetterBox;
-    //public static BrugerDAO brugerDAO;
 
     public static MediaPlayer mySound;
     public static boolean bgMusicIsPlaying;
+
+    private Animation animation;
+    private RelativeLayout logo;
+    private TextView title1, title2;
+    private Handler loadHandler;
+    private static final int MSG_LOAD_COMPLETE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +76,18 @@ public class MainActivity extends AppCompatActivity
         Firebase.setAndroidContext(this);
         setContentView(R.layout.activity_main);
 
+        loadHandler = new LoadHandler();
+
+        loadHandler.post(new LoadConfig());
+
+        logo = (RelativeLayout) findViewById(R.id.splash_cirkel);
+        logo.startAnimation(AnimationUtils.loadAnimation(this, R.anim.step_number_fader));
+        title2 = (TextView) findViewById(R.id.splash_text_left);
+        title1 = (TextView) findViewById(R.id.splash_text_right);
+
+
+
         //bgMusicIsPlaying = true;
-
-
-
         mySound = MediaPlayer.create(this, R.raw.background);
 
         mySound.start();
@@ -83,20 +104,22 @@ public class MainActivity extends AppCompatActivity
 
         if(game == null) {
             game = new HangmanLogic();
-        }
 
-        if (savedInstanceState == null && game.getMuligeOrd().size() > 8) {
+        }
+        if (savedInstanceState == null) flyIn();
+
+        /*if (savedInstanceState == null && game.getMuligeOrd().size() > 8) {
             Fragment fragment = new MainMenu();
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.include, fragment)  // tom container i layout
                     .commit();
             //loadingView.setVisibility(View.GONE);
-        }
+        }*/
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Galgeleg");
         loadingView = (RelativeLayout) findViewById(R.id.loadingView);
-        loadingView.setVisibility(View.VISIBLE);
+        //loadingView.setVisibility(View.VISIBLE);
         loadingView.setVisibility(View.GONE);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -112,7 +135,7 @@ public class MainActivity extends AppCompatActivity
         DrAsync firebaseOrdliste = new DrAsync();
         firebaseOrdliste.execute();
         game.nulstil();
-        loadList();
+        //loadList();
 
         // ShakeDetector initialization
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -133,6 +156,163 @@ public class MainActivity extends AppCompatActivity
         });
 
     }
+
+
+    //Start på Load Animation
+    private class LoadConfig implements Runnable {
+
+        @Override
+        public void run() {
+
+
+
+
+            if(game.getMuligeOrd().size() == 8 && game.getTop30Highscores().size() == 0){
+                game.opdaterOrdliste();
+                game.opdaterScoreboard();
+                //loadList();
+            }else if(game.getMuligeOrd().size() >= 8 && game.getTop30Highscores().size() == 0){
+                game.opdaterScoreboard();
+                //loadList();
+            }else if(game.getMuligeOrd().size() == 8 && game.getTop30Highscores().size() >= 1){
+                game.opdaterOrdliste();
+                //loadList();
+            }else if(game.getMuligeOrd().size() >= 8 && game.getTop30Highscores().size() >= 1){
+                errorToast("Loading complete!");
+                //loadingView.setVisibility(View.GONE);
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                endSplash();
+                onResume();}}, 400);
+            } else {
+                errorToast("Connection error. Check internet connection. If your internet connection is on, our servers might be down.");
+                //loadList();
+            }
+
+
+
+
+
+            final Message message = loadHandler.obtainMessage(MSG_LOAD_COMPLETE);
+            message.sendToTarget();
+        }
+    }
+
+   /* private static void setScreenDimension(final AppCompatActivity appCompatActivity) {
+        final Display display = appCompatActivity.getWindowManager().getDefaultDisplay();
+        display.getSize(WindowLayout.screenDimension);
+    }*/
+
+    private void flyIn() {
+//        animation = AnimationUtils.loadAnimation(this, R.anim.logo_animation);
+//        logo.startAnimation(animation);
+
+        animation = AnimationUtils.loadAnimation(this, R.anim.app_name_animation);
+        title1.startAnimation(animation);
+
+        animation = AnimationUtils.loadAnimation(this, R.anim.pro_animation);
+        title2.startAnimation(animation);
+    }
+
+    private void endSplash() {
+        logo.setAnimation(null);
+        // just use YoYo for the nice rotate out :-)
+        YoYo.with(Techniques.FlipOutY).duration(400).withListener(new SplashEndAnimatorListener(this)).playOn(logo);
+
+//        animation = AnimationUtils.loadAnimation(this, R.anim.step_number_back);
+//        logo.startAnimation(animation);
+
+//        animation = AnimationUtils.loadAnimation(this, R.anim.logo_animation_back);
+//        logo.startAnimation(animation);
+
+        animation = AnimationUtils.loadAnimation(this, R.anim.app_name_animation_back);
+        title1.startAnimation(animation);
+
+        animation = AnimationUtils.loadAnimation(this, R.anim.pro_animation_back);
+        title2.startAnimation(animation);
+
+//        animation.setAnimationListener(new SplashEndAnimationListener(this));
+
+
+    }
+
+    private class LoadHandler extends Handler {
+        @Override
+        public void handleMessage(final Message msg) {
+            super.handleMessage(msg);
+            if (msg != null && msg.what == MSG_LOAD_COMPLETE) {
+                loadHandler.postDelayed(new EndSplash(), 5000);
+            }
+        }
+    }
+
+    private class SplashEndAnimatorListener implements Animator.AnimatorListener, com.nineoldandroids.animation.Animator.AnimatorListener {
+
+        private final WeakReference<MainActivity> mainSplashActivityWeakReference;
+
+        public SplashEndAnimatorListener(final MainActivity splashActivity) {
+            mainSplashActivityWeakReference = new WeakReference<>(splashActivity);
+        }
+
+        @Override
+        public void onAnimationStart(final Animator animation) { }
+
+        @Override
+        public void onAnimationEnd(final Animator animation) {
+
+
+        }
+
+        @Override
+        public void onAnimationCancel(final Animator animation) { }
+
+        @Override
+        public void onAnimationRepeat(final Animator animation) { }
+
+        @Override
+        public void onAnimationStart(com.nineoldandroids.animation.Animator animation) {
+
+        }
+
+        @Override
+        public void onAnimationEnd(com.nineoldandroids.animation.Animator animation) {
+
+            errorToast("Loading complete!");
+
+            final MainActivity mainSplashActivity = mainSplashActivityWeakReference.get();
+            if (mainSplashActivity != null) {
+                Fragment fragment = new MainMenu();
+                getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.holder_top_fast, R.anim.holder_bottom_back_fast)
+                        .replace(R.id.include, fragment)  // tom container i layout
+                        .commit();
+
+            }
+        }
+
+        @Override
+        public void onAnimationCancel(com.nineoldandroids.animation.Animator animation) {
+
+        }
+
+        @Override
+        public void onAnimationRepeat(com.nineoldandroids.animation.Animator animation) {
+
+        }
+    }
+
+    private class EndSplash implements Runnable {
+        @Override
+        public void run() { endSplash(); }
+    }
+
+    //Slut på Load Animation
+
+
+
+
 
 
     private boolean isShaking = false;
@@ -314,14 +494,37 @@ public class MainActivity extends AppCompatActivity
         toast.show();
     }
 
-
-    //Fejl i opdate af ordliste.. Men fixed (dårligt)her
+/*
     public void loadList(){
         //Loading bar
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+
+                if(game.getMuligeOrd().size() == 8 && game.getTop30Highscores().size() == 0){
+                    game.opdaterOrdliste();
+                    game.opdaterScoreboard();
+                    loadList();
+                }else if(game.getMuligeOrd().size() >= 8 && game.getTop30Highscores().size() == 0){
+                    game.opdaterScoreboard();
+                    loadList();
+                }else if(game.getMuligeOrd().size() == 8 && game.getTop30Highscores().size() >= 1){
+                    game.opdaterOrdliste();
+                    loadList();
+                }else if(game.getMuligeOrd().size() >= 8 && game.getTop30Highscores().size() >= 1){
+                    errorToast("Loading complete!");
+                    loadingView.setVisibility(View.GONE);
+
+                    Fragment fragment = new MainMenu();
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.include, fragment)  // tom container i layout
+                            .commit();
+                    onResume();
+                } else {
+                    errorToast("Connection error. Check internet connection. If your internet connection is on, our servers might be down.");
+                    loadList();
+                }
 
                 if (game.getMuligeOrd().size() >= 8){
                     errorToast("Loading complete!");
@@ -350,14 +553,11 @@ public class MainActivity extends AppCompatActivity
                 }
                 if(game.getTop30Highscores().size() == 0) {
                    game.opdaterScoreboard();
-
                 }
-
-
             }
-        }, 4000); //Find smartere metode til at tjekke når isloading er færdig og isconnected er færdig?
+        }, 100); //Find smartere metode til at tjekke når isloading er færdig og isconnected er færdig?
     }
-
+*/
 
     private class DrAsync extends AsyncTask<Void, Void, Void> {
 
@@ -382,12 +582,12 @@ public class MainActivity extends AppCompatActivity
 
        @Override
        protected void onPostExecute(Void result){
-           if (game.getMuligeOrd().size() >= 8) {
+           /*if (game.getMuligeOrd().size() >= 8) {
                Fragment fragment = new MainMenu();
                getSupportFragmentManager().beginTransaction()
                        .replace(R.id.include, fragment)  // tom container i layout
                        .commit();
-           }
+           }*/
            //Spil_Frag.spilRefresh();
        }
 

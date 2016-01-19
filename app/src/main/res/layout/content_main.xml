@@ -10,11 +10,59 @@
     tools:context=".MainActivity">
 
     <RelativeLayout
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:background="@drawable/cirkel"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_below="@+id/loadingView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="145dp"
+        android:id="@+id/splash_cirkel">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="LOADING"
+            android:id="@+id/splash_loading"
+            android:gravity="center_vertical|center_horizontal"
+            android:textColor="#000000"
+            android:textSize="22dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/splash_cirkel"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gruppe"
+            android:textSize="30dp"
+            android:id="@+id/splash_text_left"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="#000000" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="42"
+            android:layout_centerHorizontal="true"
+            android:textSize="30dp"
+            android:id="@+id/splash_text_right"
+            android:layout_toRightOf="@+id/splash_text_left" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_vertical|center_horizontal"
         android:id="@+id/loadingView"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
