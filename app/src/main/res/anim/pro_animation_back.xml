@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ "THE BEER-WARE LICENSE" (Revision 42):
+  ~ <s133235@student.dtu> wrote this file. As long as you retain this notice you
+  ~ can do whatever you want with this stuff. If we meet some day, and you think
+  ~ this stuff is worth it, you can buy me a beer in return - Rudy Alex Kohn
+  -->
+
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+     android:fillAfter="true"
+     android:fillEnabled="true">
+
+    <translate
+        android:duration="400"
+        android:fromXDelta="0%"
+        android:interpolator="@android:anim/accelerate_interpolator"
+        android:toXDelta="-200%"/>
+
+    <alpha
+        android:duration="400"
+        android:fromAlpha="1"
+        android:toAlpha="0"/>
+
+</set>
