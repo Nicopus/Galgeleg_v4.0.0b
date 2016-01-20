@@ -29,7 +29,7 @@ public class HangmanLogic {
     private boolean sidsteBogstavVarKorrekt;
     private boolean spilletErVundet;
     private boolean spilletErTabt;
-    private int score = 0;
+    public static int score = 0;
     private ArrayList<String> top30highscores = new ArrayList<>();
     private ArrayList<String> top30nicknames = new ArrayList<>();
     private ArrayList<String> alleNicknames = new ArrayList<>();

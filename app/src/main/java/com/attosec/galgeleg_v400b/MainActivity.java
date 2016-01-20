@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Vibrator;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -65,6 +66,8 @@ public class MainActivity extends AppCompatActivity
     public static MediaPlayer soundAlive;
     public static MediaPlayer soundOuch;
     public static MediaPlayer soundYes;
+    public static MediaPlayer soundButton;
+    public static MediaPlayer soundDoor;
     public static boolean bgMusicIsPlaying;
 
     private Animation animation;
@@ -97,6 +100,8 @@ public class MainActivity extends AppCompatActivity
         soundAlive = MediaPlayer.create(this, R.raw.relief);
         soundOuch = MediaPlayer.create(this, R.raw.ouch);
         soundYes = MediaPlayer.create(this, R.raw.yes);
+        soundButton = MediaPlayer.create(this, R.raw.button);
+        soundDoor = MediaPlayer.create(this, R.raw.door);
 
         mySound.start();
         Settings_Frag.musicIsPlaying = true;
@@ -325,11 +330,11 @@ public class MainActivity extends AppCompatActivity
 
     private void handleShakeEvent(int count) {
         Spil_Frag mySpilFrag = (Spil_Frag)getSupportFragmentManager().findFragmentByTag("SPIL_FRAG");
-
+        Vibrator myVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
 
         if(mySpilFrag != null && mySpilFrag.isVisible() && isShaking == false && Spil_Frag.spilIgang){
-
+            myVibrator.vibrate(100);
             //Toast.makeText(this, "Shaking", Toast.LENGTH_SHORT).show();
             isShaking = true;
             new AlertDialog.Builder(MainActivity.this)
@@ -341,6 +346,8 @@ public class MainActivity extends AppCompatActivity
                             //Spil_Frag.wordText.setText(MainActivity.game.getSynligtOrd());
                             Spil_Frag.spilRefresh();
                             isShaking = false;
+                            game.score -= 30;
+                            Spil_Frag.scoreText.setText(String.valueOf(MainActivity.game.getScore()));
                         }
                     })
                     .setNegativeButton("Annuller", new DialogInterface.OnClickListener() {
@@ -365,6 +372,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        soundButton.start();
         //Fragment mainFragView = getSupportFragmentManager().findFragmentById(R.id.mainFragView);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -396,6 +404,7 @@ public class MainActivity extends AppCompatActivity
         mSensorManager.registerListener(mShakeDetector, mAccelerometer, SensorManager.SENSOR_DELAY_UI);
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -418,6 +427,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
+            soundButton.start();
             Fragment fragment = new MainMenu();
             getSupportFragmentManager().popBackStack();
             /*getSupportFragmentManager().beginTransaction()
@@ -427,6 +437,7 @@ public class MainActivity extends AppCompatActivity
 */
             //getSupportActionBar().setTitle("Galgeleg");
         } else if (id == R.id.nav_play) {
+            soundButton.start();
             Fragment fragment = new Spil_Frag();
             getSupportFragmentManager().popBackStack();
             getSupportFragmentManager().beginTransaction()
@@ -436,6 +447,7 @@ public class MainActivity extends AppCompatActivity
             //getSupportActionBar().setTitle("Spil");
             //Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_wordlist) {
+            soundButton.start();
             Fragment fragment = new Ordliste_Frag();
             getSupportFragmentManager().popBackStack();
             getSupportFragmentManager().beginTransaction()
@@ -445,6 +457,7 @@ public class MainActivity extends AppCompatActivity
             //getSupportActionBar().setTitle("Ordliste");
             //Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_highscore) {
+            soundButton.start();
             Fragment fragment = new Scoreboard_Frag();
             getSupportFragmentManager().popBackStack();
             getSupportFragmentManager().beginTransaction()
@@ -454,6 +467,7 @@ public class MainActivity extends AppCompatActivity
             //getSupportActionBar().setTitle("Om Appen");
             //Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_about) {
+            soundButton.start();
             Fragment fragment = new OmAppen_Frag();
             getSupportFragmentManager().popBackStack();
             getSupportFragmentManager().beginTransaction()
@@ -463,6 +477,7 @@ public class MainActivity extends AppCompatActivity
             //getSupportActionBar().setTitle("Om Appen");
             //Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_help) {
+            soundButton.start();
             Fragment fragment = new Hjaelp_Frag();
             getSupportFragmentManager().popBackStack();
             getSupportFragmentManager().beginTransaction()
@@ -472,12 +487,15 @@ public class MainActivity extends AppCompatActivity
             //getSupportActionBar().setTitle("Om Appen");
             //Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_profile) {
+            soundButton.start();
             Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
             //startActivity(new Intent(MainActivity.this, LoginActivity.class));
         } else if (id == R.id.nav_register) {
+            soundButton.start();
             Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
             //startActivity(new Intent(MainActivity.this, RegisterActivity.class));
         } else if (id == R.id.nav_settings) {
+            soundButton.start();
             Fragment fragment = new Settings_Frag();
             getSupportFragmentManager().popBackStack();
             getSupportFragmentManager().beginTransaction()

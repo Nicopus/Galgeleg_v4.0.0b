@@ -209,6 +209,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
         else if(v == btnÅ){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[28]); btnLetterClick(); spilCheck();} btnÅ.setBackgroundColor(0);}
 
         else if(v == playagain){
+            MainActivity.soundButton.start();
             playAgainView.setVisibility(View.GONE);
             //playagain.setVisibility(View.GONE);
             gættilbage.setVisibility(View.VISIBLE);
