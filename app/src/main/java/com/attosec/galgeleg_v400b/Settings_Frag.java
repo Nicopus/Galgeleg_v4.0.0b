@@ -21,6 +21,8 @@ public class Settings_Frag extends Fragment {
     public TextView soundFXSubtextView;
     public Switch soundFXSwitch;
     public static boolean effectIsPlaying;
+    public Switch insaneSwitch;
+    public static boolean insaneIsActive;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,6 +39,8 @@ public class Settings_Frag extends Fragment {
         soundFXSubtextView = (TextView) settingsView.findViewById(R.id.effectSubtext);
         soundFXSwitch = (Switch) settingsView.findViewById(R.id.effectSwitch);
 
+        insaneSwitch = (Switch) settingsView.findViewById(R.id.insaneSwitch);
+
         if(musicIsPlaying){
             bgMusicSwitch.setChecked(true);
             bgMusicSubtextView.setText("Slå baggrundsmusik fra");
@@ -45,6 +49,9 @@ public class Settings_Frag extends Fragment {
             soundFXSwitch.setChecked(true);
             soundFXSubtextView.setText("Slå lyde og lydeffekter fra");
         }
+        //if(insaneIsActive){
+        //    insaneSwitch.setChecked(true);
+        //}
 
         bgMusicSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
 
@@ -78,6 +85,19 @@ public class Settings_Frag extends Fragment {
                     // The toggle is disabled
                     soundFXSubtextView.setText("Slå lyde og lydeffekter til");
                     effectIsPlaying = false;
+                }
+            }
+        });
+        insaneSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    // The toggle is enabled
+                    insaneIsActive = true;
+                } else {
+                    // The toggle is disabled
+                    insaneIsActive = false;
                 }
             }
         });

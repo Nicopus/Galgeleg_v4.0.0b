@@ -239,59 +239,6 @@
                     android:orientation="vertical"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:id="@+id/linearLayout6"
-                    android:layout_weight="0.8"
-                    android:gravity="center_vertical|left" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="GPS placering"
-                        android:id="@+id/textView12"
-                        android:textSize="18dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Aktiverer din GPS placering"
-                        android:id="@+id/textView13"
-                        android:textSize="16dp"
-                        android:textColor="#65ffffff" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:id="@+id/linearLayout7"
-                    android:layout_weight="0.2"
-                    android:gravity="center_vertical|right" >
-
-                    <Switch
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/switch3"
-                        android:checked="false"
-                        android:clickable="true"
-                        android:thumbTint="@color/colorStart"
-                        android:trackTint="#000000" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.2"
-                android:id="@+id/line6"
-                android:layout_marginBottom="20dp" >
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
                     android:id="@+id/linearLayout8"
                     android:layout_weight="0.8"
                     android:gravity="center_vertical|left" >
@@ -325,9 +272,7 @@
                     <Switch
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/switch4"
-                        android:checked="false"
-                        android:clickable="true"
+                        android:id="@+id/insaneSwitch"
                         android:thumbTint="@color/colorStart"
                         android:trackTint="#000000" />
                 </LinearLayout>

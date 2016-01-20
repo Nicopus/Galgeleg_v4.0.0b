@@ -1,8 +1,12 @@
 package com.attosec.galgeleg_v400b;
 
 import android.animation.Animator;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.media.MediaPlayer;
@@ -165,6 +169,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 handleShakeEvent(count);
             }
         });
+
+        /*NotificationManager notiMan;
+        notiMan =(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+        Notification notify = new Notification(android.R.drawable.stat_notify_more,"Title Yo",System.currentTimeMillis());
+        PendingIntent pending = PendingIntent.getActivity(getApplicationContext(), 0, new Intent(),0);
+        notify.setLatestEventInfo(getApplicationContext(), subject, body, pending);
+        notiMan.notify(0, notify); */
 
     }
 
