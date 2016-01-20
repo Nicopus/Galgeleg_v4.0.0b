@@ -1,12 +1,19 @@
 package com.attosec.galgeleg_v400b;
 
 import android.animation.Animator;
+import android.annotation.TargetApi;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -34,6 +41,7 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.firebase.client.Firebase;
 
 import java.lang.ref.WeakReference;
+import java.util.Set;
 
 /*
 Lavet af:
@@ -112,7 +120,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             game = new HangmanLogic();
 
         }
-        if (savedInstanceState == null) flyIn();
+        if (savedInstanceState == null)
+            flyIn();
 
         /*if (savedInstanceState == null && game.getMuligeOrd().size() > 8) {
             Fragment fragment = new MainMenu();
@@ -163,12 +172,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String notiSubject = "Subject";
         String notiBody = "Body";
 
-        /*NotificationManager notiMan;
-        notiMan =(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-        Notification notify = new Notification(android.R.drawable.stat_notify_more,"Title Yo",System.currentTimeMillis());
-        PendingIntent pending = PendingIntent.getActivity(getApplicationContext(), 0, new Intent(),0);
-        notify.setLatestEventInfo(getApplicationContext(), notiSubject, notiBody, pending);
-        notiMan.notify(0, notify);*/
+        pushNoti();
+        Settings_Frag.pushIsActive = true;
 
     }
 
@@ -199,8 +204,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                endSplash();
-                onResume();}}, 400);
+                        endSplash();
+                        onResume();
+                    }}, 400);
             } else {
                 errorToast("Connection error. Check internet connection. If your internet connection is on, our servers might be down.");
                 //loadList();
@@ -287,20 +293,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         public void onAnimationRepeat(final Animator animation) { }
 
         @Override
-        public void onAnimationStart(com.nineoldandroids.animation.Animator animation) {
-
-        }
+        public void onAnimationStart(com.nineoldandroids.animation.Animator animation) {  }
 
         @Override
         public void onAnimationEnd(com.nineoldandroids.animation.Animator animation) {
             errorToast("Loading complete!");
             final MainActivity mainSplashActivity = mainSplashActivityWeakReference.get();
+            //MainMenu myMainMenu = (MainMenu)getSupportFragmentManager().findFragmentByTag("MAIN_MENU");
             if (mainSplashActivity != null) {
                 Fragment fragment = new MainMenu();
                 getSupportFragmentManager().popBackStack();
                 getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.logo_animation, R.anim.logo_animation_back)
-                        .replace(R.id.include, fragment)  // tom container i layout
+                        .replace(R.id.include, fragment, "MAIN_MENU")  // tom container i layout
                         .commit();
             }
         }
@@ -325,6 +330,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public void pushNotification(){
+            NotificationManager notiMan = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+            PendingIntent pending = PendingIntent.getActivity(getApplicationContext(), 0, new Intent(this, MainActivity.class),0);
+            Notification.Builder builder = new Notification.Builder(this);
+
+            builder.setSmallIcon(R.drawable.appicon)
+                    .setContentTitle("Galgeleg")
+                    .setContentText("Du har ikke spillet længe! Kom og spil!")
+                    .setContentInfo("Gør det!")
+                    .setAutoCancel(true)
+                    //.setColor(444444)
+                    .setColor(getResources().getColor(R.color.colorPrimary))
+                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.appicon03))
+                    .setContentIntent(pending);
+
+            Notification notification = builder.getNotification();
+            notiMan.notify(R.drawable.appicon03, notification);
+    }
 
 
 
@@ -333,7 +357,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void handleShakeEvent(int count) {
         Spil_Frag mySpilFrag = (Spil_Frag)getSupportFragmentManager().findFragmentByTag("SPIL_FRAG");
         Vibrator myVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-
 
         if(mySpilFrag != null && mySpilFrag.isVisible() && isShaking == false && Spil_Frag.spilIgang){
             myVibrator.vibrate(100);
@@ -368,6 +391,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Add the following line to unregister the Sensor Manager onPause
         mSensorManager.unregisterListener(mShakeDetector);
         super.onPause();
+        mySound.release();
+        finish();
     }
 
     @Override
@@ -386,6 +411,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //finish();
             getSupportFragmentManager().popBackStack();
         } else{
+            getSupportFragmentManager().popBackStack();
             finish();
             mySound.release();
         }
@@ -403,6 +429,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onResume();
         // Add the following line to register the Session Manager Listener onResume
         mSensorManager.registerListener(mShakeDetector, mAccelerometer, SensorManager.SENSOR_DELAY_UI);
+        //mySound.start();
     }
 
 
@@ -519,70 +546,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toast.show();
     }
 
-/*
-    public void loadList(){
-        //Loading bar
+
+    public void pushNoti(){
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-
-                if(game.getMuligeOrd().size() == 8 && game.getTop30Highscores().size() == 0){
-                    game.opdaterOrdliste();
-                    game.opdaterScoreboard();
-                    loadList();
-                }else if(game.getMuligeOrd().size() >= 8 && game.getTop30Highscores().size() == 0){
-                    game.opdaterScoreboard();
-                    loadList();
-                }else if(game.getMuligeOrd().size() == 8 && game.getTop30Highscores().size() >= 1){
-                    game.opdaterOrdliste();
-                    loadList();
-                }else if(game.getMuligeOrd().size() >= 8 && game.getTop30Highscores().size() >= 1){
-                    errorToast("Loading complete!");
-                    loadingView.setVisibility(View.GONE);
-
-                    Fragment fragment = new MainMenu();
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.include, fragment)  // tom container i layout
-                            .commit();
-                    onResume();
-                } else {
-                    errorToast("Connection error. Check internet connection. If your internet connection is on, our servers might be down.");
-                    loadList();
+                if(Settings_Frag.pushIsActive){
+                    pushNotification();
                 }
-
-                if (game.getMuligeOrd().size() >= 8){
-                    errorToast("Loading complete!");
-                    loadingView.setVisibility(View.GONE);
-                    //findViewById(R.id.fab).setVisibility(View.VISIBLE);
-                    onResume();
-                }
-                if (game.getMuligeOrd().size() == 8){
-                    //errorToast("Connection error. Check internet connection. If your internet connection is on, our servers might be down.");
-                    game.opdaterOrdliste();
-                    //loadingView.setVisibility(View.GONE);
-                    //findViewById(R.id.dilemmaList).setVisibility(View.VISIBLE);
-                    //findViewById(R.id.fab).setVisibility(View.VISIBLE);
-
-                    if (game.getMuligeOrd().size() >= 8) {
-                        Fragment fragment = new MainMenu();
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.include, fragment)  // tom container i layout
-                                .commit();
-                        loadingView.setVisibility(View.GONE);
-                        errorToast("Loading complete!");
-                    }else{
-                        errorToast("Connection error. Check internet connection. If your internet connection is on, our servers might be down.");
-                    }
-
-                }
-                if(game.getTop30Highscores().size() == 0) {
-                   game.opdaterScoreboard();
-                }
+                pushNoti();
             }
-        }, 100); //Find smartere metode til at tjekke når isloading er færdig og isconnected er færdig?
+        }, 10 * 1000);
     }
-*/
+
 
     private class DrAsync extends AsyncTask<Void, Void, Void> {
 
