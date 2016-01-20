@@ -22,10 +22,8 @@ public class Spil_Frag extends Fragment implements View.OnClickListener {
     private String[] alphabet = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "æ", "ø", "å"};
     public static Button btnA, btnB, btnC, btnD, btnE, btnF, btnG, btnH, btnI, btnJ, btnK, btnL, btnM, btnN, btnO, btnP, btnQ, btnR, btnS, btnT, btnU, btnV, btnW, btnX, btnY, btnZ, btnÆ, btnØ, btnÅ;
     private LinearLayout letterBoxView;
-    private LinearLayout charPickerView;
     private LinearLayout playAgainView;
 
-    public static Button guessButton;
     private Button playagain;
     public static Button hintBtn;
     public static TextView scoreText;
@@ -47,7 +45,6 @@ public class Spil_Frag extends Fragment implements View.OnClickListener {
         //if(game == null){game = new HangmanLogic();}
         Log.v("teajja", "jfsjfjsf");
         letterBoxView = (LinearLayout) rod.findViewById(R.id.letterBoxLayout);
-        charPickerView = (LinearLayout) rod.findViewById(R.id.charPickerLayout);
         playAgainView = (LinearLayout) rod.findViewById(R.id.playAgainLayout);
 
         btnA = (Button) rod.findViewById(R.id.btnLetterA);
@@ -119,7 +116,6 @@ public class Spil_Frag extends Fragment implements View.OnClickListener {
         wordText = (TextView) rod.findViewById(R.id.wordText);
         guessedWords = (TextView) rod.findViewById(R.id.guessedWords);
         gættilbage = (TextView) rod.findViewById(R.id.guessBackNumber);
-        guessButton = (Button) rod.findViewById(R.id.btnGuess);
         normTekst = (TextView) rod.findViewById(R.id.guessBackTitle);
         charPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
         charPicker.setMaxValue(28);
@@ -141,24 +137,15 @@ public class Spil_Frag extends Fragment implements View.OnClickListener {
 
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        //finish();
-        //android.os.Process.killProcess(android.os.Process.myPid());
         getActivity().finish();
         return true;
     }
 
     public void setVisibleView(){
         playAgainView.setVisibility(View.VISIBLE);
-        //playagain.setVisibility(View.VISIBLE);
-
-        charPickerView.setVisibility(View.GONE);
-        //charPicker.setVisibility(View.INVISIBLE);
-        //guessButton.setVisibility(View.INVISIBLE);
-        //guessedWords.setVisibility(View.INVISIBLE);
         gættilbage.setVisibility(View.INVISIBLE);
         normTekst.setVisibility(View.INVISIBLE);
         hintBtn.setVisibility(View.INVISIBLE);
-
         letterBoxView.setVisibility(View.GONE);
 
     }
@@ -173,15 +160,11 @@ public class Spil_Frag extends Fragment implements View.OnClickListener {
         wrongImg = new Integer[]{
                 R.drawable.forkert1, R.drawable.forkert2, R.drawable.forkert3, R.drawable.forkert4, R.drawable.forkert5, R.drawable.forkert6
         };
-        guessButton.setOnClickListener(this);
-
     }
 
     @Override
     public void onClick(View v) {
-        if (v == guessButton) {
-        }
-        else if(v == btnA){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[0]); btnLetterClick(); spilCheck();} btnA.setBackgroundColor(0);}
+        if(v == btnA){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[0]); btnLetterClick(); spilCheck();} btnA.setBackgroundColor(0);}
         else if(v == btnB){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[1]); btnLetterClick(); spilCheck();} btnB.setBackgroundColor(0);}
         else if(v == btnC){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[2]); btnLetterClick(); spilCheck();} btnC.setBackgroundColor(0);}
         else if(v == btnD){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[3]); btnLetterClick(); spilCheck();} btnD.setBackgroundColor(0);}
@@ -283,14 +266,8 @@ public class Spil_Frag extends Fragment implements View.OnClickListener {
             gættilbage.setVisibility(View.VISIBLE);
             normTekst.setVisibility(View.VISIBLE);
             hintBtn.setVisibility(View.VISIBLE);
-            if(MainActivity.isLetterBox = false){
-                charPickerView.setVisibility(View.VISIBLE);
-                //charPicker.setVisibility(View.VISIBLE);
-                //guessButton.setVisibility(View.VISIBLE);
-                //guessedWords.setVisibility(View.VISIBLE);
-            }else{
-                letterBoxView.setVisibility(View.VISIBLE);
-            }
+            letterBoxView.setVisibility(View.VISIBLE);
+
 
             //restartSpil();
 

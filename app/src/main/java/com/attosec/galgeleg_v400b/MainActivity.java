@@ -1,12 +1,8 @@
 package com.attosec.galgeleg_v400b;
 
 import android.animation.Animator;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.media.MediaPlayer;
@@ -38,9 +34,6 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.firebase.client.Firebase;
 
 import java.lang.ref.WeakReference;
-import java.util.HashMap;
-
-
 
 /*
 Lavet af:
@@ -59,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
     private ShakeDetector mShakeDetector;
-    public static boolean isLetterBox;
 
     public static MediaPlayer mySound;
     public static MediaPlayer soundDeath;
@@ -114,8 +106,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mySound.release();
         }*/
 
-
-        isLetterBox = true;
 
         if(game == null) {
             game = new HangmanLogic();
