@@ -24,6 +24,7 @@ public class Settings_Frag extends Fragment {
     public Switch insaneSwitch;
     public static boolean insaneIsActive;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -93,12 +94,14 @@ public class Settings_Frag extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+
                     // The toggle is enabled
                     insaneIsActive = true;
                 } else {
                     // The toggle is disabled
                     insaneIsActive = false;
                 }
+                MainActivity.game.opdaterOrdliste();
             }
         });
 
