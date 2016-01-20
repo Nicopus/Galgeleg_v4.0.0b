@@ -29,6 +29,7 @@ public class HangmanLogic {
     private boolean sidsteBogstavVarKorrekt;
     private boolean spilletErVundet;
     private boolean spilletErTabt;
+    private boolean hintBrugt = false;
     public static int score = 0;
     private ArrayList<String> top30highscores = new ArrayList<>();
     private ArrayList<String> top30nicknames = new ArrayList<>();
@@ -152,6 +153,23 @@ public class HangmanLogic {
             }
         }
         opdaterSynligtOrd();
+    }
+
+    public String brugHint() {
+        String bogstav = "";
+        if (!hintBrugt) {
+            for (int n = 0; n < ordet.length(); n++) {
+                bogstav = ordet.substring(n, n + 1);
+
+                if (!brugteBogstaver.contains(bogstav)) {
+                    gætBogstav(bogstav);
+                }
+                break;
+            }
+            hintBrugt = true;
+
+        }
+        return bogstav;
     }
 
     public void opdaterOrdliste() {

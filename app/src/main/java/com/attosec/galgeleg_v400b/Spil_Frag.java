@@ -27,6 +27,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
 
     public static Button guessButton;
     private Button playagain;
+    private Button hintBtn;
     public static TextView scoreText;
     public static TextView wordText;
     public static TextView guessedWords;
@@ -113,6 +114,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
         //brugerDAO = new BrugerDAO();
         charPicker = (NumberPicker) rod.findViewById(R.id.charPicker);
         playagain = (Button) rod.findViewById(R.id.btnPlayAgain);
+        hintBtn = (Button) rod.findViewById(R.id.hintBtn);
         scoreText = (TextView) rod.findViewById(R.id.scoreNumber);
         galgeImg = (ImageView) rod.findViewById(R.id.imageView);
         wordText = (TextView) rod.findViewById(R.id.wordText);
@@ -125,6 +127,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
         charPicker.setDisplayedValues(alphabet);
         wordText.setText("Loading...");
         playagain.setOnClickListener(this);
+        hintBtn.setOnClickListener(this);
 
 
         DrAsync firebaseOrdliste = new DrAsync();
@@ -208,6 +211,71 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
         else if(v == btnØ){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[27]); btnLetterClick(); spilCheck();} btnØ.setBackgroundColor(0);}
         else if(v == btnÅ){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[28]); btnLetterClick(); spilCheck();} btnÅ.setBackgroundColor(0);}
 
+        else if (v == hintBtn) {
+            String bogstav = MainActivity.game.brugHint();
+            if (bogstav.equals("a")) {
+                onClick(btnA);
+            } else if (bogstav.equals("b")) {
+                onClick(btnB);
+            } else if (bogstav.equals("c")) {
+                onClick(btnC);
+            } else if (bogstav.equals("d")) {
+                onClick(btnD);
+            } else if (bogstav.equals("e")) {
+                onClick(btnE);
+            } else if (bogstav.equals("f")) {
+                onClick(btnF);
+            } else if (bogstav.equals("g")) {
+                onClick(btnG);
+            } else if (bogstav.equals("h")) {
+                onClick(btnH);
+            } else if (bogstav.equals("i")) {
+                onClick(btnI);
+            } else if (bogstav.equals("j")) {
+                onClick(btnJ);
+            } else if (bogstav.equals("k")) {
+                onClick(btnK);
+            } else if (bogstav.equals("l")) {
+                onClick(btnL);
+            } else if (bogstav.equals("m")) {
+                onClick(btnM);
+            } else if (bogstav.equals("n")) {
+                onClick(btnN);
+            } else if (bogstav.equals("o")) {
+                onClick(btnO);
+            } else if (bogstav.equals("p")) {
+                onClick(btnP);
+            } else if (bogstav.equals("q")) {
+                onClick(btnQ);
+            } else if (bogstav.equals("r")) {
+                onClick(btnR);
+            } else if (bogstav.equals("s")) {
+                onClick(btnS);
+            } else if (bogstav.equals("t")) {
+                onClick(btnT);
+            } else if (bogstav.equals("u")) {
+                onClick(btnU);
+            } else if (bogstav.equals("v")) {
+                onClick(btnV);
+            } else if (bogstav.equals("w")) {
+                onClick(btnW);
+            } else if (bogstav.equals("x")) {
+                onClick(btnX);
+            } else if (bogstav.equals("y")) {
+                onClick(btnY);
+            } else if (bogstav.equals("z")) {
+                onClick(btnZ);
+            } else if (bogstav.equals("æ")) {
+                onClick(btnÆ);
+            } else if (bogstav.equals("ø")) {
+                onClick(btnØ);
+            } else if (bogstav.equals("å")) {
+                onClick(btnÅ);
+            }
+
+            hintBtn.setBackgroundColor(0);
+        }
+
         else if(v == playagain){
             MainActivity.soundButton.start();
             playAgainView.setVisibility(View.GONE);
@@ -232,6 +300,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
 
         }
 
+
     }
 
     public void btnLetterClick(){
@@ -246,26 +315,26 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
             if (!MainActivity.game.erSpilletSlut()) {
                 galgeImg.setImageResource(wrongImg[MainActivity.game.getAntalForkerteBogstaver() - 1]);
                 spilIgang = true;
-                MainActivity.soundOuch.start();
+                //MainActivity.soundOuch.start();
             } else {
                 spilIgang = false;
                 //Kan gøres til en metode for at spare kode men nu lavede jeg det i uden lige at tænke på det så fuck det (Y)
                 if (MainActivity.game.erSpilletVundet()) {
                     galgeImg.setImageResource(R.drawable.vundet);
                     wordText.setText("Du har vundet! Ordet var: " + MainActivity.game.getOrdet());
-                    MainActivity.soundAlive.start();
+                    //MainActivity.soundAlive.start();
                     setVisibleView();
 
                 } else {
                     galgeImg.setImageResource(R.drawable.tabt);
                     wordText.setText("Du har tabt! Ordet var: " + MainActivity.game.getOrdet());
-                    MainActivity.soundDeath.start();
+                    //MainActivity.soundDeath.start();
                     setVisibleView();
                 }
             }
         }
         else {
-            MainActivity.soundYes.start();
+            //MainActivity.soundYes.start();
             if(MainActivity.game.erSpilletSlut())
                 if (MainActivity.game.erSpilletVundet()) {
                     spilIgang = false;
@@ -291,7 +360,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
                     spilIgang = false;
                     galgeImg.setImageResource(R.drawable.tabt);
                     wordText.setText("Du har tabt! Ordet var: " + MainActivity.game.getOrdet());
-                    MainActivity.soundDeath.start();
+                    //MainActivity.soundDeath.start();
                     setVisibleView();
                 }
                 /*

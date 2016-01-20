@@ -95,16 +95,16 @@ public class MainActivity extends AppCompatActivity
 
 
         //bgMusicIsPlaying = true;
-        mySound = MediaPlayer.create(this, R.raw.background);
-        soundDeath = MediaPlayer.create(this, R.raw.death);
-        soundAlive = MediaPlayer.create(this, R.raw.relief);
-        soundOuch = MediaPlayer.create(this, R.raw.ouch);
-        soundYes = MediaPlayer.create(this, R.raw.yes);
-        soundButton = MediaPlayer.create(this, R.raw.button);
-        soundDoor = MediaPlayer.create(this, R.raw.door);
+        //mySound = MediaPlayer.create(this, R.raw.background);
+        //soundDeath = MediaPlayer.create(this, R.raw.death);
+        //soundAlive = MediaPlayer.create(this, R.raw.relief);
+        //soundOuch = MediaPlayer.create(this, R.raw.ouch);
+        //soundYes = MediaPlayer.create(this, R.raw.yes);
+        //soundButton = MediaPlayer.create(this, R.raw.button);
+        //soundDoor = MediaPlayer.create(this, R.raw.door);
 
-        mySound.start();
-        Settings_Frag.musicIsPlaying = true;
+        //mySound.start();
+        //Settings_Frag.musicIsPlaying = true;
 
         /*if(bgMusicIsPlaying){
             mySound.start();
@@ -297,7 +297,7 @@ public class MainActivity extends AppCompatActivity
                 Fragment fragment = new MainMenu();
                 getSupportFragmentManager().popBackStack();
                 getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.logo_animation, R.anim.logo_animation_back)
+                        //.setCustomAnimations(R.anim.logo_animation, R.anim.logo_animation_back)
                         .replace(R.id.include, fragment)  // tom container i layout
                         .commit();
             }

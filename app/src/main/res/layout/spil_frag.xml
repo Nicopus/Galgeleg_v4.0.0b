@@ -65,16 +65,25 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Score: "
                     android:textSize="15dp"
-                    android:id="@+id/scoreTitle" />
+                    android:id="@+id/scoreTitle"
+                    android:layout_gravity="bottom" />
 
                 <TextView
-                    android:layout_width="50dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="160"
                     android:id="@+id/scoreNumber"
                     android:textSize="15dp"
-                    android:paddingRight="20dp"/>
+                    android:layout_gravity="bottom"
+                    android:paddingRight="10dp" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="Hint"
+                    android:id="@+id/hintBtn"
+                    android:background="@color/colorPrimary" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -85,7 +94,8 @@
                     android:layout_alignBaseline="@+id/backGame"
                     android:layout_alignBottom="@+id/backGame"
                     android:textSize="15dp"
-                    android:paddingLeft="20dp"/>
+                    android:layout_gravity="bottom"
+                    android:paddingLeft="10dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -95,7 +105,8 @@
                     android:id="@+id/guessBackNumber"
                     android:layout_alignBaseline="@+id/backGame"
                     android:layout_alignBottom="@+id/backGame"
-                    android:textSize="15dp" />
+                    android:textSize="15dp"
+                    android:layout_gravity="bottom" />
 
             </LinearLayout>
 
