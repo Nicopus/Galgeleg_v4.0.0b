@@ -7,6 +7,7 @@ import com.attosec.galgeleg_v400b.DAO.BrugerDAO;
 import com.attosec.galgeleg_v400b.DAO.IBrugerDAO;
 import com.attosec.galgeleg_v400b.DAO.IOrdlisteDAO;
 import com.attosec.galgeleg_v400b.DAO.IScoreboardDAO;
+import com.attosec.galgeleg_v400b.DAO.InsaneOrdlisteDAO;
 import com.attosec.galgeleg_v400b.DAO.OrdlisteDAO;
 import com.attosec.galgeleg_v400b.DAO.ScoreboardDAO;
 
@@ -30,6 +31,7 @@ public class HangmanLogic {
     private boolean spilletErVundet;
     private boolean spilletErTabt;
     private boolean hintBrugt = false;
+    private boolean insaneLevel = false;
     private int score = 0;
     private ArrayList<String> top30highscores = new ArrayList<>();
     private ArrayList<String> top30nicknames = new ArrayList<>();
@@ -39,6 +41,7 @@ public class HangmanLogic {
     private IOrdlisteDAO ordlisteDAO = new OrdlisteDAO();
     private IScoreboardDAO scoreboardDAO = new ScoreboardDAO();
     private IBrugerDAO brugerDAO = new BrugerDAO();
+    private IOrdlisteDAO insaneOrdlisteDAO = new InsaneOrdlisteDAO();
 
     public HangmanLogic() {
         muligeOrd.add("bil");
@@ -115,7 +118,11 @@ public class HangmanLogic {
     }
 
     public void tilføjOrd(String word) {
-        ordlisteDAO.tilføjOrd(word);
+        //if (!insaneLevel) {
+            ordlisteDAO.tilføjOrd(word);
+        //} else {
+        //    insaneOrdlisteDAO.tilføjOrd(word);
+        //}
     }
 
     public void fjernOrd(int position) {
@@ -152,11 +159,11 @@ public class HangmanLogic {
         Random r = new Random();
         int tilfældigtNr = r.nextInt(ordet.length());
         if (!hintBrugt) {
-            bogstav = ordet.substring(tilfældigtNr, tilfældigtNr+1);
+            bogstav = ordet.substring(tilfældigtNr, tilfældigtNr + 1);
             while (brugteBogstaver.contains(bogstav)) {
                 System.out.println(ordet + " : " + tilfældigtNr);
                 tilfældigtNr = r.nextInt(ordet.length());
-                bogstav = ordet.substring(tilfældigtNr, tilfældigtNr+1);
+                bogstav = ordet.substring(tilfældigtNr, tilfældigtNr + 1);
                 System.out.println(ordet + " : " + tilfældigtNr);
             }
             hintBrugt = true;
@@ -165,19 +172,21 @@ public class HangmanLogic {
     }
 
     public void opdaterOrdliste() {
-        muligeOrd.clear();
-        muligeOrd = ordlisteDAO.getOrdliste();
-        muligeOrd.add("bil");
-        muligeOrd.add("computer");
-        muligeOrd.add("programmering");
-        muligeOrd.add("motorvej");
-        muligeOrd.add("busrute");
-        muligeOrd.add("gangsti");
-        muligeOrd.add("skovsnegl");
-        muligeOrd.add("solsort");
-        int antalOrd = ordlisteDAO.getOrdliste().size();
-        Log.v("muligeord size", String.valueOf(antalOrd));
-
+        if (!insaneLevel) {
+            muligeOrd.clear();
+            muligeOrd = ordlisteDAO.getOrdliste();
+            muligeOrd.add("bil");
+            muligeOrd.add("computer");
+            muligeOrd.add("programmering");
+            muligeOrd.add("motorvej");
+            muligeOrd.add("busrute");
+            muligeOrd.add("gangsti");
+            muligeOrd.add("skovsnegl");
+            muligeOrd.add("solsort");
+        } else {
+            muligeOrd.clear();
+            muligeOrd = insaneOrdlisteDAO.getOrdliste();
+        }
         nulstil();
     }
 
