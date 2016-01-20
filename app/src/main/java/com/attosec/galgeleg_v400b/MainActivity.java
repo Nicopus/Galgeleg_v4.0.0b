@@ -3,7 +3,6 @@ package com.attosec.galgeleg_v400b;
 import android.animation.Animator;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.media.MediaPlayer;
@@ -20,8 +19,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -52,8 +49,7 @@ Nicolai Hansen - S133974
 */
 
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static HangmanLogic game;
     private RelativeLayout loadingView;
     private SensorManager mSensorManager;
@@ -341,14 +337,13 @@ public class MainActivity extends AppCompatActivity
             isShaking = true;
             new AlertDialog.Builder(MainActivity.this)
                     .setTitle("Andet ord?")
-                    .setMessage("Du vil miste 30 point ved at få nyt ord")
+                    .setMessage("Er du sikker på du vil starte forfra?")
                     .setPositiveButton("Nyt ord", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             //game.nulstil();
                             //Spil_Frag.wordText.setText(MainActivity.game.getSynligtOrd());
                             Spil_Frag.spilRefresh();
                             isShaking = false;
-                            game.score -= 30;
                             Spil_Frag.scoreText.setText(String.valueOf(MainActivity.game.getScore()));
                         }
                     })

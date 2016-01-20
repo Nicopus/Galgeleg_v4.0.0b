@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,7 +47,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
         View rod = inflater.inflate(R.layout.spil_frag, container, false);
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //if(game == null){game = new HangmanLogic();}
-
+        Log.v("teajja", "jfsjfjsf");
         letterBoxView = (LinearLayout) rod.findViewById(R.id.letterBoxLayout);
         charPickerView = (LinearLayout) rod.findViewById(R.id.charPickerLayout);
         playAgainView = (LinearLayout) rod.findViewById(R.id.playAgainLayout);
@@ -212,7 +213,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
         else if(v == btnÅ){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[28]); btnLetterClick(); spilCheck();} btnÅ.setBackgroundColor(0);}
 
         else if (v == hintBtn) {
-            String bogstav = MainActivity.game.brugHint();
+            String bogstav = MainActivity.game.getHint();
             if (bogstav.equals("a")) {
                 onClick(btnA);
             } else if (bogstav.equals("b")) {
@@ -413,6 +414,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
         btnÆ.setBackgroundColor(0xFF37474F);
         btnØ.setBackgroundColor(0xFF37474F);
         btnÅ.setBackgroundColor(0xFF37474F);
+        //hintBtn.setBackgroundColor(0xFF37474F);
 
     }
 
