@@ -49,9 +49,9 @@ public class Settings_Frag extends Fragment {
             soundFXSwitch.setChecked(true);
             soundFXSubtextView.setText("Slå lyde og lydeffekter fra");
         }
-        //if(insaneIsActive){
-        //    insaneSwitch.setChecked(true);
-        //}
+        if(insaneIsActive){
+            insaneSwitch.setChecked(true);
+        }
 
         bgMusicSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
 

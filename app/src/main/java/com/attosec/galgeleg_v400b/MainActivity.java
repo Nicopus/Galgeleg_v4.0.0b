@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mySound.setLooping(true);
         Settings_Frag.musicIsPlaying = true;
         Settings_Frag.effectIsPlaying = true;
+        Settings_Frag.insaneIsActive = false;
 
         /*if(bgMusicIsPlaying){
             mySound.start();
@@ -159,13 +160,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 handleShakeEvent(count);
             }
         });
+        String notiSubject = "Subject";
+        String notiBody = "Body";
 
         /*NotificationManager notiMan;
         notiMan =(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
         Notification notify = new Notification(android.R.drawable.stat_notify_more,"Title Yo",System.currentTimeMillis());
         PendingIntent pending = PendingIntent.getActivity(getApplicationContext(), 0, new Intent(),0);
-        notify.setLatestEventInfo(getApplicationContext(), subject, body, pending);
-        notiMan.notify(0, notify); */
+        notify.setLatestEventInfo(getApplicationContext(), notiSubject, notiBody, pending);
+        notiMan.notify(0, notify);*/
 
     }
 

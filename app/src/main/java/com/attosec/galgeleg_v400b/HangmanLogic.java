@@ -31,7 +31,6 @@ public class HangmanLogic {
     private boolean spilletErVundet;
     private boolean spilletErTabt;
     private boolean hintBrugt = false;
-    private boolean insaneLevel = false;
     private int score = 0;
     private ArrayList<String> top30highscores = new ArrayList<>();
     private ArrayList<String> top30nicknames = new ArrayList<>();
@@ -118,11 +117,11 @@ public class HangmanLogic {
     }
 
     public void tilføjOrd(String word) {
-        //if (!insaneLevel) {
+        if (!Settings_Frag.insaneIsActive) {
             ordlisteDAO.tilføjOrd(word);
-        //} else {
-        //    insaneOrdlisteDAO.tilføjOrd(word);
-        //}
+        } else {
+            insaneOrdlisteDAO.tilføjOrd(word);
+        }
     }
 
     public void fjernOrd(int position) {
@@ -172,7 +171,7 @@ public class HangmanLogic {
     }
 
     public void opdaterOrdliste() {
-        if (!insaneLevel) {
+        if (!Settings_Frag.insaneIsActive) {
             muligeOrd.clear();
             muligeOrd = ordlisteDAO.getOrdliste();
             muligeOrd.add("bil");
@@ -186,6 +185,14 @@ public class HangmanLogic {
         } else {
             muligeOrd.clear();
             muligeOrd = insaneOrdlisteDAO.getOrdliste();
+            muligeOrd.add("menstruation");
+            muligeOrd.add("budget");
+            muligeOrd.add("apparat");
+            muligeOrd.add("parallel");
+            muligeOrd.add("provokerende");
+            muligeOrd.add("supplement");
+            muligeOrd.add("departementschef");
+            muligeOrd.add("psykiatrisk");
         }
         nulstil();
     }

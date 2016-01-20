@@ -107,19 +107,13 @@ public class Spil_Frag extends Fragment implements View.OnClickListener {
         btnØ.setOnClickListener(this);
         btnÅ.setOnClickListener(this);
 
-        //brugerDAO = new BrugerDAO();
-        charPicker = (NumberPicker) rod.findViewById(R.id.charPicker);
         playagain = (Button) rod.findViewById(R.id.btnPlayAgain);
         hintBtn = (Button) rod.findViewById(R.id.hintBtn);
         scoreText = (TextView) rod.findViewById(R.id.scoreNumber);
         galgeImg = (ImageView) rod.findViewById(R.id.imageView);
         wordText = (TextView) rod.findViewById(R.id.wordText);
-        guessedWords = (TextView) rod.findViewById(R.id.guessedWords);
         gættilbage = (TextView) rod.findViewById(R.id.guessBackNumber);
         normTekst = (TextView) rod.findViewById(R.id.guessBackTitle);
-        charPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
-        charPicker.setMaxValue(28);
-        charPicker.setDisplayedValues(alphabet);
         wordText.setText("Loading...");
         playagain.setOnClickListener(this);
         hintBtn.setOnClickListener(this);
@@ -152,7 +146,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener {
 
     public void restartSpil(){
         MainActivity.game.nulstil();
-        guessedWords.setText("Brugte bogstaver: ");
+        //guessedWords.setText("Brugte bogstaver: ");
         wordText.setText(MainActivity.game.getSynligtOrd());
         gættilbage.setText("7");
         scoreText.setText("0");
