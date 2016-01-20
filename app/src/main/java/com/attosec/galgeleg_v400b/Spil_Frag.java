@@ -277,7 +277,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
         }
 
         else if(v == playagain){
-            MainActivity.soundButton.start();
+            if(Settings_Frag.effectIsPlaying){MainActivity.soundButton.start();}
             playAgainView.setVisibility(View.GONE);
             //playagain.setVisibility(View.GONE);
             gættilbage.setVisibility(View.VISIBLE);
@@ -315,32 +315,32 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
             if (!MainActivity.game.erSpilletSlut()) {
                 galgeImg.setImageResource(wrongImg[MainActivity.game.getAntalForkerteBogstaver() - 1]);
                 spilIgang = true;
-                //MainActivity.soundOuch.start();
+                if(Settings_Frag.effectIsPlaying){MainActivity.soundOuch.start();}
             } else {
                 spilIgang = false;
                 //Kan gøres til en metode for at spare kode men nu lavede jeg det i uden lige at tænke på det så fuck det (Y)
                 if (MainActivity.game.erSpilletVundet()) {
                     galgeImg.setImageResource(R.drawable.vundet);
                     wordText.setText("Du har vundet! Ordet var: " + MainActivity.game.getOrdet());
-                    //MainActivity.soundAlive.start();
+                    if(Settings_Frag.effectIsPlaying){MainActivity.soundAlive.start();}
                     setVisibleView();
 
                 } else {
                     galgeImg.setImageResource(R.drawable.tabt);
                     wordText.setText("Du har tabt! Ordet var: " + MainActivity.game.getOrdet());
-                    //MainActivity.soundDeath.start();
+                    if(Settings_Frag.effectIsPlaying){MainActivity.soundDeath.start();}
                     setVisibleView();
                 }
             }
         }
         else {
-            //MainActivity.soundYes.start();
+            if(Settings_Frag.effectIsPlaying){MainActivity.soundYes.start();}
             if(MainActivity.game.erSpilletSlut())
                 if (MainActivity.game.erSpilletVundet()) {
                     spilIgang = false;
                     galgeImg.setImageResource(R.drawable.vundet);
                     wordText.setText("Du har vundet! Ordet var: " + MainActivity.game.getOrdet());
-                    MainActivity.soundAlive.start();
+                    if(Settings_Frag.effectIsPlaying){MainActivity.soundAlive.start();}
                     setVisibleView();
                     MainActivity.game.opdaterAlleBrugere();
                     String nickname = MainActivity.game.readFromFile(getContext());
@@ -360,7 +360,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
                     spilIgang = false;
                     galgeImg.setImageResource(R.drawable.tabt);
                     wordText.setText("Du har tabt! Ordet var: " + MainActivity.game.getOrdet());
-                    //MainActivity.soundDeath.start();
+                    if(Settings_Frag.effectIsPlaying){MainActivity.soundDeath.start();}
                     setVisibleView();
                 }
                 /*

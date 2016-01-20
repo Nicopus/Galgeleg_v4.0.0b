@@ -35,13 +35,13 @@ public class MainMenu extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
 
         if (v == startSpil) {
-            //MainActivity.soundButton.start();
+            if(Settings_Frag.effectIsPlaying){MainActivity.soundButton.start();}
             getFragmentManager().beginTransaction()
                     .replace(R.id.include, new Spil_Frag(), "SPIL_FRAG")
                     .addToBackStack(null)
                     .commit();
         } else if (v == highscore) {
-            //MainActivity.soundButton.start();
+            if(Settings_Frag.effectIsPlaying){MainActivity.soundButton.start();}
             getFragmentManager().beginTransaction()
                     .replace(R.id.include, new Scoreboard_Frag())
                     .addToBackStack(null)

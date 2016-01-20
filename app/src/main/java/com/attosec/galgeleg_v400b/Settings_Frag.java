@@ -18,6 +18,9 @@ public class Settings_Frag extends Fragment {
     public TextView bgMusicSubtextView;
     public Switch bgMusicSwitch;
     public static boolean musicIsPlaying;
+    public TextView soundFXSubtextView;
+    public Switch soundFXSwitch;
+    public static boolean effectIsPlaying;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,17 +32,19 @@ public class Settings_Frag extends Fragment {
         toolbar.setTitle("Indstillinger");
 
         bgMusicSubtextView = (TextView) settingsView.findViewById(R.id.bgmusicSubtext);
-
         bgMusicSwitch = (Switch) settingsView.findViewById(R.id.bgmusicSwitch);
+
+        soundFXSubtextView = (TextView) settingsView.findViewById(R.id.effectSubtext);
+        soundFXSwitch = (Switch) settingsView.findViewById(R.id.effectSwitch);
 
         if(musicIsPlaying){
             bgMusicSwitch.setChecked(true);
             bgMusicSubtextView.setText("Slå baggrundsmusik fra");
         }
-
-
-
-        //toggle = (ToggleButton) toggle.findViewById(R.id.switchBackgroundMusic);
+        if(effectIsPlaying){
+            soundFXSwitch.setChecked(true);
+            soundFXSubtextView.setText("Slå lyde og lydeffekter fra");
+        }
 
         bgMusicSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
 
@@ -50,6 +55,7 @@ public class Settings_Frag extends Fragment {
                     bgMusicSubtextView.setText("Slå baggrundsmusik fra");
                     //MainActivity.bgMusicIsPlaying = true;
                     MainActivity.mySound.start();
+                    MainActivity.mySound.setLooping(true);
                     musicIsPlaying = true;
                 } else {
                     // The toggle is disabled
@@ -57,6 +63,21 @@ public class Settings_Frag extends Fragment {
                     //MainActivity.bgMusicIsPlaying = false;
                     MainActivity.mySound.pause();
                     musicIsPlaying = false;
+                }
+            }
+        });
+        soundFXSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    // The toggle is enabled
+                    soundFXSubtextView.setText("Slå lyde og lydeffekter fra");
+                    effectIsPlaying = true;
+                } else {
+                    // The toggle is disabled
+                    soundFXSubtextView.setText("Slå lyde og lydeffekter til");
+                    effectIsPlaying = false;
                 }
             }
         });

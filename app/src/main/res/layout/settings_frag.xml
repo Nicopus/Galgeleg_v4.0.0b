@@ -204,8 +204,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Aktiverer lyde og lydeffekter"
-                        android:id="@+id/textView17"
+                        android:text="Slå lyde og lydeffekter til"
+                        android:id="@+id/effectSubtext"
                         android:textSize="16dp"
                         android:textColor="#65ffffff" />
                 </LinearLayout>
@@ -221,9 +221,7 @@
                     <Switch
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/switch5"
-                        android:checked="true"
-                        android:clickable="true"
+                        android:id="@+id/effectSwitch"
                         android:thumbTint="@color/colorStart"
                         android:trackTint="#000000" />
                 </LinearLayout>

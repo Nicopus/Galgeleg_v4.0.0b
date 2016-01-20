@@ -95,16 +95,18 @@ public class MainActivity extends AppCompatActivity
 
 
         //bgMusicIsPlaying = true;
-        //mySound = MediaPlayer.create(this, R.raw.background);
-        //soundDeath = MediaPlayer.create(this, R.raw.death);
-        //soundAlive = MediaPlayer.create(this, R.raw.relief);
-        //soundOuch = MediaPlayer.create(this, R.raw.ouch);
-        //soundYes = MediaPlayer.create(this, R.raw.yes);
-        //soundButton = MediaPlayer.create(this, R.raw.button);
-        //soundDoor = MediaPlayer.create(this, R.raw.door);
+        mySound = MediaPlayer.create(this, R.raw.background);
+        soundDeath = MediaPlayer.create(this, R.raw.death);
+        soundAlive = MediaPlayer.create(this, R.raw.relief);
+        soundOuch = MediaPlayer.create(this, R.raw.ouch);
+        soundYes = MediaPlayer.create(this, R.raw.yes);
+        soundButton = MediaPlayer.create(this, R.raw.button);
+        soundDoor = MediaPlayer.create(this, R.raw.door);
 
-        //mySound.start();
-        //Settings_Frag.musicIsPlaying = true;
+        mySound.start();
+        mySound.setLooping(true);
+        Settings_Frag.musicIsPlaying = true;
+        Settings_Frag.effectIsPlaying = true;
 
         /*if(bgMusicIsPlaying){
             mySound.start();
@@ -297,7 +299,7 @@ public class MainActivity extends AppCompatActivity
                 Fragment fragment = new MainMenu();
                 getSupportFragmentManager().popBackStack();
                 getSupportFragmentManager().beginTransaction()
-                        //.setCustomAnimations(R.anim.logo_animation, R.anim.logo_animation_back)
+                        .setCustomAnimations(R.anim.logo_animation, R.anim.logo_animation_back)
                         .replace(R.id.include, fragment)  // tom container i layout
                         .commit();
             }
@@ -372,7 +374,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        soundButton.start();
+        if(Settings_Frag.effectIsPlaying){soundButton.start();}
         //Fragment mainFragView = getSupportFragmentManager().findFragmentById(R.id.mainFragView);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -427,7 +429,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            soundButton.start();
+            if(Settings_Frag.effectIsPlaying){soundButton.start();}
             Fragment fragment = new MainMenu();
             getSupportFragmentManager().popBackStack();
             /*getSupportFragmentManager().beginTransaction()
@@ -437,7 +439,7 @@ public class MainActivity extends AppCompatActivity
 */
             //getSupportActionBar().setTitle("Galgeleg");
         } else if (id == R.id.nav_play) {
-            soundButton.start();
+            if(Settings_Frag.effectIsPlaying){soundButton.start();}
             Fragment fragment = new Spil_Frag();
             getSupportFragmentManager().popBackStack();
             getSupportFragmentManager().beginTransaction()
@@ -447,7 +449,7 @@ public class MainActivity extends AppCompatActivity
             //getSupportActionBar().setTitle("Spil");
             //Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_wordlist) {
-            soundButton.start();
+            if(Settings_Frag.effectIsPlaying){soundButton.start();}
             Fragment fragment = new Ordliste_Frag();
             getSupportFragmentManager().popBackStack();
             getSupportFragmentManager().beginTransaction()
@@ -457,7 +459,7 @@ public class MainActivity extends AppCompatActivity
             //getSupportActionBar().setTitle("Ordliste");
             //Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_highscore) {
-            soundButton.start();
+            if(Settings_Frag.effectIsPlaying){soundButton.start();}
             Fragment fragment = new Scoreboard_Frag();
             getSupportFragmentManager().popBackStack();
             getSupportFragmentManager().beginTransaction()
@@ -467,7 +469,7 @@ public class MainActivity extends AppCompatActivity
             //getSupportActionBar().setTitle("Om Appen");
             //Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_about) {
-            soundButton.start();
+            if(Settings_Frag.effectIsPlaying){soundButton.start();}
             Fragment fragment = new OmAppen_Frag();
             getSupportFragmentManager().popBackStack();
             getSupportFragmentManager().beginTransaction()
@@ -477,7 +479,7 @@ public class MainActivity extends AppCompatActivity
             //getSupportActionBar().setTitle("Om Appen");
             //Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_help) {
-            soundButton.start();
+            if(Settings_Frag.effectIsPlaying){soundButton.start();}
             Fragment fragment = new Hjaelp_Frag();
             getSupportFragmentManager().popBackStack();
             getSupportFragmentManager().beginTransaction()
@@ -487,15 +489,15 @@ public class MainActivity extends AppCompatActivity
             //getSupportActionBar().setTitle("Om Appen");
             //Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_profile) {
-            soundButton.start();
+            if(Settings_Frag.effectIsPlaying){soundButton.start();}
             Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
             //startActivity(new Intent(MainActivity.this, LoginActivity.class));
         } else if (id == R.id.nav_register) {
-            soundButton.start();
+            if(Settings_Frag.effectIsPlaying){soundButton.start();}
             Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
             //startActivity(new Intent(MainActivity.this, RegisterActivity.class));
         } else if (id == R.id.nav_settings) {
-            soundButton.start();
+            if(Settings_Frag.effectIsPlaying){soundButton.start();}
             Fragment fragment = new Settings_Frag();
             getSupportFragmentManager().popBackStack();
             getSupportFragmentManager().beginTransaction()
