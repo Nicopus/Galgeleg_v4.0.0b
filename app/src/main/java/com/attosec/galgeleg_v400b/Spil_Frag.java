@@ -1,6 +1,5 @@
 package com.attosec.galgeleg_v400b;
 
-
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,7 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
-public class Spil_Frag extends Fragment implements View.OnClickListener{
+public class Spil_Frag extends Fragment implements View.OnClickListener {
 
     private NumberPicker charPicker;
     private String[] alphabet = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "æ", "ø", "å"};
@@ -28,7 +27,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
 
     public static Button guessButton;
     private Button playagain;
-    private Button hintBtn;
+    public static Button hintBtn;
     public static TextView scoreText;
     public static TextView wordText;
     public static TextView guessedWords;
@@ -38,12 +37,11 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
     public static TextView normTekst;
     private Nyt_Nickname_Dialog_Frag dialogFragment;
     private Ny_Highscore_Dialog_Frag nyhighscoreFragment;
-    public static  boolean spilIgang = true;
+    public static boolean spilIgang = true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        //getActivity().setTitle("Galgeleg");
         View rod = inflater.inflate(R.layout.spil_frag, container, false);
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //if(game == null){game = new HangmanLogic();}
@@ -159,6 +157,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
         //guessedWords.setVisibility(View.INVISIBLE);
         gættilbage.setVisibility(View.INVISIBLE);
         normTekst.setVisibility(View.INVISIBLE);
+        hintBtn.setVisibility(View.INVISIBLE);
 
         letterBoxView.setVisibility(View.GONE);
 
@@ -283,6 +282,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
             //playagain.setVisibility(View.GONE);
             gættilbage.setVisibility(View.VISIBLE);
             normTekst.setVisibility(View.VISIBLE);
+            hintBtn.setVisibility(View.VISIBLE);
             if(MainActivity.isLetterBox = false){
                 charPickerView.setVisibility(View.VISIBLE);
                 //charPicker.setVisibility(View.VISIBLE);
@@ -414,7 +414,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener{
         btnÆ.setBackgroundColor(0xFF37474F);
         btnØ.setBackgroundColor(0xFF37474F);
         btnÅ.setBackgroundColor(0xFF37474F);
-        //hintBtn.setBackgroundColor(0xFF37474F);
+        hintBtn.setBackgroundColor(0xFF37474F);
 
     }
 

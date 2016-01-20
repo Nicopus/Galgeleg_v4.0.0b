@@ -149,13 +149,15 @@ public class HangmanLogic {
 
     public String getHint() {
         String bogstav = "";
-        int tilfældigtNr = (int)Math.random() * ordet.length() + 1;
+        Random r = new Random();
+        int tilfældigtNr = r.nextInt(ordet.length());
         if (!hintBrugt) {
             bogstav = ordet.substring(tilfældigtNr, tilfældigtNr+1);
             while (brugteBogstaver.contains(bogstav)) {
-                tilfældigtNr = (int) Math.random() * ordet.length() + 1;
-                bogstav = ordet.substring(tilfældigtNr, tilfældigtNr + 1);
-
+                System.out.println(ordet + " : " + tilfældigtNr);
+                tilfældigtNr = r.nextInt(ordet.length());
+                bogstav = ordet.substring(tilfældigtNr, tilfældigtNr+1);
+                System.out.println(ordet + " : " + tilfældigtNr);
             }
             hintBrugt = true;
         }
