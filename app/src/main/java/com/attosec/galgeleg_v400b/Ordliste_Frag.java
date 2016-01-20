@@ -49,6 +49,7 @@ public class Ordliste_Frag extends Fragment implements View.OnClickListener {
         if(MainActivity.game == null){
             MainActivity.game = new HangmanLogic();
         }
+        MainActivity.game.opdaterOrdliste();
         ordliste = MainActivity.game.getMuligeOrd();
         Collections.sort(ordliste);
         wordList = (ListView) rod.findViewById(R.id.wordList2);

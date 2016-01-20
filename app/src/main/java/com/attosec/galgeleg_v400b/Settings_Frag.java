@@ -101,7 +101,7 @@ public class Settings_Frag extends Fragment {
                     // The toggle is disabled
                     insaneIsActive = false;
                 }
-                MainActivity.game.opdaterOrdliste();
+            //MainActivity.game.opdaterOrdliste();
             }
         });
 

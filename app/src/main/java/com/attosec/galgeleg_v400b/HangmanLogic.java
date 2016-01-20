@@ -173,7 +173,10 @@ public class HangmanLogic {
     public void opdaterOrdliste() {
         if (!Settings_Frag.insaneIsActive) {
             muligeOrd.clear();
-            muligeOrd = ordlisteDAO.getOrdliste();
+            for (int i=0; i<ordlisteDAO.getOrdliste().size(); i++) {
+                muligeOrd.add(ordlisteDAO.getOrdliste().get(i));
+            }
+            //muligeOrd = ordlisteDAO.getOrdliste();
             muligeOrd.add("bil");
             muligeOrd.add("computer");
             muligeOrd.add("programmering");
@@ -184,7 +187,10 @@ public class HangmanLogic {
             muligeOrd.add("solsort");
         } else {
             muligeOrd.clear();
-            muligeOrd = insaneOrdlisteDAO.getOrdliste();
+            //muligeOrd = insaneOrdlisteDAO.getOrdliste();
+            for (int i=0; i<insaneOrdlisteDAO.getOrdliste().size(); i++) {
+                muligeOrd.add(insaneOrdlisteDAO.getOrdliste().get(i));
+            }
             muligeOrd.add("menstruation");
             muligeOrd.add("budget");
             muligeOrd.add("apparat");
