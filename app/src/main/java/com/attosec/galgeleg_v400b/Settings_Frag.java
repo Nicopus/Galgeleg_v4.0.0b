@@ -145,13 +145,15 @@ public class Settings_Frag extends Fragment implements View.OnClickListener, Nav
 
     public void pushNotification(){
             NotificationManager notiMan = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
-            PendingIntent pending = PendingIntent.getActivity(getActivity().getApplicationContext(), 0, new Intent(),0);
+            PendingIntent pending = PendingIntent.getActivity(getActivity().getApplicationContext(), 0, new Intent(getContext(), MainActivity.class),0);
             Notification.Builder builder = new Notification.Builder(getActivity());
 
             builder.setSmallIcon(R.drawable.appicon)
                     .setContentTitle("Galgeleg")
-                    .setContentText("Du har ikke spillet længe! Kom og spil!")
-                    .setContentInfo("Gør det!")
+                    .setContentText("Du har ikke spillet længe!")
+                    .setContentInfo("Kom og spil!")
+                    .setAutoCancel(true)
+                    .setColor(getResources().getColor(R.color.colorPrimary))
                     .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.appicon03))
                     .setContentIntent(pending);
 
