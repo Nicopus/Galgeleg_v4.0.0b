@@ -330,7 +330,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    //@TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void pushNotification(){
             NotificationManager notiMan = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
             PendingIntent pending = PendingIntent.getActivity(getApplicationContext(), 0, new Intent(this, MainActivity.class),0);
@@ -338,10 +338,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             builder.setSmallIcon(R.drawable.appicon)
                     .setContentTitle("Galgeleg")
-                    .setContentText("Du har ikke spillet længe! Kom og spil!")
-                    .setContentInfo("Gør det!")
+                    .setContentText("Du har ikke spillet længe!")
+                    .setContentInfo("Kom og spil!")
                     .setAutoCancel(true)
-                    //.setColor(444444)
                     .setColor(getResources().getColor(R.color.colorPrimary))
                     .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.appicon03))
                     .setContentIntent(pending);
@@ -557,7 +556,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
                 pushNoti();
             }
-        }, 10 * 1000);
+        }, 3 * 60 * 1000);
     }
 
 

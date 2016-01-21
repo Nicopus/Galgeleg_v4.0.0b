@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.attosec.galgeleg_v400b" >
 
-    <uses-sdk android:minSdkVersion="15"/>
+    <uses-sdk android:minSdkVersion="21"/>
     <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

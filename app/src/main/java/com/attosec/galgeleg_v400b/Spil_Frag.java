@@ -10,11 +10,16 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+import com.nineoldandroids.animation.Animator;
 
 public class Spil_Frag extends Fragment implements View.OnClickListener {
 
@@ -125,6 +130,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener {
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("Spil Galgeleg");
         spilIgang = true;
+        animFlipIn();
 
         return rod;
     }
@@ -158,35 +164,35 @@ public class Spil_Frag extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if(v == btnA){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[0]); btnLetterClick(); spilCheck();} btnA.setBackgroundColor(0);}
-        else if(v == btnB){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[1]); btnLetterClick(); spilCheck();} btnB.setBackgroundColor(0);}
-        else if(v == btnC){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[2]); btnLetterClick(); spilCheck();} btnC.setBackgroundColor(0);}
-        else if(v == btnD){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[3]); btnLetterClick(); spilCheck();} btnD.setBackgroundColor(0);}
-        else if(v == btnE){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[4]); btnLetterClick(); spilCheck();} btnE.setBackgroundColor(0);}
-        else if(v == btnF){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[5]); btnLetterClick(); spilCheck();} btnF.setBackgroundColor(0);}
-        else if(v == btnG){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[6]); btnLetterClick(); spilCheck();} btnG.setBackgroundColor(0);}
-        else if(v == btnH){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[7]); btnLetterClick(); spilCheck();} btnH.setBackgroundColor(0);}
-        else if(v == btnI){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[8]); btnLetterClick(); spilCheck();} btnI.setBackgroundColor(0);}
-        else if(v == btnJ){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[9]); btnLetterClick(); spilCheck();} btnJ.setBackgroundColor(0);}
-        else if(v == btnK){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[10]); btnLetterClick(); spilCheck();} btnK.setBackgroundColor(0);}
-        else if(v == btnL){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[11]); btnLetterClick(); spilCheck();} btnL.setBackgroundColor(0);}
-        else if(v == btnM){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[12]); btnLetterClick(); spilCheck();} btnM.setBackgroundColor(0);}
-        else if(v == btnN){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[13]); btnLetterClick(); spilCheck();} btnN.setBackgroundColor(0);}
-        else if(v == btnO){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[14]); btnLetterClick(); spilCheck();} btnO.setBackgroundColor(0);}
-        else if(v == btnP){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[15]); btnLetterClick(); spilCheck();} btnP.setBackgroundColor(0);}
-        else if(v == btnQ){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[16]); btnLetterClick(); spilCheck();} btnQ.setBackgroundColor(0);}
-        else if(v == btnR){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[17]); btnLetterClick(); spilCheck();} btnR.setBackgroundColor(0);}
-        else if(v == btnS){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[18]); btnLetterClick(); spilCheck();} btnS.setBackgroundColor(0);}
-        else if(v == btnT){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[19]); btnLetterClick(); spilCheck();} btnT.setBackgroundColor(0);}
-        else if(v == btnU){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[20]); btnLetterClick(); spilCheck();} btnU.setBackgroundColor(0);}
-        else if(v == btnV){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[21]); btnLetterClick(); spilCheck();} btnV.setBackgroundColor(0);}
-        else if(v == btnW){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[22]); btnLetterClick(); spilCheck();} btnW.setBackgroundColor(0);}
-        else if(v == btnX){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[23]); btnLetterClick(); spilCheck();} btnX.setBackgroundColor(0);}
-        else if(v == btnY){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[24]); btnLetterClick(); spilCheck();} btnY.setBackgroundColor(0);}
-        else if(v == btnZ){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[25]); btnLetterClick(); spilCheck();} btnZ.setBackgroundColor(0);}
-        else if(v == btnÆ){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[26]); btnLetterClick(); spilCheck();} btnÆ.setBackgroundColor(0);}
-        else if(v == btnØ){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[27]); btnLetterClick(); spilCheck();} btnØ.setBackgroundColor(0);}
-        else if(v == btnÅ){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[28]); btnLetterClick(); spilCheck();} btnÅ.setBackgroundColor(0);}
+        if(v == btnA){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[0]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnA);}
+        else if(v == btnB){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[1]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnB);}
+        else if(v == btnC){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[2]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnC);}
+        else if(v == btnD){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[3]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnD);}
+        else if(v == btnE){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[4]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnE);}
+        else if(v == btnF){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[5]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnF);}
+        else if(v == btnG){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[6]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnG);}
+        else if(v == btnH){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[7]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnH);}
+        else if(v == btnI){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[8]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnI);}
+        else if(v == btnJ){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[9]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnJ);}
+        else if(v == btnK){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[10]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnK);}
+        else if(v == btnL){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[11]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnL);}
+        else if(v == btnM){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[12]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnM);}
+        else if(v == btnN){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[13]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnN);}
+        else if(v == btnO){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[14]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnO);}
+        else if(v == btnP){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[15]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnP);}
+        else if(v == btnQ){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[16]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnQ);}
+        else if(v == btnR){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[17]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnR);}
+        else if(v == btnS){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[18]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnS);}
+        else if(v == btnT){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[19]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnT);}
+        else if(v == btnU){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[20]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnU);}
+        else if(v == btnV){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[21]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnV);}
+        else if(v == btnW){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[22]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnW);}
+        else if(v == btnX){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[23]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnX);}
+        else if(v == btnY){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[24]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnY);}
+        else if(v == btnZ){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[25]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnZ);}
+        else if(v == btnÆ){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[26]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnÆ);}
+        else if(v == btnØ){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[27]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnØ);}
+        else if(v == btnÅ){if (!MainActivity.game.erSpilletSlut()) {MainActivity.game.gætBogstav(alphabet[28]); btnLetterClick(); spilCheck();} YoYo.with(Techniques.FlipOutX).duration(400).playOn(btnÅ);}
 
         else if (v == hintBtn) {
             String bogstav = MainActivity.game.getHint();
@@ -254,6 +260,7 @@ public class Spil_Frag extends Fragment implements View.OnClickListener {
         }
 
         else if(v == playagain){
+            animFlipIn();
             if(Settings_Frag.effectIsPlaying){MainActivity.soundButton.start();}
             playAgainView.setVisibility(View.GONE);
             //playagain.setVisibility(View.GONE);
@@ -274,6 +281,39 @@ public class Spil_Frag extends Fragment implements View.OnClickListener {
 
 
     }
+
+    public void animFlipIn (){
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnA);
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnB);
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnC);
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnD);
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnE);
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnF);
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnG);
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnH);
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnI);
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnJ);
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnK);
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnL);
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnM);
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnN);
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnO);
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnP);
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnQ);
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnR);
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnS);
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnT);
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnU);
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnV);
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnW);
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnX);
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnY);
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnZ);
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnÆ);
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnØ);
+        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnÅ);
+    }
+
 
     public void btnLetterClick(){
         wordText.setText(MainActivity.game.getSynligtOrd());
