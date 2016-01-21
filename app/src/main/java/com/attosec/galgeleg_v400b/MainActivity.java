@@ -511,6 +511,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .replace(R.id.include, fragment)  // tom container i layout
                     .addToBackStack(null)
                     .commit();
+        } else if (id == R.id.nav_settings) {
+            if(Settings_Frag.effectIsPlaying){soundButton.start();}
+            Fragment fragment = new Settings_Frag();
+            getSupportFragmentManager().popBackStack();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.include, fragment)  // tom container i layout
+                    .addToBackStack(null)
+                    .commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
