@@ -304,7 +304,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Fragment fragment = new MainMenu();
                 getSupportFragmentManager().popBackStack();
                 getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.logo_animation, R.anim.logo_animation_back)
+                        .setCustomAnimations(R.anim.fade_in_repeat_backwards, R.anim.logo_animation_back)
                         .replace(R.id.include, fragment, "MAIN_MENU")  // tom container i layout
                         .commit();
             }

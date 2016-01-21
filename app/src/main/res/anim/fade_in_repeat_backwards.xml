@@ -4,5 +4,5 @@
        android:interpolator="@android:interpolator/cycle"
        android:fromAlpha="0.3" android:toAlpha="0.7"
        android:repeatMode="reverse"
-       android:repeatCount="infinite"
+       android:repeatCount="1"
        android:duration="2000" />

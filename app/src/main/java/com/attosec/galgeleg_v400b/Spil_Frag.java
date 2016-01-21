@@ -283,35 +283,35 @@ public class Spil_Frag extends Fragment implements View.OnClickListener {
     }
 
     public void animFlipIn (){
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnA);
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnB);
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnC);
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnD);
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnE);
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnF);
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnG);
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnH);
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnI);
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnJ);
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnK);
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnL);
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnM);
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnN);
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnO);
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnP);
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnQ);
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnR);
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnS);
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnT);
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnU);
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnV);
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnW);
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnX);
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnY);
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnZ);
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnÆ);
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnØ);
-        YoYo.with(Techniques.FlipInX).duration(400).playOn(btnÅ);
+        YoYo.with(Techniques.FlipInX).delay(0).duration(400).playOn(btnA);
+        YoYo.with(Techniques.FlipInX).delay(10).duration(400).playOn(btnB);
+        YoYo.with(Techniques.FlipInX).delay(20).duration(400).playOn(btnC);
+        YoYo.with(Techniques.FlipInX).delay(30).duration(400).playOn(btnD);
+        YoYo.with(Techniques.FlipInX).delay(40).duration(400).playOn(btnE);
+        YoYo.with(Techniques.FlipInX).delay(50).duration(400).playOn(btnF);
+        YoYo.with(Techniques.FlipInX).delay(60).duration(400).playOn(btnG);
+        YoYo.with(Techniques.FlipInX).delay(70).duration(400).playOn(btnH);
+        YoYo.with(Techniques.FlipInX).delay(80).duration(400).playOn(btnI);
+        YoYo.with(Techniques.FlipInX).delay(90).duration(400).playOn(btnJ);
+        YoYo.with(Techniques.FlipInX).delay(100).duration(400).playOn(btnK);
+        YoYo.with(Techniques.FlipInX).delay(110).duration(400).playOn(btnL);
+        YoYo.with(Techniques.FlipInX).delay(120).duration(400).playOn(btnM);
+        YoYo.with(Techniques.FlipInX).delay(130).duration(400).playOn(btnN);
+        YoYo.with(Techniques.FlipInX).delay(140).duration(400).playOn(btnO);
+        YoYo.with(Techniques.FlipInX).delay(150).duration(400).playOn(btnP);
+        YoYo.with(Techniques.FlipInX).delay(160).duration(400).playOn(btnQ);
+        YoYo.with(Techniques.FlipInX).delay(170).duration(400).playOn(btnR);
+        YoYo.with(Techniques.FlipInX).delay(180).duration(400).playOn(btnS);
+        YoYo.with(Techniques.FlipInX).delay(190).duration(400).playOn(btnT);
+        YoYo.with(Techniques.FlipInX).delay(200).duration(400).playOn(btnU);
+        YoYo.with(Techniques.FlipInX).delay(210).duration(400).playOn(btnV);
+        YoYo.with(Techniques.FlipInX).delay(220).duration(400).playOn(btnW);
+        YoYo.with(Techniques.FlipInX).delay(230).duration(400).playOn(btnX);
+        YoYo.with(Techniques.FlipInX).delay(240).duration(400).playOn(btnY);
+        YoYo.with(Techniques.FlipInX).delay(250).duration(400).playOn(btnZ);
+        YoYo.with(Techniques.FlipInX).delay(260).duration(400).playOn(btnÆ);
+        YoYo.with(Techniques.FlipInX).delay(270).duration(400).playOn(btnØ);
+        YoYo.with(Techniques.FlipInX).delay(280).duration(400).playOn(btnÅ);
     }
 
 

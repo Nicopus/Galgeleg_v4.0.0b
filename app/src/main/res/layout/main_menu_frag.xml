@@ -64,14 +64,14 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:id="@+id/imageView4"
+                    android:id="@+id/playLogo"
                     android:src="@drawable/icon_play"
                     android:layout_marginRight="90dp" />
 
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:id="@+id/imageView3"
+                    android:id="@+id/highscoreLogo"
                     android:src="@mipmap/ic_active_dilemmas"
                     android:tint="#ffffff" />
 

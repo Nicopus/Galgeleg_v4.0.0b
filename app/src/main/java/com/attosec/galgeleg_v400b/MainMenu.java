@@ -22,6 +22,8 @@ import java.lang.ref.WeakReference;
 public class MainMenu extends Fragment implements View.OnClickListener {
     Button startSpil, highscore;
     ImageView galgePicture;
+    ImageView playLogo;
+    ImageView highscoreLogo;
 
 
     @Override
@@ -37,6 +39,10 @@ public class MainMenu extends Fragment implements View.OnClickListener {
         highscore.setText("Highscore");
         highscore.setOnClickListener(this);
         galgePicture = (ImageView) mainView.findViewById(R.id.galgePic);
+        playLogo = (ImageView) mainView.findViewById(R.id.playLogo);
+        highscoreLogo = (ImageView) mainView.findViewById(R.id.highscoreLogo);
+        playLogo.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.step_number_fader));
+        highscoreLogo.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.step_number_fader));
         //galgePicture.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.anim_hangman_game_seperator));
         animator();
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
@@ -47,7 +53,7 @@ public class MainMenu extends Fragment implements View.OnClickListener {
     }
 
     public void animator (){
-        YoYo.with(Techniques.RotateOutDownLeft)
+        YoYo.with(Techniques.FadeIn)
                 .delay(0)
                 .duration(1200)
                 //.withListener(aL)
@@ -61,8 +67,8 @@ public class MainMenu extends Fragment implements View.OnClickListener {
         public void onAnimationStart(com.nineoldandroids.animation.Animator animation) {}
         @Override
         public void onAnimationEnd(com.nineoldandroids.animation.Animator animation) {
-            YoYo.with(Techniques.BounceIn)
-                    .delay(1000)
+            YoYo.with(Techniques.RotateInUpRight)
+                    .delay(3000)
                     .duration(1200)
                     .interpolate(new AccelerateDecelerateInterpolator())
                     .withListener(aL2).playOn(galgePicture);
@@ -78,8 +84,8 @@ public class MainMenu extends Fragment implements View.OnClickListener {
         public void onAnimationStart(com.nineoldandroids.animation.Animator animation) {}
         @Override
         public void onAnimationEnd(com.nineoldandroids.animation.Animator animation) {
-            YoYo.with(Techniques.FlipOutY)
-                    .delay(1000)
+            YoYo.with(Techniques.RotateOutDownLeft)
+                    .delay(10000)
                     .duration(1200)
                     .interpolate(new AccelerateDecelerateInterpolator())
                     .withListener(aL).playOn(galgePicture);
