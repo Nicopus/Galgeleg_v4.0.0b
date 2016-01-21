@@ -18,15 +18,4 @@
             android:title="Indstillinger" />
     </group>
 
-    <item android:title="Bruger indstillinger">
-        <menu>
-            <item android:id="@+id/nav_profile" android:icon="@mipmap/ic_login"
-                android:title="Min profil" />
-            <item android:id="@+id/nav_register" android:icon="@mipmap/ic_register"
-                android:title="Registrer" />
-            <item android:id="@+id/nav_editUser" android:icon="@mipmap/ic_edit_user"
-                android:title="Rediger bruger" />
-        </menu>
-    </item>
-
 </menu>

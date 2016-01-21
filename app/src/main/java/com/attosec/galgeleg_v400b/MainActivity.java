@@ -511,25 +511,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .replace(R.id.include, fragment)  // tom container i layout
                     .addToBackStack(null)
                     .commit();
-            //getSupportActionBar().setTitle("Om Appen");
-            //Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_profile) {
-            if(Settings_Frag.effectIsPlaying){soundButton.start();}
-            Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
-            //startActivity(new Intent(MainActivity.this, LoginActivity.class));
-        } else if (id == R.id.nav_register) {
-            if(Settings_Frag.effectIsPlaying){soundButton.start();}
-            Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
-            //startActivity(new Intent(MainActivity.this, RegisterActivity.class));
-        } else if (id == R.id.nav_settings) {
-            if(Settings_Frag.effectIsPlaying){soundButton.start();}
-            Fragment fragment = new Settings_Frag();
-            getSupportFragmentManager().popBackStack();
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.include, fragment)  // tom container i layout
-                    .addToBackStack(null)
-                    .commit();
-            //Toast.makeText(this, "Denne funktion er endnu ikke implementeret", Toast.LENGTH_SHORT).show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
